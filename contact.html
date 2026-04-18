@@ -10,6 +10,257 @@
 </head>
 <body>
     
+    <!-- Hero Section to have Image Slider animation -->
+    <section class="contact-hero">
+        <div class="images-slider" id="imagesSlider">
+            <div class="slider-images" id="sliderImages"></div>
+            <div class="slider-overlay"></div>
+            <div class="slider-content">
+                <h1 class="hero-title">Get In Touch</h1>
+                <p class="hero-subtitle">
+                    We&#8217;re here to help and answer any questions you may have
+                </p>
+                <a href="#contactForm" class="btn btn-hero">Send Message</a>
+            </div>
+            <!-- Slider navigation controls -->
+            <div class="slider-controls">
+                <button class="slider-btn slider-prev" id="sliderPrev" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-btn slider-next" id="sliderNext" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <!-- Contact Info + Form Grid -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+
+                <!-- Left: Contact Information -->
+                <div class="contact-info">
+                    <h2 class="section-title">Contact Information</h2>
+                    <p class="section-description">
+                        Fill up the form and our team will get back to you within 24 hours.
+                    </p>
+
+                    <div class="contact-cards">
+
+                        <!-- Phone -->
+                        <div class="glass-card" data-text="Phone">
+                            <div class="card-icon">
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Phone</h3>
+                                <p>+27 11 123 4567</p>
+                                <p>+27 11 987 6543</p>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="glass-card" data-text="Email">
+                            <div class="card-icon">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Email</h3>
+                                <p>info@mdukaziprojects.co.za</p>
+                                <p>support@mdukaziprojects.co.za</p>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="glass-card" data-text="Address">
+                            <div class="card-icon">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Address</h3>
+                                <p>5940 Zone 5 Diepkloof</p>
+                                <p>Soweto, 1864</p>
+                            </div>
+                        </div>
+
+                        <!-- Business Hours -->
+                        <div class="glass-card" data-text="Hours">
+                            <div class="card-icon">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Business Hours</h3>
+                                <p>Mon &#8211; Fri: 8:00 &#8211; 17:00</p>
+                                <p>Sat: 9:00 &#8211; 13:00</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="social-section">
+                        <h3>Follow Us</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Contact Form -->
+                <div class="contact-form-wrapper">
+                    <h2 class="section-title">Send Us a Message</h2>
+                    <form class="contact-form" id="contactForm" novalidate>
+
+                        <div class="form-group">
+                            <input
+                                type="text"
+                                id="fullName"
+                                class="input input-alt"
+                                placeholder="Full Name"
+                                required
+                                aria-required="true"
+                            >
+                            <span class="input-border input-border-alt"></span>
+                            <span class="error-message" id="nameError" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input
+                                type="email"
+                                id="email"
+                                class="input input-alt"
+                                placeholder="Email Address"
+                                required
+                                aria-required="true"
+                            >
+                            <span class="input-border input-border-alt"></span>
+                            <span class="error-message" id="emailError" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input
+                                type="tel"
+                                id="phone"
+                                class="input input-alt"
+                                placeholder="Phone Number"
+                                required
+                                aria-required="true"
+                            >
+                            <span class="input-border input-border-alt"></span>
+                            <span class="error-message" id="phoneError" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <select
+                                id="service"
+                                class="input input-alt select-input"
+                                required
+                                aria-required="true"
+                            >
+                                <option value="" disabled selected>Select a Service</option>
+                                <option value="internet">Internet Connectivity</option>
+                                <option value="cctv">CCTV Security Systems</option>
+                                <option value="it-support">IT Support</option>
+                                <option value="hosting">Hosting Services</option>
+                                <option value="fiber">Fiber Installation</option>
+                                <option value="vpn">VPN Solutions</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="input-border input-border-alt"></span>
+                            <span class="error-message" id="serviceError" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input
+                                type="text"
+                                id="subject"
+                                class="input input-alt"
+                                placeholder="Subject"
+                                required
+                                aria-required="true"
+                            >
+                            <span class="input-border input-border-alt"></span>
+                            <span class="error-message" id="subjectError" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea
+                                id="message"
+                                class="input input-alt textarea-input"
+                                placeholder="Your Message"
+                                rows="5"
+                                required
+                                aria-required="true"
+                            ></textarea>
+                            <span class="input-border input-border-alt"></span>
+                            <span class="error-message" id="messageError" role="alert"></span>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        </button>
+
+                        <!-- Success message shown after valid submission -->
+                        <div class="success-message" id="successMessage" role="status" aria-live="polite">
+                            <i class="fas fa-check-circle" aria-hidden="true"></i>
+                            <p>Thank you! Your message has been sent successfully. We&#8217;ll get back
+                            to you soon.</p>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section - shows two office locations -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title text-center">Find Us</h2>
+            <p class="section-subtitle text-center">
+                Visit our office at 5940 Zone 5 Diepkloof, Soweto, 1864
+            </p>
+            <div class="map-container">
+                <!-- Leaflet map renders here -->
+                <div id="map" aria-label="Map showing Mdukazi Projects office location"></div>
+                <div class="map-info-card">
+                    <h3>Mdukazi Projects</h3>
+                    <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        5940 Zone 5 Diepkloof, 1864</p>
+                    <p><i class="fas fa-phone" aria-hidden="true"></i>
+                        +27 11 123 4567</p>
+                    <p><i class="fas fa-envelope" aria-hidden="true"></i>
+                        info@mdukaziprojects.co.za</p>
+                    <a
+                        href="https://www.google.com/maps/dir/?api=1&destination=-26.2678,27.9378"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-directions"
+                    >
+                        Get Directions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
  <footer class="footer">
         <div class="container">
