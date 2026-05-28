@@ -1,0 +1,123 @@
+/* about.css - Company Info Layout with Index Page Colors & 3-Line Hamburger */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap');
+
+:root {
+    --intense-cherry: #BD3745;
+    --lobster-pink: #CE6974;
+    --old-rose: #DE9BA2;
+    --cotton-rose: #EFCDD1;
+    --white: #FFFFFF;
+    --dark-text: #2C3E50;
+    --light-text: #7F8C8D;
+    --transition-smooth: all 0.3s ease;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { font-family: 'Open Sans', sans-serif; color: var(--dark-text); line-height: 1.6; background-color: #FAFAFA; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; font-weight: 600; color: var(--intense-cherry); }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+a { text-decoration: none; color: inherit; }
+
+/* ================= NAVBAR (3-Line Hamburger) ================= */
+.main-nav {
+    background-color: var(--intense-cherry);
+    box-shadow: 0 2px 10px rgba(189, 55, 69, 0.3);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+}
+.nav-container { display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; height: 4rem; }
+.navbar-item { color: var(--white) !important; font-weight: 500; transition: var(--transition-smooth); padding: 0.5rem 1rem; }
+.navbar-item:hover, .navbar-item.is-active { color: var(--cotton-rose) !important; border-bottom: 3px solid var(--white); }
+.navbar-item:first-child { font-weight: 700; font-size: 1.25rem; padding-left: 0; }
+
+/* 3-Line Burger Icon */
+.navbar-burger { cursor: pointer; padding: 0.5rem; display: block; }
+.navbar-burger span {
+    display: block; width: 20px; height: 2px; background-color: var(--white);
+    margin: 4px 0; transition: var(--transition-smooth); border-radius: 2px;
+}
+
+/* Mobile Menu Dropdown */
+.navbar-menu {
+    display: none; position: absolute; top: 4rem; left: 0; right: 0;
+    background: var(--intense-cherry); padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    flex-direction: column; align-items: center; gap: 0.5rem;
+    animation: slideDown 0.3s ease forwards;
+}
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Pure CSS Toggle Logic */
+#nav-toggle:checked ~ .navbar-menu { display: flex; }
+#nav-toggle:checked ~ .navbar-burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+#nav-toggle:checked ~ .navbar-burger span:nth-child(2) { opacity: 0; }
+#nav-toggle:checked ~ .navbar-burger span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+/* Desktop View: Hide burger, show links horizontally */
+@media screen and (min-width: 769px) {
+    .navbar-burger { display: none; }
+    .navbar-menu { display: flex !important; position: static; background: transparent; padding: 0; border-top: none; flex-direction: row; gap: 1.5rem; animation: none; }
+    .navbar-item:hover, .navbar-item.is-active { background: transparent !important; }
+}
+
+/* ================= HERO SECTION ================= */
+.about-hero {
+    background: linear-gradient(135deg, var(--intense-cherry) 0%, var(--lobster-pink) 100%);
+    color: var(--white); padding: 6rem 1.5rem 4rem; margin-top: 0; text-align: center;
+}
+.about-hero .title { color: var(--white); font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+.about-hero .subtitle { color: var(--cotton-rose); font-size: 1.15rem; margin-bottom: 2rem; }
+
+/* ================= CONTENT SECTIONS ================= */
+.about-content { padding: 3rem 0; }
+.info-block { margin-bottom: 2.5rem; }
+.info-block h2 { margin-bottom: 1rem; font-size: 2rem; }
+.info-block p { margin-bottom: 1rem; color: var(--light-text); font-size: 1rem; }
+
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+.info-card {
+    background: var(--white); padding: 1.5rem; border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(189, 55, 69, 0.1); border-top: 4px solid var(--old-rose);
+    transition: var(--transition-smooth);
+}
+.info-card:hover { transform: translateY(-6px); box-shadow: 0 10px 20px rgba(189, 55, 69, 0.15); border-top-color: var(--intense-cherry); }
+.info-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.info-card p { font-size: 0.95rem; color: var(--light-text); margin-bottom: 0; }
+
+.timeline-section h2 { margin-bottom: 1.5rem; }
+.timeline-list { list-style: none; padding-left: 1rem; border-left: 3px solid var(--old-rose); margin-top: 1rem; }
+.timeline-list li { margin-bottom: 1rem; padding-left: 1rem; position: relative; color: var(--light-text); }
+.timeline-list li::before {
+    content: ''; position: absolute; left: -0.45rem; top: 0.5rem; width: 12px; height: 12px;
+    background: var(--intense-cherry); border-radius: 50%;
+}
+
+/* ================= FOOTER ================= */
+.main-footer {
+    background-color: var(--intense-cherry); color: var(--white);
+    padding: 3rem 0 2rem; position: relative; margin-top: 2rem;
+}
+.main-footer::before {
+    content: ''; position: absolute; top: -40px; left: 0; right: 0; height: 40px;
+    background: var(--intense-cherry); clip-path: ellipse(55% 100% at 50% 0%);
+}
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+.footer-col h3 { color: var(--white); font-size: 1.1rem; margin-bottom: 1rem; }
+.footer-links a { color: var(--cotton-rose); display: inline-block; margin-bottom: 0.5rem; transition: var(--transition-smooth); }
+.footer-links a:hover { color: var(--white); transform: translateX(4px); }
+.main-footer p { color: var(--cotton-rose); margin-bottom: 0.5rem; font-size: 0.9rem; }
+
+/* ================= UTILITIES ================= */
+.has-text-centered { text-align: center; }
+.mt-6 { margin-top: 3rem; }
+.mb-6 { margin-bottom: 3rem; }
+
+/* ================= RESPONSIVE ================= */
+@media screen and (max-width: 768px) {
+    .about-hero .title { font-size: 2.2rem; }
+    .about-hero .subtitle { font-size: 1rem; }
+    .info-block h2 { font-size: 1.7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
