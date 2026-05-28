@@ -1,0 +1,120 @@
+/* Mdukazi Projects - FAQ Page Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap');
+
+:root {
+    --intense-cherry: #BD3745;
+    --lobster-pink: #CE6974;
+    --old-rose: #DE9BA2;
+    --cotton-rose: #EFCDD1;
+    --white: #FFFFFF;
+    --dark-text: #2C3E50;
+    --light-text: #7F8C8D;
+    --bg-light: #FAFAFA;
+    --transition-smooth: all 0.3s ease;
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { font-family: 'Open Sans', sans-serif; color: var(--dark-text); line-height: 1.6; background: var(--bg-light); }
+h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; font-weight: 600; color: var(--intense-cherry); }
+
+/* ================= EXACT NAVBAR ================= */
+.main-nav { background: var(--intense-cherry); box-shadow: 0 2px 10px rgba(189, 55, 69, 0.3); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+.main-nav .navbar-item { color: var(--white) !important; font-weight: 500; transition: var(--transition-smooth); }
+.main-nav .navbar-item:hover, .main-nav .navbar-item.is-active { background: rgba(255,255,255,0.15) !important; color: var(--cotton-rose) !important; border-bottom: 3px solid var(--white); }
+.navbar-brand .navbar-item { font-weight: 700; font-size: 1.25rem; color: var(--white) !important; }
+.navbar-burger { cursor: pointer; display: block; margin-left: auto; }
+.navbar-menu { display: none; background: var(--intense-cherry); padding: 1rem 0; }
+#nav-toggle:checked ~ .navbar-menu { display: block; animation: slideDown 0.3s ease forwards; }
+@keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+.navbar-burger span { display: block; width: 18px; height: 2px; background: var(--white); margin: 4px 0; transition: var(--transition-smooth); }
+#nav-toggle:checked ~ .navbar-burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+#nav-toggle:checked ~ .navbar-burger span:nth-child(2) { opacity: 0; }
+#nav-toggle:checked ~ .navbar-burger span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+/* ================= EXACT FOOTER ================= */
+.main-footer { background: var(--intense-cherry); color: var(--white); padding: 4rem 2rem 2rem; position: relative; margin-top: 4rem; }
+.main-footer::before { content: ''; position: absolute; top: -40px; left: 0; right: 0; height: 40px; background: var(--intense-cherry); clip-path: ellipse(55% 100% at 50% 0%); }
+.footer-title { color: var(--white); font-size: 1.25rem; margin-bottom: 1.5rem; font-weight: 600; }
+.footer-links a { color: var(--cotton-rose); text-decoration: none; transition: var(--transition-smooth); display: inline-block; margin-bottom: 0.5rem; }
+.footer-links a:hover { color: var(--white); transform: translateX(5px); }
+.main-footer p { color: var(--cotton-rose); margin-bottom: 0.5rem; font-size: 0.9rem; }
+
+/* ================= SHARED ELEMENTS ================= */
+.section-badge { display: inline-block; padding: 0.3rem 0.8rem; background: var(--cotton-rose); color: var(--intense-cherry); border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; letter-spacing: 1px; }
+.button.is-primary { background: var(--intense-cherry); color: var(--white); font-weight: 600; border: none; transition: var(--transition-smooth); box-shadow: 0 4px 12px rgba(189,55,69,0.3); }
+.button.is-primary:hover { background: var(--lobster-pink); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(189,55,69,0.4); }
+
+/* Hero */
+.faq-hero { background: linear-gradient(135deg, var(--lobster-pink) 0%, var(--intense-cherry) 100%); color: var(--white); margin-top: 4.5rem; position: relative; overflow: hidden; }
+.faq-hero .title { color: var(--white); font-size: 3.5rem; animation: fadeInUp 0.8s ease forwards; opacity: 0; }
+.faq-hero .subtitle { color: var(--cotton-rose); font-size: 1.3rem; animation: fadeInUp 0.8s ease 0.3s forwards; opacity: 0; }
+.hero-bg-pattern { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(var(--cotton-rose) 1px, transparent 1px); background-size: 30px 30px; opacity: 0.15; pointer-events: none; }
+
+/* ================= FAQ TIMELINE ACCORDION ================= */
+.faq-section { padding: 5rem 0 3rem; background: var(--bg-light); }
+.faq-timeline { max-width: 900px; margin: 0 auto; position: relative; }
+.timeline-line { position: absolute; left: 24px; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--old-rose), var(--cotton-rose)); border-radius: 2px; z-index: 0; }
+
+.faq-item {
+    position: relative; margin-left: 50px; margin-bottom: 1.5rem;
+    background: var(--white); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    opacity: 0; animation: fadeInLeft 0.6s ease forwards; animation-delay: var(--delay, 0s);
+    /* Pure CSS Smooth Open/Close */
+    display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease;
+    border-left: 4px solid var(--old-rose);
+}
+.faq-item[open] { grid-template-rows: 1fr; border-left-color: var(--intense-cherry); }
+.faq-item[open] .q-icon { background: var(--intense-cherry); color: var(--white); transform: scale(1.1); }
+.faq-item[open] .q-marker { transform: rotate(45deg); }
+.faq-item[open] summary { padding-bottom: 0; border-bottom: 1px solid var(--cotton-rose); }
+
+.faq-question {
+    padding: 1.25rem 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 1rem;
+    font-weight: 600; font-size: 1.1rem; color: var(--dark-text); list-style: none;
+    transition: var(--transition-smooth);
+}
+.faq-question::-webkit-details-marker { display: none; }
+.faq-question:hover { color: var(--intense-cherry); background: rgba(189,55,69,0.03); }
+
+.q-icon {
+    width: 42px; height: 42px; min-width: 42px; border-radius: 50%;
+    background: var(--cotton-rose); color: var(--intense-cherry);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; transition: var(--transition-bounce);
+}
+.q-marker {
+    margin-left: auto; width: 10px; height: 10px; border-top: 2px solid var(--lobster-pink);
+    border-right: 2px solid var(--lobster-pink); transform: rotate(-45deg);
+    transition: var(--transition-smooth);
+}
+
+.faq-answer { overflow: hidden; }
+.faq-answer p { padding: 1.5rem; color: var(--light-text); line-height: 1.7; font-size: 1rem; }
+
+/* CTA Section */
+.cta-section { background: linear-gradient(135deg, var(--intense-cherry) 0%, var(--lobster-pink) 100%); color: var(--white); margin-top: 3rem; position: relative; overflow: hidden; }
+.cta-section .title { animation: fadeInUp 0.8s ease 0.1s forwards; opacity: 0; color: var(--white) !important; }
+.cta-section .subtitle { animation: fadeInUp 0.8s ease 0.3s forwards; opacity: 0; color: var(--cotton-rose) !important; }
+.cta-section .button.is-primary { background: var(--white); color: var(--intense-cherry); animation: fadeInUp 0.8s ease 0.5s forwards; opacity: 0; }
+.cta-section .button.is-primary:hover { background: var(--cotton-rose); transform: translateY(-4px); }
+
+/* ================= KEYFRAMES ================= */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ================= RESPONSIVE ================= */
+@media screen and (max-width: 768px) {
+    .faq-hero .title { font-size: 2.2rem; }
+    .timeline-line { left: 20px; }
+    .faq-item { margin-left: 36px; }
+    .faq-question { padding: 1rem; font-size: 1rem; }
+    .q-icon { width: 36px; height: 36px; min-width: 36px; font-size: 0.9rem; }
+    .cta-section { padding: 3rem 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
