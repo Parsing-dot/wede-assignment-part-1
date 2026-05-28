@@ -1,236 +1,204 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mdukazi Projects - Enterprise ICT Solutions</title>
+    <!-- Bulma CSS Framework -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="assets/css/index.css">
-    <!-- Google fonts-->
-      <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet"> 
 </head>
 <body>
-      <!-- Navigation (Navbar) -->
-    <nav class="navbar" id="navbar">
-        <img src="/images/logo.png">
+
+    <!-- Navigation -->
+    <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="container">
-            <a href="index.html" class="logo">
-                <span class="logo-text">Mdukazi</span>
-                <span class="logo-sub">Projects</span>
-            </a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="ict.html">Solutions</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+            <div class="navbar-brand">
+                <a class="navbar-item" href="index.html">
+                    <img src="/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;">
+                    <span class="ml-2">Mdukazi Projects</span>
+                </a>
+                <label for="nav-toggle" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </label>
+            </div>
+            
+            <!-- Hidden Checkbox for Pure CSS Mobile Toggle -->
+            <input type="checkbox" id="nav-toggle" class="is-hidden">
+            
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="index.html" class="navbar-item is-active">Home</a>
+                    <a href="services.html" class="navbar-item">Services</a>
+                    <a href="ict.html" class="navbar-item">Solutions</a>
+                    <a href="about.html" class="navbar-item">About Us</a>
+                    <a href="faq.html" class="navbar-item">FAQ</a>
+                    <a href="contact.html" class="navbar-item">Contact</a>
+                </div>
+            </div>
         </div>
     </nav>
-      <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-bg-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
+
+    <!-- Hero Section -->
+    <section class="hero is-primary is-fullheight-with-navbar">
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
         </div>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1>
-                    <span class="highlight">Enterprise ITC</span><br>
-                    Solutions
-                </h1>
-                <h2>Dedicated Internet Access Solutions</h2>
-                <p>
-                    Premium business internet solutions designed for the modern enterprise.
-                    Reliable, fast, and always-on connectivity for your critical operations.
-                </p>
-                <div class="hero-buttons">
-                    <a href="services.html" class="btn btn-primary">Explore Services</a>
-                    <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+        <div class="hero-body has-text-centered">
+            <div class="container">
+                <h1 class="title">Enterprise ICT Solutions</h1>
+                <p class="subtitle">Dedicated Internet Access Solutions<br>
+                Premium business internet solutions designed for the modern enterprise.<br>
+                Reliable, fast, and always-on connectivity for your critical operations.</p>
+                <div class="buttons is-centered">
+                    <a href="services.html" class="button is-primary is-medium">Explore Services</a>
+                    <a href="contact.html" class="button is-outline is-medium">Get in Touch</a>
                 </div>
             </div>
-            <!-- Hero image with floating feature cards -->
-            <div class="hero-image">
-                <div class="image-container">
-                    <div class="floating-card card-1">
-                        <div class="icon"></div>
-                        <span>High Speed</span>
-                    </div>
-                    <div class="floating-card card-2">
-                        <div class="icon"></div>
-                        <span>Secure</span>
-                    </div>
-                    <div class="floating-card card-3">
-                        <div class="icon"></div>
-                        <span>24/7 Uptime</span>
-                    </div>
-                    <img src="assets/images/index.jpg" alt="Network Infrastructure" class="main-image">
-                </div>
-            </div>
-        </div>
-        <!-- Scroll down indicator -->
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-            <p>Scroll Down</p>
         </div>
     </section>
 
-    <!-- Services Overview Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2>What We Offer</h2>
-                <div class="divider"></div>
-            </div>
-            <div class="services-content">
-                <div class="services-text">
-                    <p class="lead">
-                        Mdukazi Projects offers a range of dedicated business Internet access solutions.
-                        These services are available over various access mediums to deliver a premium
-                        data solution suitable for all business applications.
-                    </p>
-                    <div class="service-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">99.9%</div>
-                            <div class="stat-label">Uptime SLA</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">Support</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">&#8734;</div>
-                            <div class="stat-label">Uncapped</div>
-                        </div>
-                    </div>
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container has-text-centered">
+            <div class="columns is-centered">
+                <div class="column is-one-third stat-item">
+                    <span class="stat-number">High Speed</span>
+                    <span class="stat-label">Performance</span>
                 </div>
-                <div class="services-image">
-                    <div class="image-wrapper">
-                        <img src="assets/images/index2.jpeg" alt="Data Center" class="service-img">
-                        <div class="image-overlay"></div>
-                    </div>
+                <div class="column is-one-third stat-item">
+                    <span class="stat-number">Secure</span>
+                    <span class="stat-label">Infrastructure</span>
+                </div>
+                <div class="column is-one-third stat-item">
+                    <span class="stat-number">24/7 Uptime</span>
+                    <span class="stat-label">Reliability</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="features">
+    <section class="section">
         <div class="container">
-            <div class="section-header">
-                <h2>Features</h2>
-                <div class="divider"></div>
-                <p>Everything you need for seamless connectivity</p>
+            <div class="has-text-centered mb-6">
+                <h2 class="section-title">What We Offer</h2>
+                <p class="section-subtitle">Mdukazi Projects offers a range of dedicated business Internet access solutions. These services are available over various access mediums to deliver a premium data solution suitable for all business applications.</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3>Dedicated Data Service</h3>
-                    <p>Exclusive bandwidth reserved solely for your business operations</p>
+            <div class="columns is-multiline">
+                <div class="column is-one-third">
+                    <div class="feature-card has-text-centered" style="--delay: 0.1s;">
+                        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                        <h3>Dedicated Data Service</h3>
+                        <p>Exclusive bandwidth reserved solely for your business operations</p>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3>Fixed Monthly Pricing</h3>
-                    <p>Predictable costs with no hidden fees or surprises</p>
+                <div class="column is-one-third">
+                    <div class="feature-card has-text-centered" style="--delay: 0.2s;">
+                        <div class="feature-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                        <h3>Fixed Monthly Pricing</h3>
+                        <p>Predictable costs with no hidden fees or surprises</p>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3>Uncapped</h3>
-                    <p>Unlimited data usage without restrictions or throttling</p>
+                <div class="column is-one-third">
+                    <div class="feature-card has-text-centered" style="--delay: 0.3s;">
+                        <div class="feature-icon"><i class="fas fa-infinity"></i></div>
+                        <h3>Uncapped</h3>
+                        <p>Unlimited data usage without restrictions or throttling</p>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3>Unshaped</h3>
-                    <p>No traffic shaping - all your data flows freely</p>
+                <div class="column is-one-third">
+                    <div class="feature-card has-text-centered" style="--delay: 0.4s;">
+                        <div class="feature-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Unshaped</h3>
+                        <p>No traffic shaping - all your data flows freely</p>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3>Guaranteed Speeds</h3>
-                    <p>Always-on service with consistent performance</p>
+                <div class="column is-one-third">
+                    <div class="feature-card has-text-centered" style="--delay: 0.5s;">
+                        <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <h3>Guaranteed Speeds</h3>
+                        <p>Always-on service with consistent performance</p>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3>24/7 Monitoring</h3>
-                    <p>Round-the-clock network monitoring and support</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3>Various Speeds</h3>
-                    <p>Multiple speed options to match your business needs</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3>Always-On Service</h3>
-                    <p>Reliable connectivity when you need it most</p>
+                <div class="column is-one-third">
+                    <div class="feature-card has-text-centered" style="--delay: 0.6s;">
+                        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                        <h3>24/7 Monitoring</h3>
+                        <p>Round-the-clock network monitoring and support</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Benefits Section -->
-    <section id="benefits" class="benefits">
+    <section class="section benefits-section">
         <div class="container">
-            <div class="section-header">
-                <h2>Benefits</h2>
-                <div class="divider"></div>
-                <p>Why choose our dedicated internet solutions</p>
+            <div class="has-text-centered mb-6">
+                <h2 class="section-title">Benefits</h2>
+                <p class="section-subtitle">Why choose our dedicated internet solutions</p>
             </div>
-            <div class="benefits-wrapper">
-                <div class="benefits-image">
-                    <div class="image-stack">
-                        <img src="assets/images/index3.jpg" alt="Team Collaboration" class="stack-img img-1">
-                        <img src="assets/images/index4.jpeg" alt="Technology" class="stack-img img-2">
-                        <img src="assets/images/index5.jpeg" alt="Business" class="stack-img img-3">
-                    </div>
-                </div>
-                <div class="benefits-list">
-                    <div class="benefit-item">
+            <div class="columns is-multiline">
+                <div class="column is-one-half">
+                    <div class="benefit-item" style="--delay: 0.1s;">
                         <div class="benefit-number">1</div>
                         <div class="benefit-content">
-                            <h3>Scalability and Flexibility</h3>
+                            <h4>Scalability and Flexibility</h4>
                             <p>Grow your bandwidth as your business expands without infrastructure changes</p>
                         </div>
                     </div>
-                    <div class="benefit-item">
-                        <div class="benefit-number">02</div>
+                </div>
+                <div class="column is-one-half">
+                    <div class="benefit-item" style="--delay: 0.2s;">
+                        <div class="benefit-number">2</div>
                         <div class="benefit-content">
-                            <h3>Cost Control and Management</h3>
+                            <h4>Cost Control and Management</h4>
                             <p>Fixed pricing models help you budget effectively with no unexpected charges</p>
                         </div>
                     </div>
-                    <div class="benefit-item">
-                        <div class="benefit-number">03</div>
+                </div>
+                <div class="column is-one-half">
+                    <div class="benefit-item" style="--delay: 0.3s;">
+                        <div class="benefit-number">3</div>
                         <div class="benefit-content">
-                            <h3>Real-Time Applications</h3>
+                            <h4>Real-Time Applications</h4>
                             <p>Perfect for video conferencing, VoIP, cloud services, and cloud storage solutions</p>
                         </div>
                     </div>
-                    <div class="benefit-item">
-                        <div class="benefit-number">04</div>
+                </div>
+                <div class="column is-one-half">
+                    <div class="benefit-item" style="--delay: 0.4s;">
+                        <div class="benefit-number">4</div>
                         <div class="benefit-content">
-                            <h3>High Reliability</h3>
+                            <h4>High Reliability</h4>
                             <p>Enterprise-grade infrastructure ensures maximum availability and uptime</p>
                         </div>
                     </div>
-                    <div class="benefit-item">
-                        <div class="benefit-number">05</div>
+                </div>
+                <div class="column is-one-half">
+                    <div class="benefit-item" style="--delay: 0.5s;">
+                        <div class="benefit-number">5</div>
                         <div class="benefit-content">
-                            <h3>SLA-Enforced Performance</h3>
+                            <h4>SLA-Enforced Performance</h4>
                             <p>Guaranteed network uptime backed by comprehensive service level agreements</p>
                         </div>
                     </div>
-                    <div class="benefit-item">
-                        <div class="benefit-number">06</div>
+                </div>
+                <div class="column is-one-half">
+                    <div class="benefit-item" style="--delay: 0.6s;">
+                        <div class="benefit-number">6</div>
                         <div class="benefit-content">
-                            <h3>Flexible Access Options</h3>
+                            <h4>Flexible Access Options</h4>
                             <p>Choice of the most appropriate last mile access medium for your location</p>
                         </div>
                     </div>
@@ -238,41 +206,39 @@
             </div>
         </div>
     </section>
-    
-    </body>
-    
+
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="main-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="logo-text">Mdukazi</div>
-                    <span class="logo-sub">Projects</span>
+            <div class="columns">
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Mdukazi Projects</h3>
                     <p>Enterprise ITC Solutions for the modern business</p>
                 </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="ict.html">Solutions</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="services.html">Services</a>
+                        <a href="ict.html">Solutions</a>
+                        <a href="about.html">About Us</a>
+                        <a href="faq.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
                 </div>
-                <div class="footer-contact">
-                    <h4>Contact</h4>
-                    <p>Email: info@mdukaziprojects.co.za</p>
-                    <p>Phone: +27 11 123 4567</p>
-                    <p>Support: 24/7 Network Operations</p>
-                    <p>5940 Zone 5 Diepkloof, Soweto, 1864</p>
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Contact</h3>
+                    <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
+                    <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
+                    <p><i class="fas fa-headset mr-2"></i> 24/7 Network Operations</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Mdukazi Projects. All rights reserved.</p>
+            <div class="has-text-centered mt-6">
+                <p>© 2026 Mdukazi Projects. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+</body>
 </html>
