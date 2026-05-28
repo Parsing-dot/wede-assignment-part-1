@@ -1,0 +1,198 @@
+/* Mdukazi Projects - Contact Page Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap');
+
+:root {
+    --intense-cherry: #BD3745;
+    --lobster-pink: #CE6974;
+    --old-rose: #DE9BA2;
+    --cotton-rose: #EFCDD1;
+    --white: #FFFFFF;
+    --dark-text: #2C3E50;
+    --light-text: #7F8C8D;
+    --bg-light: #FAFAFA;
+    --transition-smooth: all 0.3s ease;
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { font-family: 'Open Sans', sans-serif; color: var(--dark-text); line-height: 1.6; background: var(--bg-light); overflow-x: hidden; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; font-weight: 600; color: var(--intense-cherry); }
+
+/* ================= EXACT NAVBAR ================= */
+.main-nav { background: var(--intense-cherry); box-shadow: 0 2px 10px rgba(189, 55, 69, 0.3); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+.main-nav .navbar-item { color: var(--white) !important; font-weight: 500; transition: var(--transition-smooth); }
+.main-nav .navbar-item:hover, .main-nav .navbar-item.is-active { background: rgba(255,255,255,0.15) !important; color: var(--cotton-rose) !important; border-bottom: 3px solid var(--white); }
+.navbar-brand .navbar-item { font-weight: 700; font-size: 1.25rem; color: var(--white) !important; }
+.navbar-burger { cursor: pointer; display: block; margin-left: auto; }
+.navbar-menu { display: none; background: var(--intense-cherry); padding: 1rem 0; }
+#nav-toggle:checked ~ .navbar-menu { display: block; animation: slideDown 0.3s ease forwards; }
+@keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+.navbar-burger span { display: block; width: 18px; height: 2px; background: var(--white); margin: 4px 0; transition: var(--transition-smooth); }
+#nav-toggle:checked ~ .navbar-burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+#nav-toggle:checked ~ .navbar-burger span:nth-child(2) { opacity: 0; }
+#nav-toggle:checked ~ .navbar-burger span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+/* ================= EXACT FOOTER ================= */
+.main-footer { background: var(--intense-cherry); color: var(--white); padding: 4rem 2rem 2rem; position: relative; margin-top: 4rem; }
+.main-footer::before { content: ''; position: absolute; top: -40px; left: 0; right: 0; height: 40px; background: var(--intense-cherry); clip-path: ellipse(55% 100% at 50% 0%); }
+.footer-title { color: var(--white); font-size: 1.25rem; margin-bottom: 1.5rem; font-weight: 600; }
+.footer-links a { color: var(--cotton-rose); text-decoration: none; transition: var(--transition-smooth); display: inline-block; margin-bottom: 0.5rem; }
+.footer-links a:hover { color: var(--white); transform: translateX(5px); }
+.main-footer p { color: var(--cotton-rose); margin-bottom: 0.5rem; font-size: 0.9rem; }
+
+/* ================= SHARED ELEMENTS ================= */
+.section-badge { display: inline-block; padding: 0.3rem 0.8rem; background: var(--cotton-rose); color: var(--intense-cherry); border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; letter-spacing: 1px; }
+
+/* Hero */
+.contact-hero { background: linear-gradient(135deg, var(--lobster-pink) 0%, var(--intense-cherry) 100%); color: var(--white); margin-top: 4.5rem; position: relative; overflow: hidden; }
+.contact-hero .title { color: var(--white); font-size: 3.5rem; animation: fadeInUp 0.8s ease forwards; opacity: 0; }
+.contact-hero .subtitle { color: var(--cotton-rose); font-size: 1.3rem; animation: fadeInUp 0.8s ease 0.3s forwards; opacity: 0; }
+.hero-bg-dots { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(var(--cotton-rose) 1px, transparent 1px); background-size: 30px 30px; opacity: 0.15; pointer-events: none; animation: gridMove 20s linear infinite; }
+@keyframes gridMove { 0% { transform: translateY(0); } 100% { transform: translateY(30px); } }
+
+/* ================= CONTACT GRID LAYOUT ================= */
+.contact-grid-section { padding: 4rem 0; min-height: calc(100vh - 300px); display: flex; align-items: center; }
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 0;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    overflow: hidden;
+    opacity: 0;
+    animation: scaleIn 0.8s ease forwards;
+    animation-delay: 0.4s;
+}
+
+/* Info Panel */
+.contact-info-panel {
+    background: linear-gradient(135deg, var(--intense-cherry) 0%, var(--lobster-pink) 100%);
+    padding: 3rem;
+    color: var(--white);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.contact-info-panel::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: var(--old-rose);
+    border-radius: 50%;
+    opacity: 0.3;
+}
+.contact-info-panel::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 150px;
+    height: 150px;
+    background: var(--cotton-rose);
+    border-radius: 50%;
+    opacity: 0.2;
+}
+.info-card { position: relative; z-index: 2; }
+.info-card h2 { color: var(--white); font-size: 2rem; margin-bottom: 1rem; animation: fadeInUp 0.7s ease 0.1s forwards; opacity: 0; }
+.info-lead { color: var(--cotton-rose); margin-bottom: 2rem; font-size: 1.1rem; animation: fadeInUp 0.7s ease 0.2s forwards; opacity: 0; }
+
+.info-items { display: flex; flex-direction: column; gap: 1.5rem; }
+.info-item { display: flex; align-items: flex-start; gap: 1.25rem; animation: slideInRight 0.6s ease forwards; opacity: 0; animation-delay: var(--delay, 0s); }
+.info-icon {
+    width: 45px; height: 45px; min-width: 45px; background: rgba(255,255,255,0.15);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; transition: var(--transition-bounce);
+}
+.info-item:hover .info-icon { background: var(--white); color: var(--intense-cherry); transform: rotate(10deg) scale(1.1); }
+.info-content h4 { color: var(--white); font-size: 1rem; margin-bottom: 0.25rem; }
+.info-content p { color: var(--cotton-rose); font-size: 0.9rem; margin: 0; }
+
+/* Form Panel */
+.contact-form-panel { padding: 3rem; background: var(--white); position: relative; }
+.contact-form h2 { color: var(--intense-cherry); font-size: 1.8rem; margin-bottom: 2rem; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+.form-group.full-width { grid-column: span 2; }
+
+/* Modern Floating Labels */
+.form-group { position: relative; }
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%; padding: 1rem 0.75rem; border: none; border-bottom: 2px solid var(--cotton-rose);
+    background: transparent; font-size: 1rem; color: var(--dark-text); transition: var(--transition-smooth);
+    outline: none;
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { border-bottom-color: var(--intense-cherry); background: rgba(189,55,69,0.02); }
+
+/* Floating Label Animation */
+.form-group label,
+.form-group .floating-label {
+    position: absolute; top: 1rem; left: 0.75rem; color: var(--light-text); font-size: 1rem;
+    pointer-events: none; transition: var(--transition-smooth); background: var(--white); padding: 0 4px;
+}
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group textarea:focus ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label,
+.form-group select:focus ~ .floating-label,
+.form-group select:not([value=""]) ~ .floating-label {
+    top: -0.6rem; left: 0.5rem; font-size: 0.75rem; color: var(--intense-cherry); font-weight: 600;
+}
+
+/* Custom Select Dropdown */
+.select-wrapper { position: relative; }
+.select-wrapper select { appearance: none; cursor: pointer; padding-right: 2rem; }
+.select-wrapper::after {
+    content: '\f107'; font-family: "Font Awesome 6 Free"; font-weight: 900;
+    position: absolute; right: 0.75rem; top: 1rem; color: var(--light-text);
+    pointer-events: none; transition: var(--transition-smooth);
+}
+.select-wrapper select:focus ~ .floating-label { color: var(--intense-cherry); }
+
+/* Submit Button */
+.submit-btn {
+    width: 100%; padding: 1.25rem; background: linear-gradient(135deg, var(--intense-cherry) 0%, var(--lobster-pink) 100%);
+    color: var(--white); border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+    transition: var(--transition-smooth); box-shadow: 0 4px 15px rgba(189,55,69,0.3);
+    position: relative; overflow: hidden;
+}
+.submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(189,55,69,0.4); }
+.submit-btn:active { transform: translateY(0); }
+.submit-btn::before {
+    content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+    background: rgba(255,255,255,0.2); border-radius: 50%; transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+.submit-btn:hover::before { width: 300px; height: 300px; }
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideInRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+/* ================= RESPONSIVE ================= */
+@media screen and (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-info-panel { padding: 2.5rem; }
+    .contact-form-panel { padding: 2rem; }
+}
+@media screen and (max-width: 600px) {
+    .contact-hero .title { font-size: 2.2rem; }
+    .contact-hero .subtitle { font-size: 1rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full-width { grid-column: span 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
