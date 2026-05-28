@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ | Mdukazi Projects - Enterprise ICT Solutions</title>
-    <link rel="stylesheet" href="assets/css/mdukazi.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/faq.css">
 </head>
-<body class="has-navbar-fixed-top">
-    <!-- Navigation -->
-    <nav class="navbar is-fixed-top main-nav" role="navigation" aria-label="main navigation">
+<body>
+
+    <!-- Navigation (Identical to Index & Services) -->
+    <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="index.html">
-                    <img src="images/logo.png" alt="Mdukazi Projects Logo" class="logo">
-                    <span class="brand-text">Mdukazi Projects</span>
+                    <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;">
+                    <span class="ml-2">Mdukazi Projects</span>
                 </a>
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
+                <label for="nav-toggle" class="navbar-burger" aria-label="menu">
+                    <span></span><span></span><span></span>
+                </label>
             </div>
-            <div id="navbarMenu" class="navbar-menu">
+            <input type="checkbox" id="nav-toggle" class="is-hidden">
+            <div class="navbar-menu">
                 <div class="navbar-end">
                     <a href="index.html" class="navbar-item">Home</a>
                     <a href="services.html" class="navbar-item">Services</a>
@@ -36,125 +36,152 @@
         </div>
     </nav>
 
-    <!-- FAQ Section -->
+    <!-- Hero Header -->
+    <header class="hero faq-hero is-medium">
+        <div class="hero-body has-text-centered">
+            <div class="container">
+                <span class="section-badge">Support</span>
+                <h1 class="title">Frequently Asked Questions</h1>
+                <p class="subtitle">Find answers to common questions about our enterprise ICT solutions</p>
+            </div>
+        </div>
+        <div class="hero-bg-pattern"></div>
+    </header>
+
+    <!-- FAQ Timeline Section -->
     <section class="section faq-section">
         <div class="container">
-            <h1 class="title has-text-centered section-title">Frequently Asked Questions</h1>
-            <p class="subtitle has-text-centered section-subtitle">Find answers to common questions about our services</p>
-            
-            <div class="columns is-centered">
-                <div class="column is-8">
-                    <!-- FAQ Item 1 -->
-                    <div class="faq-item card mb-4">
-                        <div class="card-content">
-                            <h3 class="title is-5 faq-question">What is Dedicated Internet Access (DIA)?</h3>
-                            <div class="faq-answer">
-                                <p>Dedicated Internet Access (DIA) is a premium internet service that provides exclusive, uncontended bandwidth reserved solely for your business. Unlike shared connections, DIA guarantees consistent speeds, 99.9% uptime, and symmetrical upload/download rates.</p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="faq-timeline">
+                <div class="timeline-line"></div>
 
-                    <!-- FAQ Item 2 -->
-                    <div class="faq-item card mb-4">
-                        <div class="card-content">
-                            <h3 class="title is-5 faq-question">How long does installation take?</h3>
-                            <div class="faq-answer">
-                                <p>Installation timelines vary based on the service type and location. Standard fibre installations typically take 5-10 business days, while wireless solutions can be deployed within 3-5 business days. Complex enterprise installations may require 2-4 weeks.</p>
-                            </div>
-                        </div>
+                <!-- FAQ Item 1 -->
+                <details class="faq-item" style="--delay: 0.1s;">
+                    <summary class="faq-question">
+                        <span class="q-icon"><i class="fas fa-network-wired"></i></span>
+                        What is Dedicated Internet Access (DIA)?
+                        <span class="q-marker"></span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Dedicated Internet Access (DIA) is a premium internet service that provides exclusive, uncontended bandwidth reserved solely for your business. Unlike shared connections, DIA guarantees consistent speeds, 99.9% uptime, and symmetrical upload/download rates.</p>
                     </div>
+                </details>
 
-                    <!-- FAQ Item 3 -->
-                    <div class="faq-item card mb-4">
-                        <div class="card-content">
-                            <h3 class="title is-5 faq-question">Do you offer SLA guarantees?</h3>
-                            <div class="faq-answer">
-                                <p>Yes, all our business solutions come with comprehensive Service Level Agreements (SLAs) guaranteeing 99.9% uptime, 24/7 network monitoring, and rapid response times. Enterprise clients receive priority support with 4-hour repair SLAs.</p>
-                            </div>
-                        </div>
+                <!-- FAQ Item 2 -->
+                <details class="faq-item" style="--delay: 0.2s;">
+                    <summary class="faq-question">
+                        <span class="q-icon"><i class="fas fa-clock"></i></span>
+                        How long does installation take?
+                        <span class="q-marker"></span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Installation timelines vary based on the service type and location. Standard fibre installations typically take 5-10 business days, while wireless solutions can be deployed within 3-5 business days. Complex enterprise installations may require 2-4 weeks.</p>
                     </div>
+                </details>
 
-                    <!-- FAQ Item 4 -->
-                    <div class="faq-item card mb-4">
-                        <div class="card-content">
-                            <h3 class="title is-5 faq-question">What areas do you cover?</h3>
-                            <div class="faq-answer">
-                                <p>We primarily serve the Greater Johannesburg area, including Soweto and surrounding regions. Our wireless network covers most metropolitan areas, and we're continuously expanding our fibre footprint. Contact us to check availability at your specific location.</p>
-                            </div>
-                        </div>
+                <!-- FAQ Item 3 -->
+                <details class="faq-item" style="--delay: 0.3s;">
+                    <summary class="faq-question">
+                        <span class="q-icon"><i class="fas fa-shield-alt"></i></span>
+                        Do you offer SLA guarantees?
+                        <span class="q-marker"></span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Yes, all our business solutions come with comprehensive Service Level Agreements (SLAs) guaranteeing 99.9% uptime, 24/7 network monitoring, and rapid response times. Enterprise clients receive priority support with 4-hour repair SLAs.</p>
                     </div>
+                </details>
 
-                    <!-- FAQ Item 5 -->
-                    <div class="faq-item card mb-4">
-                        <div class="card-content">
-                            <h3 class="title is-5 faq-question">Is the internet really uncapped and unshaped?</h3>
-                            <div class="faq-answer">
-                                <p>Yes! Our dedicated internet solutions are truly uncapped (no data limits) and unshaped (no traffic throttling). You get the full speed you pay for, 24/7, with no restrictions on usage or content.</p>
-                            </div>
-                        </div>
+                <!-- FAQ Item 4 -->
+                <details class="faq-item" style="--delay: 0.4s;">
+                    <summary class="faq-question">
+                        <span class="q-icon"><i class="fas fa-map-marker-alt"></i></span>
+                        What areas do you cover?
+                        <span class="q-marker"></span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>We primarily serve the Greater Johannesburg area, including Soweto and surrounding regions. Our wireless network covers most metropolitan areas, and we're continuously expanding our fibre footprint. Contact us to check availability at your specific location.</p>
                     </div>
+                </details>
 
-                    <!-- FAQ Item 6 -->
-                    <div class="faq-item card mb-4">
-                        <div class="card-content">
-                            <h3 class="title is-5 faq-question">What support do you provide?</h3>
-                            <div class="faq-answer">
-                                <p>We offer 24/7 technical support through our Network Operations Centre (NOC). Our expert team monitors your connection around the clock and provides proactive maintenance, troubleshooting, and rapid incident response.</p>
-                            </div>
-                        </div>
+                <!-- FAQ Item 5 -->
+                <details class="faq-item" style="--delay: 0.5s;">
+                    <summary class="faq-question">
+                        <span class="q-icon"><i class="fas fa-infinity"></i></span>
+                        Is the internet really uncapped and unshaped?
+                        <span class="q-marker"></span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Yes! Our dedicated internet solutions are truly uncapped (no data limits) and unshaped (no traffic throttling). You get the full speed you pay for, 24/7, with no restrictions on usage or content.</p>
                     </div>
+                </details>
 
-                    <!-- FAQ Item 7 -->
-                    <div class="faq-item card mb-4">
-                        <div class="card-content">
-                            <h3 class="title is-5 faq-question">Can I upgrade my package later?</h3>
-                            <div class="faq-answer">
-                                <p>Absolutely! Our solutions are scalable. You can upgrade your bandwidth or add services as your business grows without major infrastructure changes. Contact our team to discuss upgrade options.</p>
-                            </div>
-                        </div>
+                <!-- FAQ Item 6 -->
+                <details class="faq-item" style="--delay: 0.6s;">
+                    <summary class="faq-question">
+                        <span class="q-icon"><i class="fas fa-headset"></i></span>
+                        What support do you provide?
+                        <span class="q-marker"></span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>We offer 24/7 technical support through our Network Operations Centre (NOC). Our expert team monitors your connection around the clock and provides proactive maintenance, troubleshooting, and rapid incident response.</p>
                     </div>
+                </details>
 
-                    <div class="has-text-centered mt-6">
-                        <a href="contact.html" class="button is-primary is-large">Still have questions? Contact us</a>
+                <!-- FAQ Item 7 -->
+                <details class="faq-item" style="--delay: 0.7s;">
+                    <summary class="faq-question">
+                        <span class="q-icon"><i class="fas fa-sync-alt"></i></span>
+                        Can I upgrade my package later?
+                        <span class="q-marker"></span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Absolutely! Our solutions are scalable. You can upgrade your bandwidth or add services as your business grows without major infrastructure changes. Contact our team to discuss upgrade options.</p>
                     </div>
-                </div>
+                </details>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer main-footer">
+    <!-- CTA Banner -->
+    <section class="section cta-section has-text-centered">
+        <div class="container">
+            <h2 class="title" style="color: var(--white);">Still have questions?</h2>
+            <p class="subtitle" style="color: var(--cotton-rose); margin-bottom: 2rem;">Our enterprise specialists are ready to help you find the perfect connectivity solution.</p>
+            <a href="contact.html" class="button is-primary is-medium is-rounded">Contact Support</a>
+        </div>
+    </section>
+
+    <!-- Footer (Identical to Index & Services) -->
+    <footer class="main-footer">
         <div class="container">
             <div class="columns">
-                <div class="column is-4">
-                    <h4 class="title is-5 footer-title">Mdukazi Projects</h4>
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Mdukazi Projects</h3>
                     <p>Enterprise ITC Solutions for the modern business</p>
                 </div>
-                <div class="column is-4">
-                    <h4 class="title is-5 footer-title">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="ict.html">Solutions</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="services.html">Services</a>
+                        <a href="ict.html">Solutions</a>
+                        <a href="about.html">About Us</a>
+                        <a href="faq.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
                 </div>
-                <div class="column is-4">
-                    <h4 class="title is-5 footer-title">Contact</h4>
-                    <p>Email: info@mdukaziprojects.co.za</p>
-                    <p>Phone: +27 11 123 4567</p>
-                    <p>Support: 24/7 Network Operations</p>
-                    <p>5940 Zone 5 Diepkloof, Soweto, 1864</p>
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Contact</h3>
+                    <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
+                    <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
+                    <p><i class="fas fa-headset mr-2"></i> 24/7 Network Operations</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
                 </div>
             </div>
-            <div class="has-text-centered mt-4">
-                <p>&copy; 2026 Mdukazi Projects. All rights reserved.</p>
+            <div class="has-text-centered mt-6">
+                <p>© 2026 Mdukazi Projects. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
 </body>
 </html>
