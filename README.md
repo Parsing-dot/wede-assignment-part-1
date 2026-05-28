@@ -4,7 +4,7 @@ Student Name: Buhle Manyike
 Student Number:ST10521872 
 Module: WEDE5020 
 
- 
+
 
 ## Project Overview 
 
@@ -70,6 +70,11 @@ css/ — stylesheets | js/ — scripts | images/ — all assets
 - Week 5: JavaScript interactivity — accordion, form, map, tabs 
 
 - Week 6: Refactoring — unified navbar/footer, inline CSS removed 
+
+## css libraries
+- Bulma css framework  based on flexbox
+- Tailwind 
+- Custom CSS (use for brand specific styling)
 
  
 
