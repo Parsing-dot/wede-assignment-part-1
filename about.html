@@ -3,31 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Mdukazi Projects</title>
-    <link rel="stylesheet" href="assets/css/about.css">
-    <!-- Font Awesome for icons -->
+    <title>About Us | Mdukazi Projects - Enterprise ICT Solutions</title>
+    <!-- Bulma CSS Framework -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="assets/css/about.css">
 </head>
 <body>
 
-    <!-- NAVIGATION (Hamburger Toggle) -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <a href="index.html" class="navbar-item">Mdukazi Projects</a>
+    <!-- Navigation (Identical to Index & ICT Pages) -->
+    <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="index.html">
+                    <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;">
+                    <span class="ml-2">Mdukazi Projects</span>
+                </a>
+                <label for="nav-toggle" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </label>
+            </div>
             
-            <input type="checkbox" id="nav-toggle" style="display:none;">
-            <label for="nav-toggle" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-
-            <div class="navbar-menu">
-                <a href="index.html" class="navbar-item">Home</a>
-                <a href="services.html" class="navbar-item">Services</a>
-                <a href="ict.html" class="navbar-item">Solutions</a>
-                <a href="about.html" class="navbar-item is-active">About Us</a>
-                <a href="contact.html" class="navbar-item">Contact</a>
+            <!-- Hidden Checkbox for Pure CSS Mobile Toggle -->
+            <input type="checkbox" id="nav-toggle" class="is-hidden">
+            
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="index.html" class="navbar-item">Home</a>
+                    <a href="services.html" class="navbar-item">Services</a>
+                    <a href="ict.html" class="navbar-item">Solutions</a>
+                    <a href="about.html" class="navbar-item is-active">About Us</a>
+                    <a href="faq.html" class="navbar-item">FAQ</a>
+                    <a href="contact.html" class="navbar-item">Contact</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -35,7 +47,7 @@
     <!-- HERO SECTION -->
     <header class="about-hero">
         <div class="container has-text-centered">
-            <h1 class="title">Our Story</h1>
+            <h1 class="title">About Mdukazi Projects</h1>
             <p class="subtitle">Empowering South African enterprises with reliable, high-speed connectivity since 2006.</p>
         </div>
     </header>
@@ -44,60 +56,103 @@
     <main class="container about-content">
         <section class="info-block">
             <h2>Who We Are</h2>
-            <p>Mdukazi Projects is a leading provider of Enterprise ITC Solutions, specializing in Dedicated Internet Access (DIA) for businesses of all sizes. Established in 2006 as Khulacom Communications, we have grown into a comprehensive ICT solutions provider serving individuals and organisations across South Africa.</p>
+            <p>Mdukazi Projects is a leading provider of Enterprise ICT Solutions, specializing in Dedicated Internet Access (DIA) for businesses of all sizes. Established in 2006 as Khulacom Communications, we have grown into a comprehensive ICT solutions provider serving individuals and organisations across South Africa.</p>
             <p>Our mission is to empower South African enterprises with uncapped, unshaped, and guaranteed high-speed connectivity that drives digital transformation and business growth.</p>
         </section>
 
         <section class="info-grid">
             <div class="info-card">
-                <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                <i class="fas fa-bullseye"></i>
+                <h3>Our Mission</h3>
                 <p>To deliver reliable, scalable, and transparent connectivity solutions that enable businesses to thrive in the digital age.</p>
             </div>
             <div class="info-card">
-                <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                <i class="fas fa-eye"></i>
+                <h3>Our Vision</h3>
                 <p>To be South Africa's most trusted partner in enterprise ICT infrastructure, bridging the digital divide with innovation and excellence.</p>
             </div>
             <div class="info-card">
-                <h3><i class="fas fa-handshake"></i> Our Promise</h3>
+                <i class="fas fa-handshake"></i>
+                <h3>Our Promise</h3>
                 <p>Fixed pricing, guaranteed uptime, and 24/7 expert support. No hidden fees, no throttling, just premium connectivity.</p>
             </div>
         </section>
 
         <section class="info-block timeline-section">
             <h2>Our Journey</h2>
-            <ul class="timeline-list">
-                <li><strong>2006:</strong> Founded as Khulacom Communications to bridge the connectivity gap for South African enterprises.</li>
-                <li><strong>2012:</strong> Expanded network coverage to major metropolitan areas, serving over 500 businesses.</li>
-                <li><strong>2018:</strong> Achieved 99.9% uptime guarantee with comprehensive SLA-backed support systems.</li>
-                <li><strong>2024:</strong> Rebranded to Mdukazi Projects, investing in next-gen fiber and wireless infrastructure.</li>
-            </ul>
+            <div class="timeline-list">
+                <div class="timeline-item">
+                    <span class="timeline-year">2006</span>
+                    <p>Founded as Khulacom Communications to bridge the connectivity gap for South African enterprises.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2012</span>
+                    <p>Expanded network coverage to major metropolitan areas, serving over 500 businesses.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2018</span>
+                    <p>Achieved 99.9% uptime guarantee with comprehensive SLA-backed support systems.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2024</span>
+                    <p>Rebranded to Mdukazi Projects, investing in next-gen fiber and wireless infrastructure.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Values Section -->
+        <section class="info-block values-section">
+            <h2>Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <i class="fas fa-medal"></i>
+                    <h4>Excellence</h4>
+                    <p>Delivering nothing but the best in every solution we provide.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Integrity</h4>
+                    <p>Transparent pricing and honest communication with all clients.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>Innovation</h4>
+                    <p>Continuously evolving with cutting-edge technology.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-users"></i>
+                    <h4>Customer Focus</h4>
+                    <p>Your success is our success - 24/7 dedicated support.</p>
+                </div>
+            </div>
         </section>
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (Identical to Index & ICT Pages) -->
     <footer class="main-footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>Mdukazi Projects</h3>
-                    <p>Enterprise ITC Solutions for the modern business.</p>
+            <div class="columns">
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Mdukazi Projects</h3>
+                    <p>Enterprise ICT Solutions for the modern business</p>
                 </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Quick Links</h3>
                     <div class="footer-links">
                         <a href="index.html">Home</a>
                         <a href="services.html">Services</a>
                         <a href="ict.html">Solutions</a>
                         <a href="about.html">About Us</a>
+                        <a href="faq.html">FAQ</a>
                         <a href="contact.html">Contact</a>
                     </div>
                 </div>
-                <div class="footer-col">
-                    <h3>Contact</h3>
-                    <p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p>
-                    <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
-                    <p><i class="fas fa-clock"></i> 24/7 Network Operations</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Contact</h3>
+                    <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
+                    <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
+                    <p><i class="fas fa-headset mr-2"></i> 24/7 Network Operations</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
                 </div>
             </div>
             <div class="has-text-centered mt-6">
