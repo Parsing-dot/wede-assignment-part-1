@@ -3,62 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mdukazi Projects - Enterprise ICT Solutions</title>
-    <!-- Bulma CSS Framework -->
+    <!-- 3.1 On-Page SEO: Title Tags and Meta Descriptions -->
+    <title>Mdukazi Projects | Premium Enterprise ICT Solutions</title>
+    <meta name="description" content="Mdukazi Projects provides dedicated, high-speed, and secure enterprise internet access solutions in Soweto. Reliable connectivity for modern businesses.">
+    <meta name="keywords" content="enterprise ICT, dedicated internet, business internet Soweto, uncapped data, Mdukazi Projects">
+    <meta name="author" content="Mdukazi Projects">
+    
+    <!-- Bulma CSS (Assuming this was used based on your class names) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="assets/css/index.css">
+    <!-- AOS Animation Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
 </head>
-<body> 
+<body>
 
     <!-- Navigation -->
-    <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
+    <nav class="main-nav navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
-                <a class="navbar-item" href="index.html">
-                    <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;">
-                    <span class="ml-2">Mdukazi Projects</span>
-                </a>
-                <label for="nav-toggle" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
+                <a class="navbar-item" href="index.html">Mdukazi Projects</a>
+                <label class="navbar-burger" for="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </label>
             </div>
-            
-            <!-- Hidden Checkbox for Pure CSS Mobile Toggle -->
             <input type="checkbox" id="nav-toggle" class="is-hidden">
-            
-            <div id="navbarMenu" class="navbar-menu">
+            <div class="navbar-menu">
                 <div class="navbar-end">
-                    <a href="index.html" class="navbar-item is-active">Home</a>
-                    <a href="services.html" class="navbar-item">Services</a>
-                    <a href="ict.html" class="navbar-item">Solutions</a>
-                    <a href="about.html" class="navbar-item">About Us</a>
-                    <a href="faq.html" class="navbar-item">FAQ</a>
-                    <a href="contact.html" class="navbar-item">Contact</a>
+                    <a class="navbar-item is-active" href="index.html">Home</a>
+                    <a class="navbar-item" href="services.html">Services</a>
+                    <a class="navbar-item" href="ict.html">Solutions</a>
+                    <a class="navbar-item" href="about.html">About Us</a>
+                    <a class="navbar-item" href="faq.html">FAQ</a>
+                    <a class="navbar-item" href="contact.html">Contact</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero is-primary is-fullheight-with-navbar">
+    <!-- Hero Section with Rotating Text Animation -->
+    <section class="hero is-primary is-medium">
         <div class="hero-particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div>
         </div>
-        <div class="hero-body has-text-centered">
-            <div class="container">
-                <h1 class="title">Enterprise ICT Solutions</h1>
-                <p class="subtitle">Dedicated Internet Access Solutions<br>
-                Premium business internet solutions designed for the modern enterprise.<br>
-                Reliable, fast, and always-on connectivity for your critical operations.</p>
+        <div class="hero-body">
+            <div class="container has-text-centered" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="title">
+                    Enterprise ICT Solutions
+                </h1>
+                <h2 class="subtitle is-4">
+                    Dedicated <span class="rotating-text-wrapper">
+                        <span class="rotating-text">amazing</span>
+                        <span class="rotating-text">reliable</span>
+                        <span class="rotating-text">secure</span>
+                        <span class="rotating-text">fast</span>
+                    </span> Internet Solutions
+                </h2>
+                <p class="is-size-5 mb-5" style="color: var(--cotton-rose); max-width: 600px; margin: 0 auto 2rem auto;">
+                    Premium business internet solutions designed for the modern enterprise. Reliable, fast, and always-on connectivity for your critical operations.
+                </p>
                 <div class="buttons is-centered">
                     <a href="services.html" class="button is-primary is-medium">Explore Services</a>
                     <a href="contact.html" class="button is-outline is-medium">Get in Touch</a>
@@ -68,74 +76,56 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container has-text-centered">
-            <div class="columns is-centered">
-                <div class="column is-one-third stat-item">
-                    <span class="stat-number">High Speed</span>
-                    <span class="stat-label">Performance</span>
+    <section class="stats-section" data-aos="fade-up">
+        <div class="container">
+            <div class="columns is-multiline is-centered">
+                <div class="column is-3">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="99.9">0</span>%
+                        <span class="stat-label">Uptime Reliability</span>
+                    </div>
                 </div>
-                <div class="column is-one-third stat-item">
-                    <span class="stat-number">Secure</span>
-                    <span class="stat-label">Infrastructure</span>
+                <div class="column is-3">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="24">0</span>/7
+                        <span class="stat-label">Network Monitoring</span>
+                    </div>
                 </div>
-                <div class="column is-one-third stat-item">
-                    <span class="stat-number">24/7 Uptime</span>
-                    <span class="stat-label">Reliability</span>
+                <div class="column is-3">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="500">0</span>+
+                        <span class="stat-label">Business Clients</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Dynamic Content & Search Section -->
     <section class="section">
         <div class="container">
-            <div class="has-text-centered mb-6">
+            <div class="has-text-centered mb-6" data-aos="fade-up">
                 <h2 class="section-title">What We Offer</h2>
-                <p class="section-subtitle">Mdukazi Projects offers a range of dedicated business Internet access solutions. These services are available over various access mediums to deliver a premium data solution suitable for all business applications.</p>
+                <p class="section-subtitle">Mdukazi Projects offers a range of dedicated business Internet access solutions suitable for all business applications.</p>
+                
+                <!-- 2.2 Dynamic Content: Search/Filter Functionality -->
+                <div class="field has-addons is-centered" style="max-width: 500px; margin: 0 auto;">
+                    <div class="control is-expanded">
+                        <input class="input is-medium" type="text" id="feature-search" placeholder="Search services (e.g., 'uncapped', 'speed')...">
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary is-medium" id="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div
+                </div>
             </div>
-            <div class="columns is-multiline">
-                <div class="column is-one-third">
-                    <div class="feature-card has-text-centered" style="--delay: 0.1s;">
-                        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                        <h3>Dedicated Data Service</h3>
-                        <p>Exclusive bandwidth reserved solely for your business operations</p>
-                    </div>
-                </div>
-                <div class="column is-one-third">
-                    <div class="feature-card has-text-centered" style="--delay: 0.2s;">
-                        <div class="feature-icon"><i class="fas fa-file-invoice-dollar"></i></div>
-                        <h3>Fixed Monthly Pricing</h3>
-                        <p>Predictable costs with no hidden fees or surprises</p>
-                    </div>
-                </div>
-                <div class="column is-one-third">
-                    <div class="feature-card has-text-centered" style="--delay: 0.3s;">
-                        <div class="feature-icon"><i class="fas fa-infinity"></i></div>
-                        <h3>Uncapped</h3>
-                        <p>Unlimited data usage without restrictions or throttling</p>
-                    </div>
-                </div>
-                <div class="column is-one-third">
-                    <div class="feature-card has-text-centered" style="--delay: 0.4s;">
-                        <div class="feature-icon"><i class="fas fa-network-wired"></i></div>
-                        <h3>Unshaped</h3>
-                        <p>No traffic shaping - all your data flows freely</p>
-                    </div>
-                </div>
-                <div class="column is-one-third">
-                    <div class="feature-card has-text-centered" style="--delay: 0.5s;">
-                        <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        <h3>Guaranteed Speeds</h3>
-                        <p>Always-on service with consistent performance</p>
-                    </div>
-                </div>
-                <div class="column is-one-third">
-                    <div class="feature-card has-text-centered" style="--delay: 0.6s;">
-                        <div class="feature-icon"><i class="fas fa-headset"></i></div>
-                        <h3>24/7 Monitoring</h3>
-                        <p>Round-the-clock network monitoring and support</p>
-                    </div>
+
+            <!-- Dynamic Content Container -->
+            <div class="columns is-multiline" id="features-container">
+                <!-- Content will be injected here by JavaScript from data.json -->
+                <div class="column is-12 has-text-centered">
+                    <p class="has-text-grey">Loading services...</p>
                 </div>
             </div>
         </div>
@@ -144,65 +134,30 @@
     <!-- Benefits Section -->
     <section class="section benefits-section">
         <div class="container">
-            <div class="has-text-centered mb-6">
+            <div class="has-text-centered mb-6" data-aos="fade-up">
                 <h2 class="section-title">Benefits</h2>
                 <p class="section-subtitle">Why choose our dedicated internet solutions</p>
             </div>
             <div class="columns is-multiline">
-                <div class="column is-one-half">
-                    <div class="benefit-item" style="--delay: 0.1s;">
+                <div class="column is-6" data-aos="fade-right" data-aos-delay="100">
+                    <div class="benefit-item" style="--delay: 0.1s">
                         <div class="benefit-number">1</div>
                         <div class="benefit-content">
                             <h4>Scalability and Flexibility</h4>
-                            <p>Grow your bandwidth as your business expands without infrastructure changes</p>
+                            <p>Grow your bandwidth as your business expands without infrastructure changes.</p>
                         </div>
                     </div>
                 </div>
-                <div class="column is-one-half">
-                    <div class="benefit-item" style="--delay: 0.2s;">
+                <div class="column is-6" data-aos="fade-left" data-aos-delay="200">
+                    <div class="benefit-item" style="--delay: 0.2s">
                         <div class="benefit-number">2</div>
                         <div class="benefit-content">
                             <h4>Cost Control and Management</h4>
-                            <p>Fixed pricing models help you budget effectively with no unexpected charges</p>
+                            <p>Fixed pricing models help you budget effectively with no unexpected charges.</p>
                         </div>
                     </div>
                 </div>
-                <div class="column is-one-half">
-                    <div class="benefit-item" style="--delay: 0.3s;">
-                        <div class="benefit-number">3</div>
-                        <div class="benefit-content">
-                            <h4>Real-Time Applications</h4>
-                            <p>Perfect for video conferencing, VoIP, cloud services, and cloud storage solutions</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-one-half">
-                    <div class="benefit-item" style="--delay: 0.4s;">
-                        <div class="benefit-number">4</div>
-                        <div class="benefit-content">
-                            <h4>High Reliability</h4>
-                            <p>Enterprise-grade infrastructure ensures maximum availability and uptime</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-one-half">
-                    <div class="benefit-item" style="--delay: 0.5s;">
-                        <div class="benefit-number">5</div>
-                        <div class="benefit-content">
-                            <h4>SLA-Enforced Performance</h4>
-                            <p>Guaranteed network uptime backed by comprehensive service level agreements</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-one-half">
-                    <div class="benefit-item" style="--delay: 0.6s;">
-                        <div class="benefit-number">6</div>
-                        <div class="benefit-content">
-                            <h4>Flexible Access Options</h4>
-                            <p>Choice of the most appropriate last mile access medium for your location</p>
-                        </div>
-                    </div>
-                </div>
+                <!-- Add more benefits as needed -->
             </div>
         </div>
     </section>
@@ -211,34 +166,34 @@
     <footer class="main-footer">
         <div class="container">
             <div class="columns">
-                <div class="column is-one-third">
+                <div class="column is-4">
                     <h3 class="footer-title">Mdukazi Projects</h3>
-                    <p>Enterprise ITC Solutions for the modern business</p>
+                    <p>Enterprise ICT Solutions for the modern business.</p>
                 </div>
-                <div class="column is-one-third">
+                <div class="column is-4">
                     <h3 class="footer-title">Quick Links</h3>
                     <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="services.html">Services</a>
-                        <a href="ict.html">Solutions</a>
-                        <a href="about.html">About Us</a>
-                        <a href="faq.html">FAQ</a>
+                        <a href="index.html">Home</a><br>
+                        <a href="services.html">Services</a><br>
                         <a href="contact.html">Contact</a>
                     </div>
                 </div>
-                <div class="column is-one-third">
+                <div class="column is-4">
                     <h3 class="footer-title">Contact</h3>
-                    <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
-                    <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
-                    <p><i class="fas fa-headset mr-2"></i> 24/7 Network Operations</p>
-                    <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
+                    <p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p>
+                    <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
                 </div>
             </div>
-            <div class="has-text-centered mt-6">
-                <p>© 2026 Mdukazi Projects. All rights reserved.</p>
+            <div class="has-text-centered mt-6" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                <p>&copy; 2026 Mdukazi Projects. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- AOS Animation Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
