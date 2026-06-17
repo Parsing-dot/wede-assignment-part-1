@@ -74,29 +74,12 @@ h6 {
     color: var(--white) !important;
 }
 
-/* ================= HAMBURGER ICON - LEFT CORNER ================= */
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-}
-
+/* Pure CSS Mobile Menu Toggle */
 .navbar-burger {
     cursor: pointer;
     display: block;
     margin-left: 0;
     margin-right: auto;
-    order: -1;
-}
-
-.navbar-burger span {
-    display: block;
-    width: 18px;
-    height: 2px;
-    background-color: var(--white);
-    margin: 4px 0;
-    transition: var(--transition-smooth);
 }
 
 .navbar-menu {
@@ -105,7 +88,7 @@ h6 {
     padding: 1rem 0;
 }
 
-#nav-toggle:checked~.navbar-menu {
+#nav-toggle:checked ~ .navbar-menu {
     display: block;
     animation: slideDown 0.3s ease forwards;
 }
@@ -121,15 +104,24 @@ h6 {
     }
 }
 
-#nav-toggle:checked~.navbar-burger span:nth-child(1) {
+.navbar-burger span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background-color: var(--white);
+    margin: 4px 0;
+    transition: var(--transition-smooth);
+}
+
+#nav-toggle:checked ~ .navbar-burger span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
 
-#nav-toggle:checked~.navbar-burger span:nth-child(2) {
+#nav-toggle:checked ~ .navbar-burger span:nth-child(2) {
     opacity: 0;
 }
 
-#nav-toggle:checked~.navbar-burger span:nth-child(3) {
+#nav-toggle:checked ~ .navbar-burger span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
@@ -141,18 +133,11 @@ h6 {
     overflow: hidden;
     margin-top: 4.5rem;
     min-height: 60vh;
-    /* Reduced hero size */
-}
-
-.hero-body {
-    padding: 3rem 1.5rem;
-    /* Reduced padding */
 }
 
 .hero-body .title {
     color: var(--white);
-    font-size: 3rem;
-    /* Slightly reduced */
+    font-size: 3.5rem;
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     animation: fadeInDown 0.8s ease-out forwards;
@@ -161,9 +146,8 @@ h6 {
 
 .hero-body .subtitle {
     color: var(--cotton-rose);
-    font-size: 1.15rem;
-    /* Slightly reduced */
-    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
     animation: fadeInUp 0.8s ease-out 0.3s forwards;
     opacity: 0;
 }
@@ -520,73 +504,67 @@ h6 {
     margin-bottom: 3rem;
 }
 
-/* ================= RESPONSIVE - MOBILE & TABLET ================= */
+/* ================= RESPONSIVE ================= */
 @media screen and (max-width: 768px) {
+    .navbar-burger {
+        display: block;
+    }
+    
+    .navbar-menu {
+        display: none;
+    }
+    
+    #nav-toggle:checked ~ .navbar-menu {
+        display: block;
+    }
+    
     .hero-body .title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-body .subtitle {
+        font-size: 1rem;
+    }
+    
+    .section-title {
         font-size: 2rem;
     }
-    .hero-body .subtitle {
-        font-size: 0.95rem;
-    }
-    .section-title {
-        font-size: 1.8rem;
-    }
+    
     .stat-number {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
+    
     .benefit-item {
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
+    
     .benefit-number {
         margin-right: 0;
         margin-bottom: 1rem;
     }
-    .columns.is-multiline>.column {
+    
+    .columns.is-multiline > .column {
         flex: 0 0 100%;
     }
+    
     .hero.is-primary {
         min-height: 50vh;
-        /* Smaller on mobile */
-    }
-    .hero-body {
-        padding: 2rem 1rem;
-    }
-    .buttons.is-centered {
-        flex-direction: column;
-        align-items: center;
-    }
-    .buttons.is-centered .button {
-        margin: 0.25rem 0;
     }
 }
 
-/* ================= RESPONSIVE - DESKTOP ================= */
 @media screen and (min-width: 769px) {
     .navbar-burger {
         display: none;
     }
+    
     .navbar-menu {
         display: flex !important;
-        background: transparent;
-        padding: 0;
     }
-    .navbar-end {
-        margin-left: auto;
-    }
-    .main-nav .navbar-item {
-        padding: 1rem 1.5rem;
-    }
-    .hero.is-primary {
-        min-height: 55vh;
-        /* Slightly smaller on desktop */
-    }
-    .hero-body {
-        padding: 4rem 1.5rem;
-    }
-    .hero-body .title {
-        font-size: 3.2rem;
+    
+    #nav-toggle {
+        display: none;
     }
 }
 
