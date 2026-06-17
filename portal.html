@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Portal - Mdukazi Projects</title>
+    <link rel="stylesheet" href="assets/css/portal.css">
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.js"></script>
+</head>
+<body>
+    <div class="gradient-bg">
+        <div class="animated-gradient"></div>
+        <div class="portal-container">
+            <header class="portal-header">
+                <div class="logo">Mdukazi Projects</div>
+                <div class="user-info">
+                    <span id="userName">Welcome, User</span>
+                    <button onclick="logout()" class="btn-logout">Logout</button>
+                </div>
+            </header>
+
+            <div class="dashboard">
+                <div class="dashboard-grid">
+                    <!-- Service Information Card -->
+                    <div class="card">
+                        <h3>📡 Your Service</h3>
+                        <div class="service-info">
+                            <p><strong>Plan:</strong> <span id="servicePlan">Loading...</span></p>
+                            <p><strong>Speed:</strong> <span id="serviceSpeed">Loading...</span></p>
+                            <p><strong>Status:</strong> <span class="status-active">Active</span></p>
+                        </div>
+                        <button onclick="openBookingModal()" class="btn-primary">Upgrade Service</button>
+                    </div>
+
+                    <!-- Balance Card -->
+                    <div class="card">
+                        <h3>💰 Outstanding Balance</h3>
+                        <div class="balance-info">
+                            <p class="balance-amount" id="outstandingBalance">R 0.00</p>
+                            <p class="due-date">Due: <span id="dueDate">Loading...</span></p>
+                        </div>
+                        <button onclick="openPaymentModal()" class="btn-primary">Make Payment</button>
+                    </div>
+
+                    <!-- Price Updates Card -->
+                    <div class="card">
+                        <h3>📈 Price Updates</h3>
+                        <div class="updates-list" id="priceUpdates">
+                            <div class="update-item">
+                                <span class="update-date">2026-06-15</span>
+                                <p>Enterprise fibre plans now include free installation</p>
+                            </div>
+                            <div class="update-item">
+                                <span class="update-date">2026-06-10</span>
+                                <p>10% discount on annual contracts</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specials Card -->
+                    <div class="card">
+                        <h3>🎉 New Specials</h3>
+                        <div class="specials-list" id="specials">
+                            <div class="special-item">
+                                <h4>Summer Promotion</h4>
+                                <p>Get 2 months free when you sign up for 12-month contract</p>
+                                <span class="special-badge">Limited Time</span>
+                            </div>
+                            <div class="special-item">
+                                <h4>Business Bundle</h4>
+                                <p>DIA + CCTV + VPN at 15% off</p>
+                                <span class="special-badge">New</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Report Issue Card -->
+                    <div class="card full-width">
+                        <h3>🔧 Report an Issue</h3>
+                        <form id="issueForm">
+                            <div class="form-group">
+                                <label>Issue Type</label>
+                                <select id="issueType" required>
+                                    <option value="">Select issue type</option>
+                                    <option value="connectivity">Connectivity Problems</option>
+                                    <option value="speed">Speed Issues</option>
+                                    <option value="billing">Billing Query</option>
+                                    <option value="technical">Technical Support</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id="issueDescription" rows="4" required placeholder="Describe your issue in detail..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Submit Report</button>
+                        </form>
+                        <div id="issueConfirmation" class="confirmation-message" style="display: none;">
+                            <p>✅ Your issue has been reported successfully. Our team will respond shortly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('paymentModal')">&times;</span>
+            <h2>Make Monthly Payment</h2>
+            <form id="paymentForm">
+                <div class="payment-summary">
+                    <p><strong>Amount Due:</strong> <span id="paymentAmount">R 0.00</span></p>
+                    <p><strong>Service:</strong> <span id="paymentService">Loading...</span></p>
+                    <p><strong>Billing Period:</strong> <span id="billingPeriod">Loading...</span></p>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="paymentMethod" required>
+                        <option value="card">Credit/Debit Card</option>
+                        <option value="eft">EFT</option>
+                        <option value="cash">Cash (at office)</option>
+                    </select>
+                </div>
+                <div id="cardDetails" class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                    <label>Expiry Date</label>
+                    <input type="text" id="cardExpiry" placeholder="MM/YY">
+                    <label>CVV</label>
+                    <input type="text" id="cardCVV" placeholder="123">
+                </div>
+                <button type="submit" class="btn-primary">Pay Now</button>
+            </form>
+            <div id="paymentConfirmation" class="confirmation-message" style="display: none;">
+                <p>✅ Payment successful! Your service has been renewed.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('bookingModal')">&times;</span>
+            <h2>Upgrade Your Service</h2>
+            <p class="modal-subtitle">Select from our enterprise solutions (see <a href="services.html" target="_blank">Services</a> and <a href="ict.html" target="_blank">Solutions</a> for details)</p>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Service Type</label>
+                    <select id="bookingService" required>
+                        <option value="">Select service</option>
+                        <optgroup label="Enterprise Solutions">
+                            <option value="dia-100">DIA 100Mbps - R 2,999/month</option>
+                            <option value="dia-500">DIA 500Mbps - R 7,999/month</option>
+                            <option value="dia-1000">DIA 1Gbps - R 14,999/month</option>
+                        </optgroup>
+                        <optgroup label="Business Packages">
+                            <option value="business-fibre">Business Fibre + CCTV - R 3,499/month</option>
+                            <option value="business-vpn">Business VPN + Security - R 1,999/month</option>
+                        </optgroup>
+                        <optgroup label="Carrier Grade">
+                            <option value="carrier-10g">10Gbps Carrier Link - R 29,999/month</option>
+                            <option value="metro-ethernet">Metro Ethernet - R 19,999/month</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Contract Duration</label>
+                    <select id="contractDuration" required>
+                        <option value="1">1 Month</option>
+                        <option value="6">6 Months (5% discount)</option>
+                        <option value="12">12 Months (10% discount)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Book Service</button>
+            </form>
+            <div id="bookingConfirmation" class="confirmation-message" style="display: none;">
+                <p>✅ Service upgrade booked! Our team will contact you within 24 hours.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/portal.js"></script>
+</body>
+</html>
