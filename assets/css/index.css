@@ -155,6 +155,21 @@ h6 {
     pointer-events: none;
 }
 
+/* Radial vignette that intensifies near cursor — updated via JS CSS var */
+.hero.is-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(
+        ellipse 70% 60% at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(189,55,69,0.08) 0%,
+        rgba(0,0,0,0.18) 100%
+    );
+    pointer-events: none;
+    transition: background 0.12s ease;
+}
+
 .hero-body {
     position: relative;
     z-index: 2;
@@ -248,7 +263,7 @@ h6 {
 .button.is-primary:hover {
     background-color: var(--cotton-rose);
     color: var(--intense-cherry);
-    transform: translateY(-3px);
+    /* translateY handled by JS magnetic; don't override transform here */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -262,46 +277,87 @@ h6 {
 .button.is-outline:hover {
     background-color: var(--white);
     color: var(--intense-cherry);
-    transform: translateY(-3px);
+    /* translateY handled by JS magnetic; no CSS transform override */
 }
 
-/* Origin Button Ripple Effect */
+/* ================= ORIGIN BUTTON — Next-Level Animation ================= */
+
+/* Base: isolate stacking, spring-tuned color transition */
 .origin-btn {
     position: relative;
     overflow: hidden;
     isolation: isolate;
-    transition: color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Color & box-shadow both transition so the glow follows the fill */
+    transition:
+        color       0.52s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow  0.52s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.52s cubic-bezier(0.16, 1, 0.3, 1);
+    /* transform is handled by JS magnetic / scale — no CSS conflict */
+    will-change: transform;
 }
 
+/* The expanding fill circle */
 .origin-btn .origin-circle {
     position: absolute;
-    transform: translate(-50%, -50%) scale(0);
     border-radius: 50%;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: -1;
     pointer-events: none;
+    z-index: 0;
+    /* Start collapsed at cursor origin */
+    transform: translate(-50%, -50%) scale(0);
+    /* Spring-like expand: fast start, gentle settle */
+    transition:
+        transform 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity   0.62s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
 }
 
 .origin-btn .origin-circle.active {
     transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
 }
 
-/* Primary Button Fill (Cherry circle, White text) */
+/* Keep button text / icons above the fill circle */
+.origin-btn > *:not(.origin-circle) {
+    position: relative;
+    z-index: 1;
+}
+
+/* Press scale — snappy down, spring back */
+.origin-btn.origin-pressed {
+    transform: scale(0.964) !important;
+    transition:
+        transform    0.12s cubic-bezier(0.16, 1, 0.3, 1),
+        color        0.52s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow   0.52s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---- Primary button (white bg, cherry fill → white text) ---- */
 .button.is-primary.origin-btn .origin-circle {
-    background-color: var(--intense-cherry);
+    background: radial-gradient(
+        circle at center,
+        var(--lobster-pink) 0%,
+        var(--intense-cherry) 60%
+    );
 }
 
 .button.is-primary.origin-btn.origin-active {
     color: var(--white) !important;
+    box-shadow: 0 6px 24px rgba(189, 55, 69, 0.45), 0 2px 6px rgba(189, 55, 69, 0.3);
 }
 
-/* Outline Button Fill (White circle, Cherry text) */
+/* ---- Outline button (transparent bg, white fill → cherry text) ---- */
 .button.is-outline.origin-btn .origin-circle {
-    background-color: var(--white);
+    background: radial-gradient(
+        circle at center,
+        rgba(255,255,255,1)  0%,
+        rgba(239,205,209,1) 60%
+    );
 }
 
 .button.is-outline.origin-btn.origin-active {
     color: var(--intense-cherry) !important;
+    box-shadow: 0 6px 24px rgba(255, 255, 255, 0.35), 0 2px 6px rgba(255, 255, 255, 0.2);
+    border-color: transparent;
 }
 
 /* ================= SECTIONS & TITLES ================= */
@@ -611,6 +667,35 @@ h6 {
     }
 }
 
+/* ================= SCROLL REVEAL ================= */
+/* Cards and benefit items start invisible (JS-controlled) */
+/* CSS animation-delay via --delay still fires normally on page load */
+/* For items observed by IntersectionObserver, .revealed kicks them in */
+.feature-card,
+.benefit-item {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+        opacity   0.55s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay, 0s);
+}
+
+/* When CSS keyframe animation is defined on the element, let it handle reveal */
+.feature-card[style*="--delay"],
+.benefit-item[style*="--delay"] {
+    /* CSS animation already handles these — reset transition so they don't fight */
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: var(--delay, 0s);
+    transition: none;
+}
+
+.feature-card.revealed,
+.benefit-item.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* ================= ACCESSIBILITY ================= */
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -619,5 +704,13 @@ h6 {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+
+    .origin-btn {
+        transition: none !important;
+    }
+
+    .origin-btn .origin-circle {
+        transition: none !important;
     }
 }
