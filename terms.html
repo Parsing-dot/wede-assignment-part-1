@@ -3,112 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions - Mdukazi Projects</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .terms-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 40px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .terms-container h1 {
-            color: #2d1b69;
-            margin-bottom: 30px;
-        }
-        .terms-container h2 {
-            color: #11998e;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-        .terms-container p, .terms-container li {
-            line-height: 1.8;
-            color: #333;
-            margin-bottom: 15px;
-        }
-        .terms-container ul {
-            margin-left: 30px;
-        }
-        .back-btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 30px;
-            background: #11998e;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-    </style>
+    <title>Terms and Conditions | Mdukazi Projects</title>
+    <!-- Bulma CSS Framework -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="assets/css/terms.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">Mdukazi Projects</div>
+
+    <!-- Navigation (Exact Match with Index) -->
+    <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="index.html">
+                    <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;">
+                    <span class="ml-2">Mdukazi Projects</span>
+                </a>
+                <label for="nav-toggle" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </label>
+            </div>
+            
+            <input type="checkbox" id="nav-toggle" class="is-hidden">
+            
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="index.html" class="navbar-item">Home</a>
+                    <a href="services.html" class="navbar-item">Services</a>
+                    <a href="ict.html" class="navbar-item">Solutions</a>
+                    <a href="about.html" class="navbar-item">About Us</a>
+                    <a href="faq.html" class="navbar-item">FAQ</a>
+                    <a href="contact.html" class="navbar-item">Contact</a>
+                </div>
+            </div>
         </div>
     </nav>
 
-    <div class="terms-container">
-        <h1>Terms and Conditions</h1>
-        <p><strong>Last Updated:</strong> June 17, 2026</p>
+    <!-- Hero Section -->
+    <section class="terms-hero">
+        <div class="hero-body has-text-centered">
+            <div class="container">
+                <h1 class="title">Terms and Conditions</h1>
+                <p class="subtitle">Last Updated: June 17, 2026</p>
+            </div>
+        </div>
+    </section>
 
-        <h2>1. Acceptance of Terms</h2>
-        <p>By creating an account with Mdukazi Projects, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our services.</p>
+    <!-- Main Content -->
+    <section class="section terms-section">
+        <div class="container">
+            <div class="terms-card">
+                
+                <h2><span class="term-number">1</span> Acceptance of Terms</h2>
+                <p>By creating an account with Mdukazi Projects, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our services.</p>
 
-        <h2>2. Account Registration</h2>
-        <p>You agree to provide accurate, current, and complete information during the registration process. You are responsible for maintaining the confidentiality of your account credentials.</p>
+                <h2><span class="term-number">2</span> Account Registration</h2>
+                <p>You agree to provide accurate, current, and complete information during the registration process. You are responsible for maintaining the confidentiality of your account credentials.</p>
 
-        <h2>3. Service Agreements</h2>
-        <ul>
-            <li>All services are subject to availability and technical feasibility</li>
-            <li>Service Level Agreements (SLAs) apply to enterprise customers</li>
-            <li>Installation timelines vary based on service type and location</li>
-            <li>Monthly billing cycles begin on the date of service activation</li>
-        </ul>
+                <h2><span class="term-number">3</span> Service Agreements</h2>
+                <ul>
+                    <li>All services are subject to availability and technical feasibility</li>
+                    <li>Service Level Agreements (SLAs) apply to enterprise customers</li>
+                    <li>Installation timelines vary based on service type and location</li>
+                    <li>Monthly billing cycles begin on the date of service activation</li>
+                </ul>
 
-        <h2>4. Payment Terms</h2>
-        <ul>
-            <li>Monthly payments are due in advance</li>
-            <li>Late payments may result in service suspension</li>
-            <li>All prices are in South African Rand (ZAR) and exclude VAT unless stated otherwise</li>
-            <li>Contract commitments apply to discounted plans</li>
-        </ul>
+                <h2><span class="term-number">4</span> Payment Terms</h2>
+                <ul>
+                    <li>Monthly payments are due in advance</li>
+                    <li>Late payments may result in service suspension</li>
+                    <li>All prices are in South African Rand (ZAR) and exclude VAT unless stated otherwise</li>
+                    <li>Contract commitments apply to discounted plans</li>
+                </ul>
 
-        <h2>5. Service Usage</h2>
-        <ul>
-            <li>Services are provided for lawful purposes only</li>
-            <li>Excessive usage that impacts network performance may be subject to fair use policies</li>
-            <li>Customers are responsible for securing their own equipment</li>
-        </ul>
+                <h2><span class="term-number">5</span> Service Usage</h2>
+                <ul>
+                    <li>Services are provided for lawful purposes only</li>
+                    <li>Excessive usage that impacts network performance may be subject to fair use policies</li>
+                    <li>Customers are responsible for securing their own equipment</li>
+                </ul>
 
-        <h2>6. Privacy and Data Protection</h2>
-        <p>We collect and process personal information in accordance with POPIA (Protection of Personal Information Act). Your data will be used solely for service delivery and communication purposes.</p>
+                <h2><span class="term-number">6</span> Privacy and Data Protection</h2>
+                <p>We collect and process personal information in accordance with POPIA (Protection of Personal Information Act). Your data will be used solely for service delivery and communication purposes.</p>
 
-        <h2>7. Limitation of Liability</h2>
-        <p>Mdukazi Projects shall not be liable for any indirect, incidental, or consequential damages arising from the use of our services. Our total liability shall not exceed the amount paid by you in the preceding 12 months.</p>
+                <h2><span class="term-number">7</span> Limitation of Liability</h2>
+                <p>Mdukazi Projects shall not be liable for any indirect, incidental, or consequential damages arising from the use of our services. Our total liability shall not exceed the amount paid by you in the preceding 12 months.</p>
 
-        <h2>8. Service Modifications</h2>
-        <p>We reserve the right to modify, suspend, or discontinue services at any time. Price changes will be communicated 30 days in advance.</p>
+                <h2><span class="term-number">8</span> Service Modifications</h2>
+                <p>We reserve the right to modify, suspend, or discontinue services at any time. Price changes will be communicated 30 days in advance.</p>
 
-        <h2>9. Termination</h2>
-        <p>Either party may terminate services with 30 days written notice. Early termination of contracted services may incur cancellation fees.</p>
+                <h2><span class="term-number">9</span> Termination</h2>
+                <p>Either party may terminate services with 30 days written notice. Early termination of contracted services may incur cancellation fees.</p>
 
-        <h2>10. Support and Issue Resolution</h2>
-        <p>Issues reported through the client portal will receive a response within 24 business hours. Critical issues are prioritized based on SLA terms.</p>
+                <h2><span class="term-number">10</span> Support and Issue Resolution</h2>
+                <p>Issues reported through the client portal will receive a response within 24 business hours. Critical issues are prioritized based on SLA terms.</p>
 
-        <h2>11. Governing Law</h2>
-        <p>These terms are governed by the laws of the Republic of South Africa. Any disputes shall be resolved in the appropriate courts of Johannesburg.</p>
+                <h2><span class="term-number">11</span> Governing Law</h2>
+                <p>These terms are governed by the laws of the Republic of South Africa. Any disputes shall be resolved in the appropriate courts of Johannesburg.</p>
 
-        <h2>12. Contact Information</h2>
-        <p>For questions about these terms, contact us at:</p>
-        <ul>
-            <li>Email: info@mdukaziprojects.co.za</li>
-            <li>Phone: +27 11 123 4567</li>
-            <li>Address: 5940 Zone 5 Diepkloof, Soweto, 1864</li>
-        </ul>
+                <h2><span class="term-number">12</span> Contact Information</h2>
+                <p>For questions about these terms, contact us at:</p>
+                <ul>
+                    <li><strong>Email:</strong> info@mdukaziprojects.co.za</li>
+                    <li><strong>Phone:</strong> +27 11 123 4567</li>
+                    <li><strong>Address:</strong> 5940 Zone 5 Diepkloof, Soweto, 1864</li>
+                </ul>
 
-        <a href="index.html" class="back-btn">← Back to Home</a>
-    </div>
+                <div class="has-text-centered mt-6">
+                    <a href="index.html" class="button is-primary is-medium">
+                        <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Exact Match with Index) -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Mdukazi Projects</h3>
+                    <p>Enterprise ITC Solutions for the modern business</p>
+                </div>
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="services.html">Services</a>
+                        <a href="ict.html">Solutions</a>
+                        <a href="about.html">About Us</a>
+                        <a href="faq.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <h3 class="footer-title">Contact</h3>
+                    <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
+                    <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
+                </div>
+            </div>
+            <div class="has-text-centered mt-6">
+                <p>© 2026 Mdukazi Projects. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
