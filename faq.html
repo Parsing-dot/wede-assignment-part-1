@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FAQ | Mdukazi Projects - Enterprise ICT Solutions</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/faq.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/faq.css" />
 </head>
 <body>
 
-    <!-- Navigation (Exact Match with Index) -->
+    <!-- Navigation (Exact Match Index + CTA Buttons) -->
     <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="index.html">
-                    <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;">
+                    <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;" />
                     <span class="ml-2">Mdukazi Projects</span>
                 </a>
                 <label for="nav-toggle" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -25,7 +25,7 @@
                 </label>
             </div>
             
-            <input type="checkbox" id="nav-toggle" class="is-hidden">
+            <input type="checkbox" id="nav-toggle" class="is-hidden" />
             
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
@@ -35,24 +35,54 @@
                     <a href="about.html" class="navbar-item">About Us</a>
                     <a href="faq.html" class="navbar-item is-active">FAQ</a>
                     <a href="contact.html" class="navbar-item">Contact</a>
+                    
+                    <!-- Signup/Login CTA Buttons -->
+                    <div class="nav-cta-buttons">
+                        <button class="button is-outline-light" id="loginBtn">Sign In</button>
+                        <button class="button is-white" id="signupBtn">Sign Up</button>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section with Network Nodes Canvas -->
-    <section class="hero is-medium faq-hero">
-        <canvas id="faq-canvas"></canvas>
+    <!-- Hero Header with Gooey Text Animation -->
+    <header class="hero faq-hero is-medium">
+        <div class="hero-glow"></div>
+        <div class="hero-glow-left"></div>
+        <div class="hero-bg-pattern"></div>
         <div class="hero-body has-text-centered">
             <div class="container">
-                <span class="section-badge">Support</span>
-                <h1 class="title">Frequently Asked Questions</h1>
-                <p class="subtitle">Find answers to common questions about our enterprise ICT solutions. <br>Hover over <span class="glossary-term-static">highlighted terms</span> to learn more.</p>
+                <span class="section-badge" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);">Support</span>
+                <div class="gooey-text-container">
+                    <div class="gooey-text-wrapper" id="gooeyTextWrapper">
+                        <!-- SVG Filter for Gooey Effect -->
+                        <svg aria-hidden="true" focusable="false">
+                            <defs>
+                                <filter id="gooey-threshold">
+                                    <feColorMatrix
+                                        in="SourceGraphic"
+                                        type="matrix"
+                                        values="1 0 0 0 0
+                                                0 1 0 0 0
+                                                0 0 1 0 0
+                                                0 0 0 255 -140"
+                                    />
+                                </filter>
+                            </defs>
+                        </svg>
+                        <div class="gooey-filter-container">
+                            <span class="gooey-text-slot text1" id="gooeyText1">Frequently Asked</span>
+                            <span class="gooey-text-slot text2" id="gooeyText2">Questions</span>
+                        </div>
+                    </div>
+                    <p class="subtitle">Find answers to common questions about our enterprise ICT solutions. <br>Hover over <span style="border-bottom: 2px dotted rgba(255,255,255,0.6);">highlighted terms</span> to learn more.</p>
+                </div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- FAQ Accordion Section -->
+    <!-- FAQ Timeline Section -->
     <section class="section faq-section">
         <div class="container">
             <div class="faq-timeline">
@@ -60,8 +90,8 @@
 
                 <details class="faq-item" style="--delay: 0.1s;">
                     <summary class="faq-question">
-                        <span class="q-icon"><i class="fas fa-question"></i></span>
-                        <span>What is Dedicated Internet Access (<span class="glossary-term" data-term="DIA" data-def="Dedicated Internet Access: A premium, uncontended internet connection where bandwidth is not shared with anyone else, guaranteeing consistent speeds and symmetrical upload/download rates.">DIA</span>)?</span>
+                        <span class="q-icon"><i class="fas fa-network-wired"></i></span>
+                        What is Dedicated Internet Access (<span class="glossary-term" data-term="DIA" data-def="Dedicated Internet Access: A premium, uncontended internet connection where bandwidth is not shared with anyone else, guaranteeing consistent speeds and symmetrical upload/download rates.">DIA</span>)?
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
@@ -72,7 +102,7 @@
                 <details class="faq-item" style="--delay: 0.2s;">
                     <summary class="faq-question">
                         <span class="q-icon"><i class="fas fa-clock"></i></span>
-                        <span>How long does installation take?</span>
+                        How long does installation take?
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
@@ -83,7 +113,7 @@
                 <details class="faq-item" style="--delay: 0.3s;">
                     <summary class="faq-question">
                         <span class="q-icon"><i class="fas fa-shield-alt"></i></span>
-                        <span>Do you offer <span class="glossary-term" data-term="SLA" data-def="Service Level Agreement: A formal contract outlining the expected level of service, including guaranteed uptime (e.g., 99.9%), response times, and compensation if the provider fails to meet these standards.">SLA</span> guarantees?</span>
+                        Do you offer <span class="glossary-term" data-term="SLA" data-def="Service Level Agreement: A formal contract outlining the expected level of service, including guaranteed uptime (e.g., 99.9%), response times, and compensation if the provider fails to meet these standards.">SLA</span> guarantees?
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
@@ -94,7 +124,7 @@
                 <details class="faq-item" style="--delay: 0.4s;">
                     <summary class="faq-question">
                         <span class="q-icon"><i class="fas fa-map-marker-alt"></i></span>
-                        <span>What areas do you cover?</span>
+                        What areas do you cover?
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
@@ -105,7 +135,7 @@
                 <details class="faq-item" style="--delay: 0.5s;">
                     <summary class="faq-question">
                         <span class="q-icon"><i class="fas fa-infinity"></i></span>
-                        <span>Is the internet really <span class="glossary-term" data-term="Uncapped" data-def="An internet service with no data limits or fair usage policies (FUP). You can download, stream, and upload as much data as you need without being throttled or charged extra.">uncapped</span> and <span class="glossary-term" data-term="Unshaped" data-def="A connection where no specific type of traffic (like streaming, gaming, or VoIP) is artificially slowed down or prioritized. All data is treated equally, ensuring maximum performance for all applications.">unshaped</span>?</span>
+                        Is the internet really <span class="glossary-term" data-term="Uncapped" data-def="An internet service with no data limits or fair usage policies (FUP). You can download, stream, and upload as much data as you need without being throttled or charged extra.">uncapped</span> and <span class="glossary-term" data-term="Unshaped" data-def="A connection where no specific type of traffic (like streaming, gaming, or VoIP) is artificially slowed down or prioritized. All data is treated equally, ensuring maximum performance for all applications.">unshaped</span>?
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
@@ -116,7 +146,7 @@
                 <details class="faq-item" style="--delay: 0.6s;">
                     <summary class="faq-question">
                         <span class="q-icon"><i class="fas fa-headset"></i></span>
-                        <span>What support do you provide via your <span class="glossary-term" data-term="NOC" data-def="Network Operations Centre: A centralized location where IT administrators monitor, manage, and maintain the client's network infrastructure 24/7 to ensure optimal performance and rapid fault resolution.">NOC</span>?</span>
+                        What support do you provide via your <span class="glossary-term" data-term="NOC" data-def="Network Operations Centre: A centralized location where IT administrators monitor, manage, and maintain the client's network infrastructure 24/7 to ensure optimal performance and rapid fault resolution.">NOC</span>?
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
@@ -126,8 +156,8 @@
 
                 <details class="faq-item" style="--delay: 0.7s;">
                     <summary class="faq-question">
-                        <span class="q-icon"><i class="fas fa-chart-line"></i></span>
-                        <span>Can I upgrade my package later?</span>
+                        <span class="q-icon"><i class="fas fa-sync-alt"></i></span>
+                        Can I upgrade my package later?
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
@@ -138,14 +168,12 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="hero is-medium cta-section">
-        <div class="hero-body has-text-centered">
-            <div class="container">
-                <h2 class="title">Still have questions?</h2>
-                <p class="subtitle">Our enterprise specialists are ready to help you find the perfect connectivity solution.</p>
-                <a href="contact.html" class="button is-primary is-medium">Contact Support</a>
-            </div>
+    <!-- CTA Banner -->
+    <section class="section cta-section has-text-centered">
+        <div class="container">
+            <h2 class="title" style="color: var(--white);">Still have questions?</h2>
+            <p class="subtitle" style="color: var(--cotton-rose); margin-bottom: 2rem;">Our enterprise specialists are ready to help you find the perfect connectivity solution.</p>
+            <a href="contact.html" class="button is-primary is-medium is-rounded">Contact Support</a>
         </div>
     </section>
 
@@ -172,6 +200,7 @@
                     <h3 class="footer-title">Contact</h3>
                     <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
                     <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
+                    <p><i class="fas fa-headset mr-2"></i> 24/7 Network Operations</p>
                     <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
                 </div>
             </div>
@@ -180,6 +209,40 @@
             </div>
         </div>
     </footer>
+
+    <!-- Signup/Login Modal -->
+    <div class="modal-backdrop" id="authModal">
+        <div class="modal-card">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <h3 id="modalTitle">Sign In</h3>
+            <p class="subtitle" id="modalSubtitle">Welcome back to Mdukazi Projects</p>
+            <form id="authForm">
+                <div class="field" id="nameField" style="display:none;">
+                    <label class="label">Full Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="John Doe" id="signupName" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input" type="email" placeholder="you@example.com" id="authEmail" required />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input class="input" type="password" placeholder="••••••••" id="authPassword" required minlength="6" />
+                    </div>
+                </div>
+                <button type="submit" class="button is-primary" id="authSubmitBtn">Sign In</button>
+            </form>
+            <div class="toggle-form">
+                <span id="toggleText">Don't have an account?</span>
+                <a id="toggleLink">Sign Up</a>
+            </div>
+        </div>
+    </div>
 
     <script src="assets/js/faq.js" defer></script>
 </body>

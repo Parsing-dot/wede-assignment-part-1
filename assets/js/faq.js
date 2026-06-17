@@ -5,6 +5,7 @@
     // 🍔 1. NAVBAR ENHANCEMENTS
     // ============================================================================
     const navToggle = document.getElementById('nav-toggle');
+    const navbarMenu = document.getElementById('navbarMenu');
     const navLinks = document.querySelectorAll('.navbar-item');
     const mainNav = document.querySelector('.main-nav');
 
@@ -24,90 +25,91 @@
         }
     });
 
-    // ============================================================================
-    // 🌐 2. NETWORK NODES HERO CANVAS
-    // ============================================================================
-    // Creates a dynamic "data packet / network node" effect using company colors.
-    class NetworkNodes {
-        constructor(canvasId) {
-            this.canvas = document.getElementById(canvasId);
-            this.ctx = this.canvas ? this.canvas.getContext('2d') : null;
-            this.nodes = [];
-            this.connectionDistance = 120;
-            this.nodeCount = 60;
-            
-            this.colors = [
-                'rgba(239, 205, 209, 0.8)', // Cotton Rose
-                'rgba(206, 105, 116, 0.7)', // Lobster Pink
-                'rgba(255, 255, 255, 0.6)'  // White
-            ];
-            
-            if (this.canvas) this.init();
-        }
-
-        init() {
-            this.resize();
-            window.addEventListener('resize', () => this.resize());
-            this.animate();
-        }
-
-        resize() {
-            const rect = this.canvas.parentElement.getBoundingClientRect();
-            this.width = rect.width;
-            this.height = rect.height;
-            this.canvas.width = this.width;
-            this.canvas.height = this.height;
-            
-            this.nodes = Array.from({ length: this.nodeCount }, () => ({
-                x: Math.random() * this.width,
-                y: Math.random() * this.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                radius: Math.random() * 2 + 1,
-                color: this.colors[Math.floor(Math.random() * this.colors.length)]
-            }));
-        }
-
-        animate() {
-            this.ctx.clearRect(0, 0, this.width, this.height);
-            
-            // Update and draw nodes
-            this.nodes.forEach(node => {
-                node.x += node.vx;
-                node.y += node.vy;
-                
-                if (node.x < 0 || node.x > this.width) node.vx *= -1;
-                if (node.y < 0 || node.y > this.height) node.vy *= -1;
-                
-                this.ctx.beginPath();
-                this.ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-                this.ctx.fillStyle = node.color;
-                this.ctx.fill();
-            });
-            
-            // Draw connections
-            for (let i = 0; i < this.nodes.length; i++) {
-                for (let j = i + 1; j < this.nodes.length; j++) {
-                    const dx = this.nodes[i].x - this.nodes[j].x;
-                    const dy = this.nodes[i].y - this.nodes[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < this.connectionDistance) {
-                        const opacity = 1 - (distance / this.connectionDistance);
-                        this.ctx.beginPath();
-                        this.ctx.moveTo(this.nodes[i].x, this.nodes[i].y);
-                        this.ctx.lineTo(this.nodes[j].x, this.nodes[j].y);
-                        this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.3})`;
-                        this.ctx.lineWidth = 0.5;
-                        this.ctx.stroke();
-                    }
-                }
-            }
-            
-            requestAnimationFrame(() => this.animate());
+    function handleNavbarResize() {
+        if (window.innerWidth >= 769) {
+            if (navToggle) navToggle.checked = false;
+            if (navbarMenu) navbarMenu.style.display = 'flex';
+        } else {
+            if (navbarMenu) navbarMenu.style.display = '';
         }
     }
-    new NetworkNodes('faq-canvas');
+    window.addEventListener('resize', handleNavbarResize);
+    handleNavbarResize();
+
+    // ============================================================================
+    // 🫧 2. GOOEY TEXT ANIMATION (Hero)
+    // ============================================================================
+    const texts = [
+        'Frequently Asked',
+        'Questions',
+        'Enterprise ICT',
+        'Solutions',
+        'We\'ve Got Answers'
+    ];
+    const morphTime = 1.8;
+    const cooldownTime = 0.5;
+
+    const text1El = document.getElementById('gooeyText1');
+    const text2El = document.getElementById('gooeyText2');
+
+    if (text1El && text2El) {
+        let textIndex = texts.length - 1;
+        let time = new Date();
+        let morph = 0;
+        let cooldown = cooldownTime;
+
+        const setMorph = (fraction) => {
+            const blur2 = Math.min(8 / (fraction + 0.01) - 8, 100);
+            text2El.style.filter = `blur(${blur2}px)`;
+            text2El.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+            const fraction1 = 1 - fraction;
+            const blur1 = Math.min(8 / (fraction1 + 0.01) - 8, 100);
+            text1El.style.filter = `blur(${blur1}px)`;
+            text1El.style.opacity = `${Math.pow(fraction1, 0.4) * 100}%`;
+        };
+
+        const doCooldown = () => {
+            morph = 0;
+            text2El.style.filter = '';
+            text2El.style.opacity = '100%';
+            text1El.style.filter = '';
+            text1El.style.opacity = '0%';
+        };
+
+        const doMorph = () => {
+            morph -= cooldown;
+            cooldown = 0;
+            let fraction = morph / morphTime;
+            if (fraction > 1) {
+                cooldown = cooldownTime;
+                fraction = 1;
+            }
+            setMorph(fraction);
+        };
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const newTime = new Date();
+            const shouldIncrementIndex = cooldown > 0;
+            const dt = (newTime.getTime() - time.getTime()) / 1000;
+            time = newTime;
+
+            cooldown -= dt;
+
+            if (cooldown <= 0) {
+                if (shouldIncrementIndex) {
+                    textIndex = (textIndex + 1) % texts.length;
+                    text1El.textContent = texts[textIndex % texts.length];
+                    text2El.textContent = texts[(textIndex + 1) % texts.length];
+                }
+                doMorph();
+            } else {
+                doCooldown();
+            }
+        }
+        animate();
+    }
 
     // ============================================================================
     // 🔍 3. HOVERPEEK GLOSSARY (Spring Physics & 3D Tilt)
@@ -128,7 +130,7 @@
 
         init() {
             this.createCard();
-            this.animate(); // Start RAF loop for smooth Lerp
+            this.animate();
 
             this.terms.forEach(term => {
                 term.addEventListener('mouseenter', (e) => this.showCard(e, term));
@@ -170,7 +172,6 @@
             this.card.querySelector('.peek-definition').textContent = termDef;
             this.card.querySelector('.peek-link').href = `https://www.google.com/search?q=what+is+${encodeURIComponent(termName)}+in+ICT+networking`;
             
-            // Snap position to prevent flying across screen
             this.targetX = e.clientX;
             this.targetY = e.clientY - 20;
             this.currentX = this.targetX;
@@ -198,7 +199,6 @@
         }
 
         animate() {
-            // Lerp (Linear Interpolation) for buttery smooth spring physics
             this.currentX += (this.targetX - this.currentX) * 0.15;
             this.currentY += (this.targetY - this.currentY) * 0.15;
 
@@ -215,29 +215,113 @@
         }
     }
 
-    // Initialize HoverPeek only on desktop
     if (window.matchMedia('(min-width: 769px)').matches) {
         new HoverPeek();
     }
 
     // ============================================================================
-    // ✨ 4. SCROLL REVEAL FOR FAQ ITEMS
+    // 🔐 4. SIGNUP / LOGIN MODAL
     // ============================================================================
-    const revealElements = document.querySelectorAll('.faq-item');
+    const modal = document.getElementById('authModal');
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const closeModal = document.getElementById('closeModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+    const authSubmitBtn = document.getElementById('authSubmitBtn');
+    const toggleLink = document.getElementById('toggleLink');
+    const toggleText = document.getElementById('toggleText');
+    const nameField = document.getElementById('nameField');
+    const signupName = document.getElementById('signupName');
+    const authEmail = document.getElementById('authEmail');
+    const authPassword = document.getElementById('authPassword');
+
+    let isLoginMode = true;
+
+    function openModal(mode) {
+        isLoginMode = (mode === 'login');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        if (isLoginMode) {
+            modalTitle.textContent = 'Sign In';
+            modalSubtitle.textContent = 'Welcome back to Mdukazi Projects';
+            authSubmitBtn.textContent = 'Sign In';
+            toggleText.textContent = "Don't have an account?";
+            toggleLink.textContent = 'Sign Up';
+            nameField.style.display = 'none';
+        } else {
+            modalTitle.textContent = 'Create Account';
+            modalSubtitle.textContent = 'Join Mdukazi Projects today';
+            authSubmitBtn.textContent = 'Sign Up';
+            toggleText.textContent = 'Already have an account?';
+            toggleLink.textContent = 'Sign In';
+            nameField.style.display = 'block';
+        }
+    }
+
+    function closeModalFn() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        document.getElementById('authForm').reset();
+        nameField.style.display = 'none';
+    }
+
+    if(loginBtn) loginBtn.addEventListener('click', () => openModal('login'));
+    if(signupBtn) signupBtn.addEventListener('click', () => openModal('signup'));
+    if(closeModal) closeModal.addEventListener('click', closeModalFn);
+    if(modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModalFn(); });
     
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) closeModalFn();
+    });
+
+    if(toggleLink) toggleLink.addEventListener('click', () => {
+        openModal(isLoginMode ? 'signup' : 'login');
+    });
+
+    const authForm = document.getElementById('authForm');
+    if(authForm) authForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = authEmail.value.trim();
+        const password = authPassword.value.trim();
+        const name = signupName.value.trim();
+
+        if (!email || !password) { alert('Please fill in all required fields.'); return; }
+        if (password.length < 6) { alert('Password must be at least 6 characters.'); return; }
+        if (!isLoginMode && !name) { alert('Please enter your full name.'); return; }
+
+        const action = isLoginMode ? 'signed in' : 'signed up';
+        alert(`✅ Successfully ${action} as ${email}!`);
+        closeModalFn();
+    });
+
+    // ============================================================================
+    // ✨ 5. SCROLL REVEAL FOR FAQ ITEMS
+    // ============================================================================
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-20px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        item.style.transitionDelay = `${index * 0.08}s`;
+    });
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateX(0)';
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.15 });
 
-    revealElements.forEach(el => observer.observe(el));
+    faqItems.forEach(item => observer.observe(item));
 
     console.log('✨ Mdukazi Projects — FAQ page fully loaded!');
-    console.log('🌐 Network nodes are connecting...');
+    console.log('🫧 Gooey text is morphing...');
     console.log('🔍 Hover over highlighted terms to see definitions.');
+    console.log('🔐 Signup/Login modal ready.');
 
 })();
