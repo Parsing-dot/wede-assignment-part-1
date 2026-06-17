@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <!-- Navigation (Identical to Index & Services) -->
+    <!-- Navigation (Exact Match with Index) -->
     <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
@@ -18,12 +18,16 @@
                     <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;">
                     <span class="ml-2">Mdukazi Projects</span>
                 </a>
-                <label for="nav-toggle" class="navbar-burger" aria-label="menu">
-                    <span></span><span></span><span></span>
+                <label for="nav-toggle" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
                 </label>
             </div>
+            
             <input type="checkbox" id="nav-toggle" class="is-hidden">
-            <div class="navbar-menu">
+            
+            <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
                     <a href="index.html" class="navbar-item">Home</a>
                     <a href="services.html" class="navbar-item">Services</a>
@@ -36,41 +40,39 @@
         </div>
     </nav>
 
-    <!-- Hero Header -->
-    <header class="hero faq-hero is-medium">
+    <!-- Hero Section with Network Nodes Canvas -->
+    <section class="hero is-medium faq-hero">
+        <canvas id="faq-canvas"></canvas>
         <div class="hero-body has-text-centered">
             <div class="container">
                 <span class="section-badge">Support</span>
                 <h1 class="title">Frequently Asked Questions</h1>
-                <p class="subtitle">Find answers to common questions about our enterprise ICT solutions</p>
+                <p class="subtitle">Find answers to common questions about our enterprise ICT solutions. <br>Hover over <span class="glossary-term-static">highlighted terms</span> to learn more.</p>
             </div>
         </div>
-        <div class="hero-bg-pattern"></div>
-    </header>
+    </section>
 
-    <!-- FAQ Timeline Section -->
+    <!-- FAQ Accordion Section -->
     <section class="section faq-section">
         <div class="container">
             <div class="faq-timeline">
                 <div class="timeline-line"></div>
 
-                <!-- FAQ Item 1 -->
                 <details class="faq-item" style="--delay: 0.1s;">
                     <summary class="faq-question">
-                        <span class="q-icon"><i class="fas fa-network-wired"></i></span>
-                        What is Dedicated Internet Access (DIA)?
+                        <span class="q-icon"><i class="fas fa-question"></i></span>
+                        <span>What is Dedicated Internet Access (<span class="glossary-term" data-term="DIA" data-def="Dedicated Internet Access: A premium, uncontended internet connection where bandwidth is not shared with anyone else, guaranteeing consistent speeds and symmetrical upload/download rates.">DIA</span>)?</span>
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
-                        <p>Dedicated Internet Access (DIA) is a premium internet service that provides exclusive, uncontended bandwidth reserved solely for your business. Unlike shared connections, DIA guarantees consistent speeds, 99.9% uptime, and symmetrical upload/download rates.</p>
+                        <p>Dedicated Internet Access is a premium internet service that provides exclusive, uncontended bandwidth reserved solely for your business. Unlike shared connections, DIA guarantees consistent speeds, 99.9% uptime, and symmetrical upload/download rates.</p>
                     </div>
                 </details>
 
-                <!-- FAQ Item 2 -->
                 <details class="faq-item" style="--delay: 0.2s;">
                     <summary class="faq-question">
                         <span class="q-icon"><i class="fas fa-clock"></i></span>
-                        How long does installation take?
+                        <span>How long does installation take?</span>
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
@@ -78,23 +80,21 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 3 -->
                 <details class="faq-item" style="--delay: 0.3s;">
                     <summary class="faq-question">
                         <span class="q-icon"><i class="fas fa-shield-alt"></i></span>
-                        Do you offer SLA guarantees?
+                        <span>Do you offer <span class="glossary-term" data-term="SLA" data-def="Service Level Agreement: A formal contract outlining the expected level of service, including guaranteed uptime (e.g., 99.9%), response times, and compensation if the provider fails to meet these standards.">SLA</span> guarantees?</span>
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
-                        <p>Yes, all our business solutions come with comprehensive Service Level Agreements (SLAs) guaranteeing 99.9% uptime, 24/7 network monitoring, and rapid response times. Enterprise clients receive priority support with 4-hour repair SLAs.</p>
+                        <p>Yes, all our business solutions come with comprehensive Service Level Agreements guaranteeing 99.9% uptime, 24/7 network monitoring, and rapid response times. Enterprise clients receive priority support with 4-hour repair SLAs.</p>
                     </div>
                 </details>
 
-                <!-- FAQ Item 4 -->
                 <details class="faq-item" style="--delay: 0.4s;">
                     <summary class="faq-question">
                         <span class="q-icon"><i class="fas fa-map-marker-alt"></i></span>
-                        What areas do you cover?
+                        <span>What areas do you cover?</span>
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
@@ -102,11 +102,10 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 5 -->
                 <details class="faq-item" style="--delay: 0.5s;">
                     <summary class="faq-question">
                         <span class="q-icon"><i class="fas fa-infinity"></i></span>
-                        Is the internet really uncapped and unshaped?
+                        <span>Is the internet really <span class="glossary-term" data-term="Uncapped" data-def="An internet service with no data limits or fair usage policies (FUP). You can download, stream, and upload as much data as you need without being throttled or charged extra.">uncapped</span> and <span class="glossary-term" data-term="Unshaped" data-def="A connection where no specific type of traffic (like streaming, gaming, or VoIP) is artificially slowed down or prioritized. All data is treated equally, ensuring maximum performance for all applications.">unshaped</span>?</span>
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
@@ -114,23 +113,21 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 6 -->
                 <details class="faq-item" style="--delay: 0.6s;">
                     <summary class="faq-question">
                         <span class="q-icon"><i class="fas fa-headset"></i></span>
-                        What support do you provide?
+                        <span>What support do you provide via your <span class="glossary-term" data-term="NOC" data-def="Network Operations Centre: A centralized location where IT administrators monitor, manage, and maintain the client's network infrastructure 24/7 to ensure optimal performance and rapid fault resolution.">NOC</span>?</span>
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
-                        <p>We offer 24/7 technical support through our Network Operations Centre (NOC). Our expert team monitors your connection around the clock and provides proactive maintenance, troubleshooting, and rapid incident response.</p>
+                        <p>We offer 24/7 technical support through our Network Operations Centre. Our expert team monitors your connection around the clock and provides proactive maintenance, troubleshooting, and rapid incident response.</p>
                     </div>
                 </details>
 
-                <!-- FAQ Item 7 -->
                 <details class="faq-item" style="--delay: 0.7s;">
                     <summary class="faq-question">
-                        <span class="q-icon"><i class="fas fa-sync-alt"></i></span>
-                        Can I upgrade my package later?
+                        <span class="q-icon"><i class="fas fa-chart-line"></i></span>
+                        <span>Can I upgrade my package later?</span>
                         <span class="q-marker"></span>
                     </summary>
                     <div class="faq-answer">
@@ -141,16 +138,18 @@
         </div>
     </section>
 
-    <!-- CTA Banner -->
-    <section class="section cta-section has-text-centered">
-        <div class="container">
-            <h2 class="title" style="color: var(--white);">Still have questions?</h2>
-            <p class="subtitle" style="color: var(--cotton-rose); margin-bottom: 2rem;">Our enterprise specialists are ready to help you find the perfect connectivity solution.</p>
-            <a href="contact.html" class="button is-primary is-medium is-rounded">Contact Support</a>
+    <!-- CTA Section -->
+    <section class="hero is-medium cta-section">
+        <div class="hero-body has-text-centered">
+            <div class="container">
+                <h2 class="title">Still have questions?</h2>
+                <p class="subtitle">Our enterprise specialists are ready to help you find the perfect connectivity solution.</p>
+                <a href="contact.html" class="button is-primary is-medium">Contact Support</a>
+            </div>
         </div>
     </section>
 
-    <!-- Footer (Identical to Index & Services) -->
+    <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
             <div class="columns">
@@ -173,7 +172,6 @@
                     <h3 class="footer-title">Contact</h3>
                     <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
                     <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
-                    <p><i class="fas fa-headset mr-2"></i> 24/7 Network Operations</p>
                     <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
                 </div>
             </div>
@@ -183,5 +181,6 @@
         </div>
     </footer>
 
+    <script src="assets/js/faq.js" defer></script>
 </body>
 </html>
