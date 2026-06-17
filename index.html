@@ -45,7 +45,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero is-primary is-fullheight-with-navbar">
+    <section class="hero is-primary is-fullheight-with-navbar" id="hero">
         <div class="hero-particles">
             <div class="particle"></div>
             <div class="particle"></div>
@@ -55,13 +55,23 @@
         </div>
         <div class="hero-body has-text-centered">
             <div class="container">
-                <h1 class="title">Enterprise ICT Solutions</h1>
-                <p class="subtitle">Dedicated Internet Access Solutions<br>
+                <h1 class="title" id="hero-title">Enterprise ICT Solutions</h1>
+                <p class="subtitle" id="hero-subtitle">Dedicated Internet Access Solutions<br>
                 Premium business internet solutions designed for the modern enterprise.<br>
                 Reliable, fast, and always-on connectivity for your critical operations.</p>
-                <div class="buttons is-centered">
-                    <a href="services.html" class="button is-primary is-medium">Explore Services</a>
-                    <a href="contact.html" class="button is-outline is-medium">Get in Touch</a>
+                <div class="button-container">
+                    <button class="animated-button button-primary" id="primaryBtn" data-loading="false">
+                        <span class="button-content">
+                            <i class="fas fa-rocket"></i>
+                            Explore Services
+                        </span>
+                    </button>
+                    <button class="animated-button button-outline" id="secondaryBtn">
+                        <span class="button-content">
+                            <i class="fas fa-envelope"></i>
+                            Get in Touch
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -72,16 +82,16 @@
         <div class="container has-text-centered">
             <div class="columns is-centered">
                 <div class="column is-one-third stat-item">
-                    <span class="stat-number">High Speed</span>
-                    <span class="stat-label">Performance</span>
+                    <span class="stat-number" data-count="99">0</span>
+                    <span class="stat-label">% Uptime</span>
                 </div>
                 <div class="column is-one-third stat-item">
-                    <span class="stat-number">Secure</span>
-                    <span class="stat-label">Infrastructure</span>
+                    <span class="stat-number" data-count="24">0</span>
+                    <span class="stat-label">/7 Support</span>
                 </div>
                 <div class="column is-one-third stat-item">
-                    <span class="stat-number">24/7 Uptime</span>
-                    <span class="stat-label">Reliability</span>
+                    <span class="stat-number" data-count="1000">0</span>
+                    <span class="stat-label">+ Clients</span>
                 </div>
             </div>
         </div>
@@ -213,7 +223,7 @@
             <div class="columns">
                 <div class="column is-one-third">
                     <h3 class="footer-title">Mdukazi Projects</h3>
-                    <p>Enterprise ITC Solutions for the modern business</p>
+                    <p>Enterprise ICT Solutions for the modern business</p>
                 </div>
                 <div class="column is-one-third">
                     <h3 class="footer-title">Quick Links</h3>
@@ -240,5 +250,7 @@
         </div>
     </footer>
 
+    <!-- JavaScript for Animations -->
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

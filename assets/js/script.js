@@ -1,301 +1,312 @@
 /**
- * Mdukazi Projects — Main Script
- * ================================
- Handles four things in order:
- 1. AOS (Animate On Scroll) initialisation
-   2. Hero word-switcher animation (spring-style, 21st.dev approach)
-   3. Dynamic feature cards — loaded from data.json, fallback built in
-   4. Live search / filter on the feature cards
-   5. Animated stat counters (count up from zero)
- 
- Everything waits for DOMContentLoaded so we never touch
-  an element that hasn't been parsed yet.
+ * Mdukazi Projects - Main JavaScript
+ * Interactive animations and functionality
  */
-document.addEventListener('DOMContentLoaded', () => {
 
+(function() {
+    'use strict';
 
-    /* =============================================
-       1. AOS — Animate On Scroll
-       Triggers the fade-in/slide-in effects defined
-       via data-aos="..." attributes in the HTML.
-       'once: true' means the animation only fires the
-       first time an element enters the viewport —
-       no replaying when you scroll back up.
-    ============================================= */
-    AOS.init({
-        duration: 750,          // how long each animation takes (ms)
-        easing:   'ease-out-cubic',
-        once:     true,         // animate once, then leave it visible
-        offset:   80,           // trigger 80px before the element is fully in view
-    });
-
-
-    /* =============================================
-       2. Hero Word Switcher
-       Cycles through the <span class="word"> elements
-       inside .word-switcher. The active class slides
-       the word into view; the exit class shoots it upward.
-       All the visual work is in CSS — JS just swaps classes.
-    ============================================= */
-    const words       = document.querySelectorAll('.word-switcher .word');
-    let   activeIndex = 0; // track which word is currently showing
-
-    if (words.length > 0) {
-        // Make sure the first word starts in the visible position
-        words[0].classList.add('active');
-
-        setInterval(() => {
-            const currentWord = words[activeIndex];
-
-            // Work out the next word index, looping back to 0 at the end
-            const nextIndex = (activeIndex + 1) % words.length;
-            const nextWord  = words[nextIndex];
-
-            // 1. Tell the current word to shoot upward and fade out
-            currentWord.classList.remove('active');
-            currentWord.classList.add('exit');
-
-            // 2. Bring the next word in from below
-            nextWord.classList.add('active');
-
-            // 3. After the CSS exit transition finishes, clean up the exit class
-            //    so the word resets to its "waiting below" position silently
-            setTimeout(() => {
-                currentWord.classList.remove('exit');
-            }, 450); // should match the transition duration in CSS
-
-            // Advance the pointer
-            activeIndex = nextIndex;
-
-        }, 2200); // swap every 2.2 seconds — feels natural, not rushed
-    }
-
-
-    /* =============================================
-       3. Dynamic Feature Cards
-       We try to load data.json first. If the file
-       doesn't exist yet (common during dev), we fall
-       back to the hardcoded array below — so the page
-       never looks broken while you're building.
-    ============================================= */
-
-    // Grab the grid container that script.js is responsible for filling
-    const featuresContainer = document.getElementById('features-container');
-
-    // Keep a full copy of all features so the search filter can work from it
-    let allFeatures = [];
-
-    // Fallback data — mirrors what you'd put in data.json
-    // Just create a real data.json when you're ready; this stays as backup
-    const fallbackFeatures = [
-        {
-            id: 1,
-            icon: '📡',
-            title: 'Dedicated Data Service',
-            description: 'Exclusive bandwidth reserved solely for your business operations — no sharing with neighbours.'
-        },
-        {
-            id: 2,
-            icon: '💰',
-            title: 'Fixed Monthly Pricing',
-            description: 'Predictable costs every month with no hidden fees, no throttling surprises.'
-        },
-        {
-            id: 3,
-            icon: '♾️',
-            title: 'Uncapped Data',
-            description: 'Unlimited data usage — download, upload, and stream as much as your business needs.'
-        },
-        {
-            id: 4,
-            icon: '🚀',
-            title: 'Unshaped Traffic',
-            description: 'No traffic shaping or prioritisation — all your data flows at full speed, always.'
-        },
-        {
-            id: 5,
-            icon: '⚡',
-            title: 'Guaranteed Speeds',
-            description: 'Always-on service with consistent, SLA-backed performance you can actually rely on.'
-        },
-        {
-            id: 6,
-            icon: '🛡️',
-            title: '24/7 Monitoring',
-            description: 'Round-the-clock network monitoring and support so issues get caught before you notice them.'
-        },
-    ];
-
-    // Try fetching the real JSON first; fall back silently if it's not there yet
-    fetch('data.json')
-        .then(response => {
-            // If the server returned anything other than 200, treat it as missing
-            if (!response.ok) throw new Error('data.json not found');
-            return response.json();
-        })
-        .then(data => {
-            // data.json loaded successfully — use it
-            allFeatures = data.features;
-            renderFeatures(allFeatures);
-            animateStats();
-        })
-        .catch(() => {
-            // data.json missing or malformed — use the fallback and move on
-            console.info('data.json not found — using fallback feature data. Create data.json to override this.');
-            allFeatures = fallbackFeatures;
-            renderFeatures(allFeatures);
-            animateStats();
-        });
-
-
-    /**
-     * renderFeatures
-     * Clears the grid and injects a card for each feature object.
-     * Called on initial load and every time the search term changes.
-     *
-     * @param {Array} features — array of { id, icon, title, description }
-     */
-    function renderFeatures(features) {
-        // Wipe whatever was in the container (loading message or previous results)
-        featuresContainer.innerHTML = '';
-
-        if (features.length === 0) {
-            // Let the user know their search returned nothing
-            featuresContainer.innerHTML = '<p class="loading-msg">No services match your search — try a different keyword.</p>';
-            return;
-        }
-
-        features.forEach((feature, index) => {
-            // Build the outer wrapper div that AOS will animate
-            const col = document.createElement('div');
-
-            // Build the card itself
-            const card = document.createElement('div');
-            card.className = 'feature-card';
-            card.setAttribute('data-aos', 'fade-up');
-            // Stagger each card slightly so they cascade in rather than all at once
-            card.setAttribute('data-aos-delay', String(index * 80));
-
-            // Fill the card with icon, heading, and description
-            // We use textContent for the heading and description to avoid XSS
-            // (in case data.json ever comes from an external source)
-            const iconEl = document.createElement('div');
-            iconEl.className = 'feature-icon';
-            iconEl.textContent = feature.icon;
-
-            const titleEl = document.createElement('h3');
-            titleEl.textContent = feature.title;
-
-            const descEl = document.createElement('p');
-            descEl.textContent = feature.description;
-
-            // Assemble and append
-            card.appendChild(iconEl);
-            card.appendChild(titleEl);
-            card.appendChild(descEl);
-            featuresContainer.appendChild(card);
-        });
-
-        // Tell AOS to re-scan the DOM so it picks up the freshly injected cards
-        AOS.refresh();
-    }
-
-
-    /* =============================================
-       4. Live Search / Filter
-       Filters the feature cards in real time as the
-       user types. Matches against both title and
-       description so "uncapped" and "unlimited" both work.
-    ============================================= */
-    const searchInput = document.getElementById('feature-search');
-    const searchBtn   = document.getElementById('search-btn');
-
-    /**
-     * filterFeatures
-     * Reads the current input value and re-renders only
-     * the features whose title or description contains the term.
-     */
-    function filterFeatures() {
-        const term = searchInput.value.toLowerCase().trim();
-
-        if (term === '') {
-            // Empty search = show everything
-            renderFeatures(allFeatures);
-            return;
-        }
-
-        const filtered = allFeatures.filter(feature =>
-            feature.title.toLowerCase().includes(term) ||
-            feature.description.toLowerCase().includes(term)
-        );
-
-        renderFeatures(filtered);
-    }
-
-    // Fire on every keystroke so results update as you type
-    searchInput.addEventListener('input', filterFeatures);
-
-    // Also fire on the button click (and Enter key via the button)
-    searchBtn.addEventListener('click', filterFeatures);
-
-    // Allow pressing Enter inside the input to trigger a search too
-    searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') filterFeatures();
-    });
-
-
-    /* =============================================
-       5. Animated Stat Counters
-       Each .stat-number element has a data-target attribute
-       with the final value. We animate from 0 to that value
-       using requestAnimationFrame for a silky smooth count-up.
-       Called after the features render so the page is ready.
-    ============================================= */
-
-    /**
-     * animateStats
-     * Runs the count-up animation on every element with class .stat-number.
-     * Automatically detects whether the target is a decimal (e.g. 99.9)
-     * and formats it accordingly.
-     */
-    function animateStats() {
-        const statEls   = document.querySelectorAll('.stat-number');
-        const duration  = 2000; // total animation time in ms
-
-        statEls.forEach(statEl => {
-            const target    = parseFloat(statEl.getAttribute('data-target'));
-            const isDecimal = !Number.isInteger(target); // e.g. 99.9 vs 24
-            const startTime = performance.now();
-
-            /**
-             * tick — called on every animation frame.
-             * Calculates progress (0 → 1), applies an ease-out curve,
-             * and updates the element text.
-             */
-            function tick(currentTime) {
-                // How far through the animation are we? (clamped 0–1)
-                const progress = Math.min((currentTime - startTime) / duration, 1);
-
-                // Ease-out quartic: fast start, gentle landing
-                const eased = 1 - Math.pow(1 - progress, 4);
-
-                // Set the text — one decimal place for decimals, integer otherwise
-                statEl.textContent = isDecimal
-                    ? (target * eased).toFixed(1)
-                    : Math.floor(target * eased);
-
-                // Keep going until we've hit the end
-                if (progress < 1) {
-                    requestAnimationFrame(tick);
-                } else {
-                    // Make absolutely sure the final value is exact, not a rounding artifact
-                    statEl.textContent = isDecimal ? target.toFixed(1) : target;
-                }
+    // ============================================
+    // 1. BUTTON RIPPLE & LOADING EFFECTS
+    // ============================================
+    function initButtons() {
+        const buttons = document.querySelectorAll('.animated-button');
+        
+        buttons.forEach(button => {
+            // Ripple effect on click
+            button.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = Math.max(rect.width, rect.height);
+                
+                ripple.className = 'button-ripple';
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+                
+                this.appendChild(ripple);
+                
+                // Remove ripple after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+            
+            // Loading state toggle (for demo)
+            if (button.id === 'primaryBtn') {
+                button.addEventListener('click', function(e) {
+                    // Prevent default if it's a link
+                    e.preventDefault();
+                    
+                    // Toggle loading state
+                    const isLoading = this.dataset.loading === 'true';
+                    const content = this.querySelector('.button-content');
+                    
+                    if (!isLoading) {
+                        // Show loading
+                        this.dataset.loading = 'true';
+                        this.classList.add('button-loading');
+                        content.innerHTML = '<span class="button-spinner"></span> Loading...';
+                        
+                        // Simulate async operation
+                        setTimeout(() => {
+                            this.dataset.loading = 'false';
+                            this.classList.remove('button-loading');
+                            content.innerHTML = '<i class="fas fa-rocket"></i> Explore Services';
+                            
+                            // Show success feedback
+                            const originalColor = this.style.backgroundColor;
+                            this.style.backgroundColor = '#2ecc71';
+                            this.style.color = '#fff';
+                            setTimeout(() => {
+                                this.style.backgroundColor = originalColor;
+                                this.style.color = '';
+                            }, 1000);
+                        }, 2000);
+                    }
+                });
             }
-
-            requestAnimationFrame(tick);
+            
+            // Hover effect - subtle glow
+            button.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 8px 32px rgba(189, 55, 69, 0.3)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('button-primary')) {
+                    this.style.boxShadow = 'none';
+                } else {
+                    this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+                }
+            });
         });
     }
 
+    // ============================================
+    // 2. COUNTER ANIMATION FOR STATS
+    // ============================================
+    function animateCounters() {
+        const counters = document.querySelectorAll('.stat-number[data-count]');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.count);
+                    const duration = 2000;
+                    const startTime = performance.now();
+                    
+                    function updateCounter(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        
+                        // Ease out cubic
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        const current = Math.floor(eased * target);
+                        
+                        el.textContent = current + (target > 100 ? '+' : '');
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            el.textContent = target + (target > 100 ? '+' : '');
+                        }
+                    }
+                    
+                    requestAnimationFrame(updateCounter);
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        counters.forEach(counter => observer.observe(counter));
+    }
 
-}); // end DOMContentLoaded
+    // ============================================
+    // 3. SCROLL REVEAL ANIMATIONS
+    // ============================================
+    function initScrollReveal() {
+        const revealElements = document.querySelectorAll('.feature-card, .benefit-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        revealElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    }
+
+    // ============================================
+    // 4. PARALLAX HERO PARTICLES
+    // ============================================
+    function initParallaxParticles() {
+        const particles = document.querySelectorAll('.particle');
+        const hero = document.querySelector('.hero.is-primary');
+        
+        if (!hero || particles.length === 0) return;
+        
+        document.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            
+            particles.forEach((particle, index) => {
+                const speed = 20 + index * 5;
+                const moveX = x * speed;
+                const moveY = y * speed;
+                particle.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    }
+
+    // ============================================
+    // 5. TYPING EFFECT FOR HERO TITLE
+    // ============================================
+    function initTypingEffect() {
+        const title = document.getElementById('hero-title');
+        if (!title) return;
+        
+        const originalText = title.textContent;
+        const chars = originalText.split('');
+        title.textContent = '';
+        
+        let index = 0;
+        const typeInterval = setInterval(() => {
+            if (index < chars.length) {
+                title.textContent += chars[index];
+                index++;
+            } else {
+                clearInterval(typeInterval);
+            }
+        }, 50);
+    }
+
+    // ============================================
+    // 6. MOBILE MENU ACCESSIBILITY
+    // ============================================
+    function initMobileMenu() {
+        const toggle = document.getElementById('nav-toggle');
+        const burger = document.querySelector('.navbar-burger');
+        
+        if (toggle && burger) {
+            // Update aria-expanded
+            toggle.addEventListener('change', function() {
+                const isExpanded = this.checked;
+                burger.setAttribute('aria-expanded', isExpanded);
+            });
+            
+            // Close menu when clicking a link (mobile)
+            document.querySelectorAll('.navbar-menu .navbar-item').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        toggle.checked = false;
+                        burger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        }
+    }
+
+    // ============================================
+    // 7. SMOOTH SCROLL FOR INTERNAL LINKS
+    // ============================================
+    function initSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    const navHeight = document.querySelector('.main-nav').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    }
+
+    // ============================================
+    // 8. ACTIVE NAV LINK ON SCROLL
+    // ============================================
+    function initActiveNavLink() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.navbar-menu .navbar-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    navLinks.forEach(link => {
+                        link.classList.remove('is-active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('is-active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.4 });
+        
+        sections.forEach(section => observer.observe(section));
+    }
+
+    // ============================================
+    // 9. FEATURE CARD GLOW ON HOVER
+    // ============================================
+    function initCardGlow() {
+        const cards = document.querySelectorAll('.feature-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                this.style.setProperty('--mouse-x', x + 'px');
+                this.style.setProperty('--mouse-y', y + 'px');
+                this.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(189, 55, 69, 0.05) 0%, transparent 70%)`;
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.background = '';
+            });
+        });
+    }
+
+    // ============================================
+    // 10. INITIALIZE ALL
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        // Run all initializations
+        initButtons();
+        animateCounters();
+        initScrollReveal();
+        initParallaxParticles();
+        initTypingEffect();
+        initMobileMenu();
+        initSmoothScroll();
+        initActiveNavLink();
+        initCardGlow();
+        
+        console.log('🚀 Mdukazi Projects - Interactive features loaded');
+    });
+
+})();

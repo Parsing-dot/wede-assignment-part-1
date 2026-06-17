@@ -74,12 +74,36 @@ h6 {
     color: var(--white) !important;
 }
 
-/* Pure CSS Mobile Menu Toggle */
+/* ================= HAMBURGER ICON - LEFT CORNER ================= */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
 .navbar-burger {
     cursor: pointer;
     display: block;
     margin-left: 0;
     margin-right: auto;
+    order: -1;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-burger:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-burger span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background-color: var(--white);
+    margin: 4px 0;
+    transition: var(--transition-smooth);
 }
 
 .navbar-menu {
@@ -88,7 +112,7 @@ h6 {
     padding: 1rem 0;
 }
 
-#nav-toggle:checked ~ .navbar-menu {
+#nav-toggle:checked~.navbar-menu {
     display: block;
     animation: slideDown 0.3s ease forwards;
 }
@@ -104,24 +128,15 @@ h6 {
     }
 }
 
-.navbar-burger span {
-    display: block;
-    width: 18px;
-    height: 2px;
-    background-color: var(--white);
-    margin: 4px 0;
-    transition: var(--transition-smooth);
-}
-
-#nav-toggle:checked ~ .navbar-burger span:nth-child(1) {
+#nav-toggle:checked~.navbar-burger span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
 
-#nav-toggle:checked ~ .navbar-burger span:nth-child(2) {
+#nav-toggle:checked~.navbar-burger span:nth-child(2) {
     opacity: 0;
 }
 
-#nav-toggle:checked ~ .navbar-burger span:nth-child(3) {
+#nav-toggle:checked~.navbar-burger span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
@@ -132,12 +147,19 @@ h6 {
     position: relative;
     overflow: hidden;
     margin-top: 4.5rem;
-    min-height: 60vh;
+    min-height: 55vh;
+    /* Reduced from 60vh */
+}
+
+.hero-body {
+    padding: 3rem 1.5rem;
+    /* Reduced padding */
 }
 
 .hero-body .title {
     color: var(--white);
-    font-size: 3.5rem;
+    font-size: 3rem;
+    /* Reduced from 3.5rem */
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     animation: fadeInDown 0.8s ease-out forwards;
@@ -146,10 +168,119 @@ h6 {
 
 .hero-body .subtitle {
     color: var(--cotton-rose);
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
+    font-size: 1.15rem;
+    /* Reduced from 1.25rem */
+    margin-bottom: 1.5rem;
+    /* Reduced from 2rem */
     animation: fadeInUp 0.8s ease-out 0.3s forwards;
     opacity: 0;
+}
+
+/* ================= ANIMATED BUTTONS ================= */
+.button-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.animated-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    min-width: 140px;
+    text-decoration: none;
+}
+
+.animated-button .button-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.animated-button .button-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Primary Button */
+.button-primary {
+    background: var(--white);
+    color: var(--intense-cherry);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.button-primary:hover {
+    background: var(--cotton-rose);
+    color: var(--intense-cherry);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.button-primary:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Outline Button */
+.button-outline {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.button-outline:hover {
+    background: var(--white);
+    color: var(--intense-cherry);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.button-outline:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Button Loading State */
+.button-loading {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.button-loading .button-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Floating Particles */
@@ -304,6 +435,17 @@ h6 {
     text-align: center;
     padding: 1rem;
     animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.stat-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.stat-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.stat-item:nth-child(3) {
+    animation-delay: 0.3s;
 }
 
 .stat-number {
@@ -350,7 +492,7 @@ h6 {
 
 .feature-card:hover .feature-icon {
     color: var(--intense-cherry);
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(-5deg);
 }
 
 .feature-card h3 {
@@ -400,6 +542,7 @@ h6 {
 
 .benefit-item:hover .benefit-number {
     color: var(--intense-cherry);
+    transform: scale(1.2);
 }
 
 .benefit-content h4 {
@@ -506,32 +649,20 @@ h6 {
 
 /* ================= RESPONSIVE ================= */
 @media screen and (max-width: 768px) {
-    .navbar-burger {
-        display: block;
-    }
-    
-    .navbar-menu {
-        display: none;
-    }
-    
-    #nav-toggle:checked ~ .navbar-menu {
-        display: block;
-    }
-    
     .hero-body .title {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
     
     .hero-body .subtitle {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
     
     .section-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     .stat-number {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     .benefit-item {
@@ -545,12 +676,35 @@ h6 {
         margin-bottom: 1rem;
     }
     
-    .columns.is-multiline > .column {
+    .columns.is-multiline>.column {
         flex: 0 0 100%;
     }
     
     .hero.is-primary {
         min-height: 50vh;
+    }
+    
+    .hero-body {
+        padding: 2rem 1rem;
+    }
+    
+    .buttons.is-centered {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .buttons.is-centered .button {
+        margin: 0.25rem 0;
+    }
+    
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .animated-button {
+        width: 100%;
+        max-width: 280px;
     }
 }
 
@@ -561,10 +715,28 @@ h6 {
     
     .navbar-menu {
         display: flex !important;
+        background: transparent;
+        padding: 0;
     }
     
-    #nav-toggle {
-        display: none;
+    .navbar-end {
+        margin-left: auto;
+    }
+    
+    .main-nav .navbar-item {
+        padding: 1rem 1.5rem;
+    }
+    
+    .hero.is-primary {
+        min-height: 55vh;
+    }
+    
+    .hero-body {
+        padding: 4rem 1.5rem;
+    }
+    
+    .hero-body .title {
+        font-size: 3.2rem;
     }
 }
 
