@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - Mdukazi Projects</title>
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Mdukazi Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="issues">
+                    <span class="icon">🔧</span>
+                    <span>Client Queries</span>
+                </a>
+                <a href="#" class="nav-item" data-section="specials">
+                    <span class="icon">🎉</span>
+                    <span>Specials Management</span>
+                </a>
+                <a href="#" class="nav-item" data-section="payments">
+                    <span class="icon">💰</span>
+                    <span>Payments</span>
+                </a>
+                <a href="#" class="nav-item" data-section="outstanding">
+                    <span class="icon">⚠️</span>
+                    <span>Outstanding Accounts</span>
+                </a>
+                <a href="#" class="nav-item" data-section="analytics">
+                    <span class="icon">📈</span>
+                    <span>Client Analytics</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button onclick="adminLogout()" class="btn-logout">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="admin-header">
+                <h1 id="pageTitle">Dashboard</h1>
+                <div class="admin-info">
+                    <span>Administrator</span>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3>Total Clients</h3>
+                            <p id="totalClients">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <h3>Total Revenue</h3>
+                            <p id="totalRevenue">R 0.00</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-info">
+                            <h3>Outstanding</h3>
+                            <p id="totalOutstanding">R 0.00</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔧</div>
+                        <div class="stat-info">
+                            <h3>Pending Issues</h3>
+                            <p id="pendingIssues">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>Recent Signups</h3>
+                        <div id="recentSignups" class="list-container"></div>
+                    </div>
+                    <div class="card">
+                        <h3>Recent Payments</h3>
+                        <div id="recentPayments" class="list-container"></div>
+                    </div>
+                    <div class="card">
+                        <h3>Recent Issues</h3>
+                        <div id="recentIssues" class="list-container"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Issues Section -->
+            <section id="issues" class="content-section">
+                <div class="section-header">
+                    <h2>Client Queries & Issues</h2>
+                    <div class="filter-controls">
+                        <select id="issueFilter" onchange="filterIssues()">
+                            <option value="all">All Issues</option>
+                            <option value="pending">Pending</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="issuesList" class="issues-grid"></div>
+            </section>
+
+            <!-- Specials Section -->
+            <section id="specials" class="content-section">
+                <div class="section-header">
+                    <h2>Specials & Promotions</h2>
+                    <button onclick="openSpecialModal()" class="btn-primary">+ Create Special</button>
+                </div>
+                <div id="specialsList" class="specials-grid"></div>
+            </section>
+
+            <!-- Payments Section -->
+            <section id="payments" class="content-section">
+                <div class="section-header">
+                    <h2>Payment History</h2>
+                    <div class="filter-controls">
+                        <input type="month" id="paymentMonth" onchange="filterPayments()">
+                        <select id="paymentClient" onchange="filterPayments()">
+                            <option value="all">All Clients</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="paymentsTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Client</th>
+                                <th>Amount</th>
+                                <th>Service</th>
+                                <th>Period</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Outstanding Section -->
+            <section id="outstanding" class="content-section">
+                <div class="section-header">
+                    <h2>Outstanding Accounts</h2>
+                    <div class="filter-controls">
+                        <select id="outstandingFilter" onchange="filterOutstanding()">
+                            <option value="all">All Outstanding</option>
+                            <option value="overdue">Overdue</option>
+                            <option value="current">Current</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="outstandingTable">
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Email</th>
+                                <th>Service</th>
+                                <th>Amount Due</th>
+                                <th>Due Date</th>
+                                <th>Months Outstanding</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="outstandingTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="content-section">
+                <div class="section-header">
+                    <h2>Client Analytics</h2>
+                </div>
+                <div class="analytics-grid">
+                    <div class="card">
+                        <h3>Account Creation Timeline</h3>
+                        <div id="creationTimeline" class="timeline-container"></div>
+                    </div>
+                    <div class="card">
+                        <h3>Monthly Signups</h3>
+                        <div id="monthlySignups" class="chart-container"></div>
+                    </div>
+                    <div class="card">
+                        <h3>Service Distribution</h3>
+                        <div id="serviceDistribution" class="distribution-container"></div>
+                    </div>
+                    <div class="card">
+                        <h3>Client Growth</h3>
+                        <div id="clientGrowth" class="growth-container"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Create Special Modal -->
+    <div id="specialModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSpecialModal()">&times;</span>
+            <h2>Create New Special</h2>
+            <form id="specialForm">
+                <div class="form-group">
+                    <label>Special Title</label>
+                    <input type="text" id="specialTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="specialDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Badge Text</label>
+                    <input type="text" id="specialBadge" placeholder="e.g., Limited Time, New, Hot Deal" required>
+                </div>
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" id="specialStartDate" required>
+                </div>
+                <div class="form-group">
+                    <label>End Date</label>
+                    <input type="date" id="specialEndDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Target Services (comma-separated)</label>
+                    <input type="text" id="specialTargetServices" placeholder="e.g., DIA 100Mbps, Business Fibre">
+                </div>
+                <button type="submit" class="btn-primary">Create Special</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Resolve Issue Modal -->
+    <div id="resolveModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeResolveModal()">&times;</span>
+            <h2>Resolve Issue</h2>
+            <form id="resolveForm">
+                <div class="form-group">
+                    <label>Response Message</label>
+                    <textarea id="resolveMessage" rows="4" required placeholder="Enter your response to the client..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Mark as Resolved</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets//js/auth.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>
