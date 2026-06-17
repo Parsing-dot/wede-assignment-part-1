@@ -9,9 +9,9 @@
     <meta name="keywords" content="enterprise ICT, dedicated internet, business internet, uncapped data, Mdukazi Projects">
     <meta name="author" content="Mdukazi Projects">
     
-    <!-- Your Original Custom CSS (NO external frameworks that override colors) -->
-    <link rel="stylesheet" href="index.css">
-    <!-- AOS Animation Library CSS (Lightweight, won't break your layout) -->
+    <!-- Your Original Custom CSS -->
+    <link rel="stylesheet" href="assets/css/index.css">
+    <!-- AOS Animation Library CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
@@ -47,9 +47,6 @@
         </div>
         <div class="hero-body">
             <div class="container text-center" data-aos="fade-up">
-                <!-- REPLACE WITH YOUR ORIGINAL HERO IMAGE IF APPLICABLE -->
-                <!-- <img src="images/hero-banner.jpg" alt="Mdukazi Projects Enterprise ICT Solutions" class="hero-image"> -->
-                
                 <h1 class="title">Enterprise ICT Solutions</h1>
                 <h2 class="subtitle">
                     Dedicated <span class="rotating-text-wrapper">
@@ -72,18 +69,24 @@
     <!-- Stats Section -->
     <section class="stats-section" data-aos="fade-up">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number" data-target="99.9">0</span>%
-                    <span class="stat-label">Uptime Reliability</span>
+            <div class="columns is-multiline is-centered">
+                <div class="column is-4">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="99.9">0</span>%
+                        <span class="stat-label">High Speed Performance</span>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="24">0</span>/7
-                    <span class="stat-label">Network Monitoring</span>
+                <div class="column is-4">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="24">0</span>/7
+                        <span class="stat-label">Secure Infrastructure</span>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="500">0</span>+
-                    <span class="stat-label">Business Clients</span>
+                <div class="column is-4">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="100">0</span>%
+                        <span class="stat-label">Uptime Reliability</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -104,8 +107,10 @@
             </div>
 
             <!-- Dynamic Content Container (Populated by script.js) -->
-            <div class="features-grid" id="features-container">
-                <p class="text-center">Loading services...</p>
+            <div class="columns is-multiline" id="features-container">
+                <div class="column is-12 text-center">
+                    <p>Loading services...</p>
+                </div>
             </div>
         </div>
     </section>
@@ -117,33 +122,59 @@
                 <h2 class="section-title">Benefits</h2>
                 <p class="section-subtitle">Why choose our dedicated internet solutions</p>
             </div>
-            <div class="benefits-grid">
-                <div class="benefit-item" data-aos="fade-right" style="--delay: 0.1s">
-                    <div class="benefit-number">1</div>
-                    <div class="benefit-content">
-                        <h4>Scalability and Flexibility</h4>
-                        <p>Grow your bandwidth as your business expands without infrastructure changes.</p>
+            <div class="columns is-multiline">
+                <div class="column is-6" data-aos="fade-right">
+                    <div class="benefit-item">
+                        <div class="benefit-number">1</div>
+                        <div class="benefit-content">
+                            <h4>Scalability and Flexibility</h4>
+                            <p>Grow your bandwidth as your business expands without infrastructure changes.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="benefit-item" data-aos="fade-left" style="--delay: 0.2s">
-                    <div class="benefit-number">2</div>
-                    <div class="benefit-content">
-                        <h4>Cost Control and Management</h4>
-                        <p>Fixed pricing models help you budget effectively with no unexpected charges.</p>
+                <div class="column is-6" data-aos="fade-left">
+                    <div class="benefit-item">
+                        <div class="benefit-number">2</div>
+                        <div class="benefit-content">
+                            <h4>Cost Control and Management</h4>
+                            <p>Fixed pricing models help you budget effectively with no unexpected charges.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="benefit-item" data-aos="fade-right" style="--delay: 0.3s">
-                    <div class="benefit-number">3</div>
-                    <div class="benefit-content">
-                        <h4>Real-Time Applications</h4>
-                        <p>Perfect for video conferencing, VoIP, cloud services, and cloud storage solutions.</p>
+                <div class="column is-6" data-aos="fade-right">
+                    <div class="benefit-item">
+                        <div class="benefit-number">3</div>
+                        <div class="benefit-content">
+                            <h4>Real-Time Applications</h4>
+                            <p>Perfect for video conferencing, VoIP, cloud services, and cloud storage solutions.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="benefit-item" data-aos="fade-left" style="--delay: 0.4s">
-                    <div class="benefit-number">4</div>
-                    <div class="benefit-content">
-                        <h4>High Reliability</h4>
-                        <p>Enterprise-grade infrastructure ensures maximum availability and uptime.</p>
+                <div class="column is-6" data-aos="fade-left">
+                    <div class="benefit-item">
+                        <div class="benefit-number">4</div>
+                        <div class="benefit-content">
+                            <h4>High Reliability</h4>
+                            <p>Enterprise-grade infrastructure ensures maximum availability and uptime.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-6" data-aos="fade-right">
+                    <div class="benefit-item">
+                        <div class="benefit-number">5</div>
+                        <div class="benefit-content">
+                            <h4>SLA-Enforced Performance</h4>
+                            <p>Guaranteed network uptime backed by comprehensive service level agreements.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-6" data-aos="fade-left">
+                    <div class="benefit-item">
+                        <div class="benefit-number">6</div>
+                        <div class="benefit-content">
+                            <h4>Flexible Access Options</h4>
+                            <p>Choice of the most appropriate last mile access medium for your location.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,26 +184,26 @@
     <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
+            <div class="columns is-multiline">
+                <div class="column is-4">
                     <h3 class="footer-title">Mdukazi Projects</h3>
                     <p>Enterprise ICT Solutions for the modern business.</p>
                 </div>
-                <div class="footer-col">
+                <div class="column is-4">
                     <h3 class="footer-title">Quick Links</h3>
                     <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="services.html">Services</a>
-                        <a href="ict.html">Solutions</a>
+                        <a href="index.html">Home</a><br>
+                        <a href="services.html">Services</a><br>
+                        <a href="ict.html">Solutions</a><br>
                         <a href="contact.html">Contact</a>
                     </div>
                 </div>
-                <div class="footer-col">
+                <div class="column is-4">
                     <h3 class="footer-title">Contact</h3>
                     <p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p>
                     <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
                     <p><i class="fas fa-map-marker-alt"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
-                </div>
+                </div
             </div>
             <div class="text-center mt-6" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
                 <p>&copy; 2026 Mdukazi Projects. All rights reserved.</p>
@@ -180,9 +211,11 @@
         </div>
     </footer>
 
+    <!-- Font Awesome for Icons (Optional, remove if you use SVGs) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- AOS Animation Library JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- Custom JavaScript -->
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
