@@ -646,7 +646,57 @@ h6 {
 .mb-6 {
     margin-bottom: 3rem;
 }
+ 
+/* ================= NAVBAR CTA BUTTONS ================= */
+.nav-cta-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-left: 1rem;
+}
+.nav-cta-buttons .button {
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.4rem 1.2rem;
+  transition: all 0.3s ease;
+  height: auto;
+}
+.nav-cta-buttons .button.is-outline-light {
+  background: transparent;
+  color: white !important;
+  border: 2px solid rgba(255,255,255,0.5);
+}
+.nav-cta-buttons .button.is-outline-light:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: white;
+  transform: translateY(-2px);
+}
+.nav-cta-buttons .button.is-white {
+  background: white;
+  color: #BD3745 !important;
+  border: 2px solid white;
+}
+.nav-cta-buttons .button.is-white:hover {
+  background: #EFCDD1;
+  border-color: #EFCDD1;
+  transform: translateY(-2px);
+}
 
+/* Mobile responsiveness for CTA buttons */
+@media screen and (max-width: 768px) {
+  .nav-cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+  .nav-cta-buttons .button { 
+    width: 100%; 
+    justify-content: center; 
+  }
+}
 /* ================= RESPONSIVE ================= */
 @media screen and (max-width: 768px) {
     .navbar-burger {

@@ -1,20 +1,17 @@
-// Client Portal Functionality
+// Client Portal Functionality - Updated to fetch specials from admin
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if user is logged in
     const currentUser = auth.getCurrentUser();
-    if (!currentUser) {
+    if (!currentUser || currentUser.isAdmin) {
         window.location.href = 'index.html';
         return;
     }
 
-    // Display user name
     document.getElementById('userName').textContent = `Welcome, ${currentUser.name}`;
-
-    // Load client data
     loadClientData();
+    loadSpecials();
 
-    // Issue Form Handler
+    // Form handlers
     const issueForm = document.getElementById('issueForm');
     if (issueForm) {
         issueForm.addEventListener('submit', function(e) {
@@ -23,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Payment Form Handler
     const paymentForm = document.getElementById('paymentForm');
     if (paymentForm) {
         paymentForm.addEventListener('submit', function(e) {
@@ -32,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Booking Form Handler
     const bookingForm = document.getElementById('bookingForm');
     if (bookingForm) {
         bookingForm.addEventListener('submit', function(e) {
@@ -41,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Payment method toggle
     const paymentMethod = document.getElementById('paymentMethod');
     if (paymentMethod) {
         paymentMethod.addEventListener('change', function() {
@@ -59,6 +53,23 @@ function loadClientData() {
     document.getElementById('serviceSpeed').textContent = clientData.speed;
     document.getElementById('outstandingBalance').textContent = `R ${clientData.balance.toFixed(2)}`;
     document.getElementById('dueDate').textContent = clientData.dueDate;
+}
+
+function loadSpecials() {
+    const specials = auth.getSpecials();
+    const specialsList = document.getElementById('specials');
+    
+    // Filter active specials
+    const today = new Date().toISOString().split('T')[0];
+    const activeSpecials = specials.filter(s => s.startDate <= today && s.endDate >= today);
+    
+    specialsList.innerHTML = activeSpecials.map(special => `
+        <div class="special-item">
+            <h4>${special.title}</h4>
+            <p>${special.description}</p>
+            <span class="special-badge">${special.badge}</span>
+        </div>
+    `).join('');
 }
 
 function openPaymentModal() {
@@ -83,7 +94,6 @@ function submitIssue() {
     const currentUser = auth.getCurrentUser();
     const clientData = currentUser.clientData;
 
-    // Add issue to client data
     const newIssue = {
         id: Date.now(),
         type: issueType,
@@ -95,7 +105,6 @@ function submitIssue() {
     clientData.issues.push(newIssue);
     auth.updateUserClientData(clientData);
 
-    // Show confirmation
     document.getElementById('issueForm').style.display = 'none';
     document.getElementById('issueConfirmation').style.display = 'block';
 
@@ -103,7 +112,6 @@ function submitIssue() {
         document.getElementById('issueForm').style.display = 'block';
         document.getElementById('issueConfirmation').style.display = 'none';
         document.getElementById('issueForm').reset();
-        closeModal('issueModal');
     }, 3000);
 }
 
@@ -112,7 +120,6 @@ function processPayment() {
     const currentUser = auth.getCurrentUser();
     const clientData = currentUser.clientData;
 
-    // Simulate payment processing
     if (paymentMethod === 'card') {
         const cardNumber = document.getElementById('cardNumber').value;
         const cardExpiry = document.getElementById('cardExpiry').value;
@@ -124,22 +131,27 @@ function processPayment() {
         }
     }
 
-    // Record payment
+    const currentMonth = new Date().toISOString().substring(0, 7);
+    
     const payment = {
         id: Date.now(),
         amount: clientData.balance,
         method: paymentMethod,
         date: new Date().toISOString(),
-        service: clientData.service
+        service: clientData.service,
+        period: currentMonth
     };
 
     clientData.paymentHistory.push(payment);
+    if (!clientData.monthsPaid) {
+        clientData.monthsPaid = [];
+    }
+    clientData.monthsPaid.push(currentMonth);
     clientData.balance = 0;
     clientData.dueDate = auth.getNextBillingDate();
 
     auth.updateUserClientData(clientData);
 
-    // Show confirmation
     document.getElementById('paymentForm').style.display = 'none';
     document.getElementById('paymentConfirmation').style.display = 'block';
 
@@ -163,7 +175,6 @@ function bookService() {
     const currentUser = auth.getCurrentUser();
     const clientData = currentUser.clientData;
 
-    // Update service
     const serviceMap = {
         'dia-100': { name: 'DIA 100Mbps', speed: '100 Mbps', price: 2999 },
         'dia-500': { name: 'DIA 500Mbps', speed: '500 Mbps', price: 7999 },
@@ -185,7 +196,6 @@ function bookService() {
 
     auth.updateUserClientData(clientData);
 
-    // Show confirmation
     document.getElementById('bookingForm').style.display = 'none';
     document.getElementById('bookingConfirmation').style.display = 'block';
 

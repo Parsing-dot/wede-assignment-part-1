@@ -14,35 +14,40 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="index.html">
-                    <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;">
-                    <span class="ml-2">Mdukazi Projects</span>
-                </a>
-                <label for="nav-toggle" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </label>
-            </div>
-            
-            <!-- Hidden Checkbox for Pure CSS Mobile Toggle -->
-            <input type="checkbox" id="nav-toggle" class="is-hidden">
-            
-            <div id="navbarMenu" class="navbar-menu">
-                <div class="navbar-end">
-                    <a href="index.html" class="navbar-item is-active">Home</a>
-                    <a href="services.html" class="navbar-item">Services</a>
-                    <a href="ict.html" class="navbar-item">Solutions</a>
-                    <a href="about.html" class="navbar-item">About Us</a>
-                    <a href="faq.html" class="navbar-item">FAQ</a>
-                    <a href="contact.html" class="navbar-item">Contact</a>
-                </div>
-            </div>
+    <nav class="navbar main-nav" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="index.html">
+        <!-- <img src="logo.png" alt="Mdukazi Projects"> -->
+        Mdukazi Projects
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <a class="navbar-item is-active" href="index.html">Home</a>
+        <a class="navbar-item" href="services.html">Services</a>
+        <a class="navbar-item" href="ict.html">Solutions</a>
+        <a class="navbar-item" href="about.html">About Us</a>
+        <a class="navbar-item" href="faq.html">FAQ</a>
+        <a class="navbar-item" href="contact.html">Contact</a>
+      </div>
+      
+      <div class="navbar-end">
+        <!-- NEW: Sign In & Sign Up Buttons -->
+        <div class="nav-cta-buttons">
+          <a href="account.html" class="button is-outline-light">Sign In</a>
+          <a href="account.html" class="button is-white">Sign Up</a>
         </div>
-    </nav>
+      </div>
+    </div>
+  </div>
+</nav>
 
     <!-- Hero Section -->
     <!-- Removed is-fullheight-with-navbar to respect your reduced hero size CSS -->
