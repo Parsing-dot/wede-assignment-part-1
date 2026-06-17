@@ -3,170 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact & Support | Mdukazi Projects - Enterprise ICT Solutions</title>
+    <title>Contact & Support | Mdukazi Projects</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="assets/css/contact.css" />
-    <style>
-        /* Fix navbar: desktop menu visible, burger on far right */
-        .navbar-brand {
-            width: 100%;
-            justify-content: space-between;
-        }
-        .navbar-burger {
-            margin-left: 0 !important;
-        }
-        @media screen and (max-width: 1023px) {
-            .navbar-menu {
-                background: #BD3745;
-                padding: 1rem 0;
-            }
-            .navbar-item {
-                color: white !important;
-            }
-            .navbar-item.is-active {
-                background: rgba(255,255,255,0.15) !important;
-            }
-        }
-        @media screen and (min-width: 1024px) {
-            .navbar-burger {
-                display: none !important;
-            }
-            #nav-toggle:checked ~ .navbar-menu {
-                display: flex !important;
-            }
-            .navbar-menu {
-                display: flex !important;
-                background: transparent !important;
-                padding: 0 !important;
-            }
-        }
-        .navbar-item {
-            border-radius: 6px;
-        }
-        .navbar-item.is-active {
-            background: rgba(255,255,255,0.15) !important;
-            border-bottom: 3px solid white;
-        }
-        .navbar-item:hover {
-            background: rgba(255,255,255,0.1) !important;
-        }
-
-        /* Particle Hero Override - full screen canvas overlay */
-        .contact-hero {
-            position: relative;
-            overflow: hidden;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-        }
-        .contact-hero .hero-body {
-            position: relative;
-            z-index: 2;
-            padding: 4rem 1.5rem;
-        }
-        .contact-hero .hero-body .title {
-            color: white;
-            text-shadow: 0 4px 30px rgba(0,0,0,0.4);
-        }
-        .contact-hero .hero-body .subtitle {
-            color: rgba(255,255,255,0.85);
-            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-        }
-        .contact-hero .section-badge {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-            backdrop-filter: blur(10px);
-        }
-        #particleCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            display: block;
-            pointer-events: none;
-        }
-        .hero-bg-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .hero-glow {
-            position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 60%;
-            height: 80%;
-            background: radial-gradient(ellipse, rgba(206,105,116,0.2) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        .hero-glow-left {
-            position: absolute;
-            bottom: -20%;
-            left: -10%;
-            width: 50%;
-            height: 70%;
-            background: radial-gradient(ellipse, rgba(189,55,69,0.15) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        @media screen and (max-width: 768px) {
-            .contact-hero {
-                min-height: 50vh;
-            }
-            .contact-hero .hero-body .title {
-                font-size: 2.2rem;
-            }
-        }
-
-        /* Form success state */
-        .form-show-success .success-message {
-            display: flex !important;
-            animation: fadeInUp 0.5s ease forwards;
-        }
-        .success-message {
-            display: none;
-            padding: 1rem;
-            background: #E8F5E9;
-            color: #2E7D32;
-            border-left: 4px solid #4CAF50;
-            border-radius: 4px;
-            margin-bottom: 1.5rem;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 500;
-        }
-
-        /* Ripple effect on submit */
-        .submit-btn .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: scale(0);
-            animation: rippleAnim 0.6s linear;
-            pointer-events: none;
-        }
-        @keyframes rippleAnim {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-    </style>
 </head>
 <body>
 
-    <!-- Navigation (fixed: burger on far right, desktop menu visible) -->
+    <!-- Navigation (Exact Match Index + Auth Buttons) -->
     <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
@@ -174,12 +18,14 @@
                     <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;" />
                     <span class="ml-2">Mdukazi Projects</span>
                 </a>
-                <label for="nav-toggle" class="navbar-burger" aria-label="menu">
-                    <span></span><span></span><span></span>
+                <label for="nav-toggle" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
                 </label>
             </div>
             <input type="checkbox" id="nav-toggle" class="is-hidden" />
-            <div class="navbar-menu">
+            <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
                     <a href="index.html" class="navbar-item">Home</a>
                     <a href="services.html" class="navbar-item">Services</a>
@@ -187,152 +33,193 @@
                     <a href="about.html" class="navbar-item">About Us</a>
                     <a href="faq.html" class="navbar-item">FAQ</a>
                     <a href="contact.html" class="navbar-item is-active">Contact</a>
+                    
+                    <!-- Signup/Login CTA Buttons -->
+                    <div class="nav-cta-buttons">
+                        <button class="button is-outline-light" id="loginBtn">Sign In</button>
+                        <button class="button is-white" id="signupBtn">Sign Up</button>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Header with Particle Text Effect -->
+    <!-- Hero Section (Gooey Text Animation Only) -->
     <header class="hero contact-hero is-medium">
         <div class="hero-glow"></div>
         <div class="hero-glow-left"></div>
         <div class="hero-bg-pattern"></div>
-        <!-- Particle Canvas - rendered by JS -->
-        <canvas id="particleCanvas"></canvas>
         <div class="hero-body has-text-centered">
             <div class="container">
-                <span class="section-badge">Support</span>
-                <h1 class="title" style="color: white;">Get In Touch</h1>
-                <p class="subtitle" style="color: rgba(255,255,255,0.85);">We're here to help and answer any questions you may have about our enterprise ICT solutions</p>
+                <div class="gooey-text-container">
+                    <div class="gooey-text-wrapper" id="gooeyTextWrapper">
+                        <!-- SVG Filter for Gooey Effect -->
+                        <svg aria-hidden="true" focusable="false">
+                            <defs>
+                                <filter id="gooey-threshold">
+                                    <feColorMatrix in="SourceGraphic" type="matrix"
+                                        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140" />
+                                </filter>
+                            </defs>
+                        </svg>
+                        <div class="gooey-filter-container">
+                            <span class="gooey-text-slot text1" id="gooeyText1">Get In Touch</span>
+                            <span class="gooey-text-slot text2" id="gooeyText2">Contact Us</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Contact Grid Section -->
-    <section class="section contact-main">
+    <!-- Main Contact Section -->
+    <section class="section contact-section">
         <div class="container">
-            <div class="contact-grid">
-                <!-- Info Panel -->
-                <div class="contact-info-panel" style="--delay: 0.1s;">
-                    <div class="info-card">
-                        <h2>Contact Information</h2>
-                        <p class="info-lead">Fill up the form and our team will get back to you within 24 hours.</p>
-
-                        <div class="info-items">
-                            <div class="info-item">
-                                <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
-                                <div class="info-content">
-                                    <h4>Phone</h4>
-                                    <p>+27 11 123 4567</p>
-                                    <p>+27 11 987 6543</p>
-                                </div>
+            <div class="columns is-variable is-6">
+                <!-- Contact Info -->
+                <div class="column is-5">
+                    <div class="contact-info-card reveal-item">
+                        <h2 class="title is-4">Contact Information</h2>
+                        <p class="mb-5">Fill up the form and our team will get back to you within 24 hours.</p>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <span>+27 11 123 4567</span>
+                                <span>+27 11 987 6543</span>
                             </div>
-                            <div class="info-item">
-                                <div class="info-icon"><i class="fas fa-envelope"></i></div>
-                                <div class="info-content">
-                                    <h4>Email</h4>
-                                    <p>info@mdukaziprojects.co.za</p>
-                                    <p>support@mdukaziprojects.co.za</p>
-                                </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span>info@mdukaziprojects.co.za</span>
+                                <span>support@mdukaziprojects.co.za</span>
                             </div>
-                            <div class="info-item">
-                                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                                <div class="info-content">
-                                    <h4>Address</h4>
-                                    <p>5940 Zone 5 Diepkloof,<br />Soweto, 1864</p>
-                                </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span>5940 Zone 5 Diepkloof, Soweto, 1864</span>
                             </div>
-                            <div class="info-item">
-                                <div class="info-icon"><i class="fas fa-clock"></i></div>
-                                <div class="info-content">
-                                    <h4>Business Hours</h4>
-                                    <p>Mon – Fri: 8:00 – 17:00</p>
-                                    <p>Sat: 9:00 – 13:00</p>
-                                </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <span>Mon – Fri: 8:00 – 17:00</span>
+                                <span>Sat: 9:00 – 13:00</span>
                             </div>
                         </div>
 
-                        <div class="social-links">
-                            <h4 class="social-title">Follow Us</h4>
-                            <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+                        <div class="social-links mt-5">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Form Panel -->
-                <div class="contact-form-panel" style="--delay: 0.3s;">
-                    <form action="#" class="contact-form" id="contactForm">
-                        <h2>Send Us a Message</h2>
-
-                        <!-- Success Message -->
-                        <div class="success-message">
-                            <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. We'll get back to you soon.
-                        </div>
-
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <input type="text" id="fullName" placeholder=" " required />
-                                <label for="fullName">Full Name</label>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" id="email" placeholder=" " required />
-                                <label for="email">Email Address</label>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" id="phone" placeholder=" " />
-                                <label for="phone">Phone Number</label>
-                            </div>
-                            <div class="form-group">
-                                <div class="select-wrapper">
-                                    <select id="service" required>
-                                        <option value="" disabled selected>Select a Service</option>
-                                        <option value="internet">Internet Connectivity</option>
-                                        <option value="cctv">CCTV Security Systems</option>
-                                        <option value="it">IT Support</option>
-                                        <option value="hosting">Hosting Services</option>
-                                        <option value="fibre">Fiber Installation</option>
-                                        <option value="vpn">VPN Solutions</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                    <label for="service" class="floating-label">Service Type</label>
+                <!-- Contact Form -->
+                <div class="column is-7">
+                    <div class="contact-form-card reveal-item">
+                        <h2 class="title is-4">Send Us a Message</h2>
+                        <form id="contactForm">
+                            <div class="columns is-multiline">
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">Full Name</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="text" placeholder="John Doe" required />
+                                            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">Email Address</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="email" placeholder="you@example.com" required />
+                                            <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">Phone Number</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="tel" placeholder="+27 12 345 6789" />
+                                            <span class="icon is-small is-left"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">Select a Service</label>
+                                        <div class="control has-icons-left">
+                                            <div class="select is-fullwidth">
+                                                <select>
+                                                    <option>Internet Connectivity</option>
+                                                    <option>CCTV Security Systems</option>
+                                                    <option>IT Support</option>
+                                                    <option>Fiber Installation</option>
+                                                    <option>Other</option>
+                                                </select>
+                                            </div>
+                                            <span class="icon is-small is-left"><i class="fas fa-chevron-down"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-12">
+                                    <div class="field">
+                                        <label class="label">Subject</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="text" placeholder="How can we help?" required />
+                                            <span class="icon is-small is-left"><i class="fas fa-tag"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-12">
+                                    <div class="field">
+                                        <label class="label">Your Message</label>
+                                        <div class="control">
+                                            <textarea class="textarea" placeholder="Type your message here..." rows="5" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-12">
+                                    <div class="field">
+                                        <div class="control">
+                                            <button type="submit" class="button is-primary is-fullwidth">
+                                                <span class="icon"><i class="fas fa-paper-plane"></i></span>
+                                                <span>Send Message</span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group full-width">
-                                <input type="text" id="subject" placeholder=" " required />
-                                <label for="subject">Subject</label>
-                            </div>
-                            <div class="form-group full-width">
-                                <textarea id="message" rows="5" placeholder=" " required></textarea>
-                                <label for="message">Your Message</label>
-                            </div>
+                        </form>
+                        <div id="formSuccess" class="success-message" style="display: none;">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Thank you! Your message has been sent successfully. We'll get back to you soon.</p>
                         </div>
-                        <button type="submit" class="submit-btn" id="submitBtn">
-                            <span>Send Message</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Map Section -->
+    <!-- Map / Office Section -->
     <section class="section map-section">
-        <div class="container">
-            <div class="map-container" style="--delay: 0.1s;">
-                <div class="map-overlay">
-                    <h3>Visit Our Office</h3>
-                    <p>5940 Zone 5 Diepkloof, 1864</p>
-                    <p class="phone">+27 11 123 4567</p>
-                    <p class="email">info@mdukaziprojects.co.za</p>
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=-26.2678,27.9378" target="_blank" class="directions-btn">
-                        <i class="fas fa-location-arrow"></i> Get Directions
-                    </a>
-                </div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11456.87463434345!2d27.9271845!3d-26.2688483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e95116505845647%3A0xc6c1424166342150!2sSoweto%2C%20Johannesburg%2C%20South%20Africa!5e0!3m2!1sen!2s!4v1701180000000!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="container has-text-centered">
+            <h2 class="title is-3 reveal-item">Visit Our Office</h2>
+            <p class="subtitle reveal-item">5940 Zone 5 Diepkloof, 1864</p>
+            <div class="map-container reveal-item">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.22!2d27.9378!3d-26.2678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDE2JzA0LjEiUyAyN8KwNTYnMTYuMSJF!5e0!3m2!1sen!2sza!4v1620000000000" width="100%" height="400" style="border:0; border-radius: 16px;" allowfullscreen="" loading="lazy"></iframe>
             </div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=-26.2678,27.9378" target="_blank" class="button is-primary is-rounded mt-5 reveal-item">
+                <span class="icon"><i class="fas fa-directions"></i></span>
+                <span>Get Directions</span>
+            </a>
         </div>
     </section>
 
@@ -359,7 +246,6 @@
                     <h3 class="footer-title">Contact</h3>
                     <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
                     <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
-                    <p><i class="fas fa-headset mr-2"></i> 24/7 Network Operations</p>
                     <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
                 </div>
             </div>
@@ -369,424 +255,40 @@
         </div>
     </footer>
 
-    <script>
-        (function() {
-            'use strict';
+    <!-- Auth Modal -->
+    <div class="modal-backdrop" id="authModal">
+        <div class="modal-card">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <h3 id="modalTitle">Sign In</h3>
+            <p class="subtitle" id="modalSubtitle">Welcome back to Mdukazi Projects</p>
+            <form id="authForm">
+                <div class="field" id="nameField" style="display:none;">
+                    <label class="label">Full Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="John Doe" id="signupName" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input" type="email" placeholder="you@example.com" id="authEmail" required />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input class="input" type="password" placeholder="••••••••" id="authPassword" required minlength="6" />
+                    </div>
+                </div>
+                <button type="submit" class="button is-primary" id="authSubmitBtn">Sign In</button>
+            </form>
+            <div class="toggle-form">
+                <span id="toggleText">Don't have an account?</span>
+                <a id="toggleLink">Sign Up</a>
+            </div>
+        </div>
+    </div>
 
-            // ============================================================================
-            // 🍔 1. NAVBAR ENHANCEMENTS & MOBILE MENU FIX
-            // ============================================================================
-            const navToggle = document.getElementById('nav-toggle');
-            const navbarMenu = document.querySelector('.navbar-menu');
-            const navLinks = document.querySelectorAll('.navbar-item');
-            const mainNav = document.querySelector('.main-nav');
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (navToggle && navToggle.checked) {
-                        navToggle.checked = false;
-                    }
-                });
-            });
-
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    mainNav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-                    mainNav.style.backdropFilter = 'blur(10px)';
-                } else {
-                    mainNav.style.boxShadow = '0 2px 10px rgba(189, 55, 69, 0.3)';
-                    mainNav.style.backdropFilter = 'none';
-                }
-            });
-
-            function handleNavbarResize() {
-                if (window.innerWidth >= 1024) {
-                    if (navToggle) navToggle.checked = false;
-                    if (navbarMenu) navbarMenu.style.display = 'flex';
-                } else {
-                    if (navbarMenu) navbarMenu.style.display = '';
-                }
-            }
-            window.addEventListener('resize', handleNavbarResize);
-            handleNavbarResize();
-
-
-            // ============================================================================
-            // ✨ 2. PARTICLE TEXT EFFECT (Hero Animation)
-            // ============================================================================
-            // This creates a stunning particle animation that forms the words
-            // "Get In Touch" with floating particles that move organically.
-
-            const canvas = document.getElementById('particleCanvas');
-            if (canvas) {
-                // --- Particle Class ---
-                class Particle {
-                    constructor() {
-                        this.pos = { x: 0, y: 0 };
-                        this.vel = { x: 0, y: 0 };
-                        this.acc = { x: 0, y: 0 };
-                        this.target = { x: 0, y: 0 };
-                        this.closeEnoughTarget = 100;
-                        this.maxSpeed = 1.0;
-                        this.maxForce = 0.1;
-                        this.particleSize = 10;
-                        this.isKilled = false;
-                        this.startColor = { r: 0, g: 0, b: 0 };
-                        this.targetColor = { r: 0, g: 0, b: 0 };
-                        this.colorWeight = 0;
-                        this.colorBlendRate = 0.01;
-                    }
-
-                    move() {
-                        const dx = this.target.x - this.pos.x;
-                        const dy = this.target.y - this.pos.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        let proximityMult = 1;
-                        if (distance < this.closeEnoughTarget) {
-                            proximityMult = distance / this.closeEnoughTarget;
-                        }
-
-                        let towardsX = dx;
-                        let towardsY = dy;
-                        const mag = Math.sqrt(towardsX * towardsX + towardsY * towardsY);
-                        if (mag > 0) {
-                            towardsX = (towardsX / mag) * this.maxSpeed * proximityMult;
-                            towardsY = (towardsY / mag) * this.maxSpeed * proximityMult;
-                        }
-
-                        let steerX = towardsX - this.vel.x;
-                        let steerY = towardsY - this.vel.y;
-                        const steerMag = Math.sqrt(steerX * steerX + steerY * steerY);
-                        if (steerMag > 0) {
-                            steerX = (steerX / steerMag) * this.maxForce;
-                            steerY = (steerY / steerMag) * this.maxForce;
-                        }
-
-                        this.acc.x += steerX;
-                        this.acc.y += steerY;
-                        this.vel.x += this.acc.x;
-                        this.vel.y += this.acc.y;
-                        this.pos.x += this.vel.x;
-                        this.pos.y += this.vel.y;
-                        this.acc.x = 0;
-                        this.acc.y = 0;
-                    }
-
-                    draw(ctx, drawAsPoints) {
-                        if (this.colorWeight < 1.0) {
-                            this.colorWeight = Math.min(this.colorWeight + this.colorBlendRate, 1.0);
-                        }
-
-                        const r = Math.round(this.startColor.r + (this.targetColor.r - this.startColor.r) * this
-                        .colorWeight);
-                        const g = Math.round(this.startColor.g + (this.targetColor.g - this.startColor.g) * this
-                        .colorWeight);
-                        const b = Math.round(this.startColor.b + (this.targetColor.b - this.startColor.b) * this
-                        .colorWeight);
-
-                        ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
-                        if (drawAsPoints) {
-                            ctx.fillRect(this.pos.x, this.pos.y, 2, 2);
-                        } else {
-                            ctx.beginPath();
-                            ctx.arc(this.pos.x, this.pos.y, this.particleSize / 2, 0, Math.PI * 2);
-                            ctx.fill();
-                        }
-                    }
-
-                    kill(width, height) {
-                        if (!this.isKilled) {
-                            const randomPos = this.generateRandomPos(width / 2, height / 2, (width + height) / 2);
-                            this.target.x = randomPos.x;
-                            this.target.y = randomPos.y;
-
-                            this.startColor = {
-                                r: this.startColor.r + (this.targetColor.r - this.startColor.r) * this.colorWeight,
-                                g: this.startColor.g + (this.targetColor.g - this.startColor.g) * this.colorWeight,
-                                b: this.startColor.b + (this.targetColor.b - this.startColor.b) * this.colorWeight,
-                            };
-                            this.targetColor = { r: 0, g: 0, b: 0 };
-                            this.colorWeight = 0;
-                            this.isKilled = true;
-                        }
-                    }
-
-                    generateRandomPos(x, y, mag) {
-                        const randomX = Math.random() * 1000;
-                        const randomY = Math.random() * 500;
-                        let dx = randomX - x;
-                        let dy = randomY - y;
-                        const d = Math.sqrt(dx * dx + dy * dy);
-                        if (d > 0) {
-                            dx = (dx / d) * mag;
-                            dy = (dy / d) * mag;
-                        }
-                        return { x: x + dx, y: y + dy };
-                    }
-                }
-
-                // --- Setup ---
-                const ctx = canvas.getContext('2d');
-                let W, H;
-
-                function resizeCanvas() {
-                    const rect = canvas.parentElement.getBoundingClientRect();
-                    W = canvas.width = rect.width;
-                    H = canvas.height = rect.height;
-                }
-                resizeCanvas();
-                window.addEventListener('resize', () => {
-                    resizeCanvas();
-                    // Rebuild particles for new size
-                    initParticles();
-                });
-
-                const words = ['Get In Touch', 'We\'re Here', 'To Help', 'Enterprise ICT'];
-                const pixelSteps = 6;
-                const drawAsPoints = true;
-
-                let particles = [];
-                let frameCount = 0;
-                let wordIndex = 0;
-                let animationId = null;
-
-                function generateRandomPos(x, y, mag) {
-                    const randomX = Math.random() * 1000;
-                    const randomY = Math.random() * 500;
-                    let dx = randomX - x;
-                    let dy = randomY - y;
-                    const d = Math.sqrt(dx * dx + dy * dy);
-                    if (d > 0) {
-                        dx = (dx / d) * mag;
-                        dy = (dy / d) * mag;
-                    }
-                    return { x: x + dx, y: y + dy };
-                }
-
-                function nextWord(word) {
-                    if (W === 0 || H === 0) return;
-
-                    const offscreen = document.createElement('canvas');
-                    offscreen.width = W;
-                    offscreen.height = H;
-                    const offCtx = offscreen.getContext('2d');
-
-                    // Use company colors for the text
-                    const gradient = offCtx.createLinearGradient(0, 0, W, H);
-                    gradient.addColorStop(0, '#BD3745');
-                    gradient.addColorStop(0.5, '#CE6974');
-                    gradient.addColorStop(1, '#DE9BA2');
-
-                    offCtx.fillStyle = 'white';
-                    offCtx.font = `bold ${Math.min(W / 6, 120)}px 'Poppins', Arial, sans-serif`;
-                    offCtx.textAlign = 'center';
-                    offCtx.textBaseline = 'middle';
-                    offCtx.fillText(word, W / 2, H / 2);
-
-                    const imageData = offCtx.getImageData(0, 0, W, H);
-                    const pixels = imageData.data;
-
-                    const newColor = {
-                        r: 189 + Math.random() * 60,
-                        g: 55 + Math.random() * 60,
-                        b: 69 + Math.random() * 60,
-                    };
-
-                    let particleIndex = 0;
-                    const coordsIndexes = [];
-                    for (let i = 0; i < pixels.length; i += pixelSteps * 4) {
-                        coordsIndexes.push(i);
-                    }
-
-                    for (let i = coordsIndexes.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [coordsIndexes[i], coordsIndexes[j]] = [coordsIndexes[j], coordsIndexes[i]];
-                    }
-
-                    for (const coordIndex of coordsIndexes) {
-                        const alpha = pixels[coordIndex + 3];
-                        if (alpha > 0) {
-                            const x = (coordIndex / 4) % W;
-                            const y = Math.floor(coordIndex / 4 / W);
-
-                            let particle;
-                            if (particleIndex < particles.length) {
-                                particle = particles[particleIndex];
-                                particle.isKilled = false;
-                                particleIndex++;
-                            } else {
-                                particle = new Particle();
-                                const randomPos = generateRandomPos(W / 2, H / 2, (W + H) / 2);
-                                particle.pos.x = randomPos.x;
-                                particle.pos.y = randomPos.y;
-                                particle.maxSpeed = Math.random() * 4 + 3;
-                                particle.maxForce = particle.maxSpeed * 0.05;
-                                particle.particleSize = Math.random() * 4 + 4;
-                                particle.colorBlendRate = Math.random() * 0.025 + 0.005;
-                                particles.push(particle);
-                            }
-
-                            particle.startColor = {
-                                r: particle.startColor.r + (particle.targetColor.r - particle.startColor.r) * particle
-                                    .colorWeight,
-                                g: particle.startColor.g + (particle.targetColor.g - particle.startColor.g) * particle
-                                    .colorWeight,
-                                b: particle.startColor.b + (particle.targetColor.b - particle.startColor.b) * particle
-                                    .colorWeight,
-                            };
-                            particle.targetColor = newColor;
-                            particle.colorWeight = 0;
-                            particle.target.x = x;
-                            particle.target.y = y;
-                        }
-                    }
-
-                    for (let i = particleIndex; i < particles.length; i++) {
-                        particles[i].kill(W, H);
-                    }
-                }
-
-                function initParticles() {
-                    particles = [];
-                    wordIndex = 0;
-                    nextWord(words[0]);
-                }
-
-                function animate() {
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-                    ctx.fillRect(0, 0, W, H);
-
-                    for (let i = particles.length - 1; i >= 0; i--) {
-                        const p = particles[i];
-                        p.move();
-                        p.draw(ctx, drawAsPoints);
-
-                        if (p.isKilled) {
-                            if (p.pos.x < -50 || p.pos.x > W + 50 || p.pos.y < -50 || p.pos.y > H + 50) {
-                                particles.splice(i, 1);
-                            }
-                        }
-                    }
-
-                    frameCount++;
-                    if (frameCount % 300 === 0) {
-                        wordIndex = (wordIndex + 1) % words.length;
-                        nextWord(words[wordIndex]);
-                    }
-
-                    animationId = requestAnimationFrame(animate);
-                }
-
-                // Start the animation
-                initParticles();
-                animate();
-
-                // Handle resize with debounce
-                let resizeTimeout;
-                window.addEventListener('resize', () => {
-                    clearTimeout(resizeTimeout);
-                    resizeTimeout = setTimeout(() => {
-                        resizeCanvas();
-                        initParticles();
-                    }, 300);
-                });
-
-                // Cleanup
-                window.addEventListener('beforeunload', () => {
-                    if (animationId) cancelAnimationFrame(animationId);
-                });
-            }
-
-
-            // ============================================================================
-            // 📝 3. CONTACT FORM HANDLING
-            // ============================================================================
-            const contactForm = document.getElementById('contactForm');
-            const submitBtn = document.getElementById('submitBtn');
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-
-                    // Basic validation
-                    const name = document.getElementById('fullName').value.trim();
-                    const email = document.getElementById('email').value.trim();
-                    const subject = document.getElementById('subject').value.trim();
-                    const message = document.getElementById('message').value.trim();
-                    const service = document.getElementById('service').value;
-
-                    if (!name || !email || !subject || !message || !service) {
-                        alert('Please fill in all required fields.');
-                        return;
-                    }
-
-                    if (!email.includes('@') || !email.includes('.')) {
-                        alert('Please enter a valid email address.');
-                        return;
-                    }
-
-                    // Show success state
-                    contactForm.classList.add('form-show-success');
-
-                    // Reset form after delay
-                    setTimeout(() => {
-                        contactForm.reset();
-                        // Reset floating labels
-                        document.querySelectorAll('.form-group input, .form-group textarea').forEach(el => {
-                            el.value = '';
-                        });
-                        // Remove success after 5 seconds
-                        setTimeout(() => {
-                            contactForm.classList.remove('form-show-success');
-                        }, 5000);
-                    }, 2000);
-
-                    // Ripple effect on button
-                    const rect = submitBtn.getBoundingClientRect();
-                    const ripple = document.createElement('span');
-                    ripple.className = 'ripple';
-                    const size = Math.max(rect.width, rect.height);
-                    ripple.style.width = ripple.style.height = size + 'px';
-                    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-                    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-                    submitBtn.appendChild(ripple);
-                    setTimeout(() => ripple.remove(), 600);
-
-                    // Log for debugging
-                    console.log('📧 Form submitted:', { name, email, service, subject, message });
-                });
-            }
-
-
-            // ============================================================================
-            // ✨ 4. SCROLL REVEAL FOR CONTACT GRID
-            // ============================================================================
-            const gridItems = document.querySelectorAll('.contact-info-panel, .contact-form-panel, .map-container');
-            gridItems.forEach(item => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(30px)';
-                item.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-            });
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const delay = entry.target.style.getPropertyValue('--delay') || '0s';
-                        entry.target.style.transitionDelay = delay;
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.15 });
-
-            gridItems.forEach(item => observer.observe(item));
-
-            console.log('✨ Mdukazi Projects — Contact page loaded with Particle Text Effect!');
-            console.log('📝 Form validation and submission ready.');
-
-        })();
-    </script>
+    <script src="assets/js/contact.js" defer></script>
 </body>
 </html>
