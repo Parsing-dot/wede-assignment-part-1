@@ -74,36 +74,21 @@ h6 {
     color: var(--white) !important;
 }
 
-/* ================= HAMBURGER ICON - LEFT CORNER ================= */
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
+/* Logo Aesthetic Hover Animation */
+.navbar-brand .navbar-item img {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+.navbar-brand .navbar-item:hover img {
+    transform: rotate(15deg) scale(1.1);
+}
+
+/* Pure CSS Mobile Menu Toggle */
 .navbar-burger {
     cursor: pointer;
     display: block;
     margin-left: 0;
     margin-right: auto;
-    order: -1;
-    padding: 0.5rem;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.navbar-burger:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.navbar-burger span {
-    display: block;
-    width: 18px;
-    height: 2px;
-    background-color: var(--white);
-    margin: 4px 0;
-    transition: var(--transition-smooth);
 }
 
 .navbar-menu {
@@ -112,7 +97,7 @@ h6 {
     padding: 1rem 0;
 }
 
-#nav-toggle:checked~.navbar-menu {
+#nav-toggle:checked ~ .navbar-menu {
     display: block;
     animation: slideDown 0.3s ease forwards;
 }
@@ -128,15 +113,24 @@ h6 {
     }
 }
 
-#nav-toggle:checked~.navbar-burger span:nth-child(1) {
+.navbar-burger span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background-color: var(--white);
+    margin: 4px 0;
+    transition: var(--transition-smooth);
+}
+
+#nav-toggle:checked ~ .navbar-burger span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
 
-#nav-toggle:checked~.navbar-burger span:nth-child(2) {
+#nav-toggle:checked ~ .navbar-burger span:nth-child(2) {
     opacity: 0;
 }
 
-#nav-toggle:checked~.navbar-burger span:nth-child(3) {
+#nav-toggle:checked ~ .navbar-burger span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
@@ -147,140 +141,66 @@ h6 {
     position: relative;
     overflow: hidden;
     margin-top: 4.5rem;
-    min-height: 55vh;
-    /* Reduced from 60vh */
+    min-height: 60vh;
+}
+
+/* Pixel Canvas Layout */
+.hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .hero-body {
-    padding: 3rem 1.5rem;
-    /* Reduced padding */
+    position: relative;
+    z-index: 2;
 }
 
 .hero-body .title {
     color: var(--white);
-    font-size: 3rem;
-    /* Reduced from 3.5rem */
+    font-size: 3.5rem;
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     animation: fadeInDown 0.8s ease-out forwards;
     opacity: 0;
 }
 
+/* Glassmorphism Shimmer Text Effect */
+.hero-body .title.glass-text {
+    color: transparent !important;
+    text-shadow: none !important;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.3);
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(255, 255, 255, 0.4) 25%, 
+        rgba(255, 255, 255, 0.1) 45%, 
+        rgba(255, 255, 255, 0.9) 55%, 
+        rgba(255, 255, 255, 0.2) 75%, 
+        rgba(255, 255, 255, 1) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: fadeInDown 0.8s ease-out forwards, text-shimmer 8s linear infinite 0.8s;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes text-shimmer {
+    0% { background-position: 200% center; }
+    100% { background-position: 0% center; }
+}
+
 .hero-body .subtitle {
     color: var(--cotton-rose);
-    font-size: 1.15rem;
-    /* Reduced from 1.25rem */
-    margin-bottom: 1.5rem;
-    /* Reduced from 2rem */
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
     animation: fadeInUp 0.8s ease-out 0.3s forwards;
     opacity: 0;
-}
-
-/* ================= ANIMATED BUTTONS ================= */
-.button-container {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.animated-button {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow: hidden;
-    min-width: 140px;
-    text-decoration: none;
-}
-
-.animated-button .button-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.animated-button .button-ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(0);
-    animation: ripple 0.6s linear;
-    pointer-events: none;
-}
-
-@keyframes ripple {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-
-/* Primary Button */
-.button-primary {
-    background: var(--white);
-    color: var(--intense-cherry);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.button-primary:hover {
-    background: var(--cotton-rose);
-    color: var(--intense-cherry);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-.button-primary:active {
-    transform: translateY(0) scale(0.98);
-}
-
-/* Outline Button */
-.button-outline {
-    background: transparent;
-    color: var(--white);
-    border: 2px solid var(--white);
-}
-
-.button-outline:hover {
-    background: var(--white);
-    color: var(--intense-cherry);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-.button-outline:active {
-    transform: translateY(0) scale(0.98);
-}
-
-/* Button Loading State */
-.button-loading {
-    opacity: 0.7;
-    cursor: wait;
-}
-
-.button-loading .button-spinner {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 2px solid currentColor;
-    border-radius: 50%;
-    border-top-color: transparent;
-    animation: spin 0.6s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
 }
 
 /* Floating Particles */
@@ -292,6 +212,7 @@ h6 {
     height: 100%;
     pointer-events: none;
     overflow: hidden;
+    z-index: 1;
 }
 
 .particle {
@@ -301,68 +222,20 @@ h6 {
     animation: float 20s infinite linear;
 }
 
-.particle:nth-child(1) {
-    width: 80px;
-    height: 80px;
-    left: 10%;
-    bottom: -80px;
-    animation-duration: 15s;
-}
-
-.particle:nth-child(2) {
-    width: 40px;
-    height: 40px;
-    left: 30%;
-    bottom: -40px;
-    animation-duration: 12s;
-    animation-delay: 2s;
-}
-
-.particle:nth-child(3) {
-    width: 60px;
-    height: 60px;
-    left: 50%;
-    bottom: -60px;
-    animation-duration: 18s;
-    animation-delay: 4s;
-}
-
-.particle:nth-child(4) {
-    width: 100px;
-    height: 100px;
-    left: 70%;
-    bottom: -100px;
-    animation-duration: 22s;
-    animation-delay: 1s;
-}
-
-.particle:nth-child(5) {
-    width: 50px;
-    height: 50px;
-    left: 90%;
-    bottom: -50px;
-    animation-duration: 14s;
-    animation-delay: 3s;
-}
+.particle:nth-child(1) { width: 80px; height: 80px; left: 10%; bottom: -80px; animation-duration: 15s; }
+.particle:nth-child(2) { width: 40px; height: 40px; left: 30%; bottom: -40px; animation-duration: 12s; animation-delay: 2s; }
+.particle:nth-child(3) { width: 60px; height: 60px; left: 50%; bottom: -60px; animation-duration: 18s; animation-delay: 4s; }
+.particle:nth-child(4) { width: 100px; height: 100px; left: 70%; bottom: -100px; animation-duration: 22s; animation-delay: 1s; }
+.particle:nth-child(5) { width: 50px; height: 50px; left: 90%; bottom: -50px; animation-duration: 14s; animation-delay: 3s; }
 
 @keyframes float {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-    }
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
 }
 
-/* ================= BUTTONS ================= */
+/* ================= BUTTONS & ORIGIN ANIMATION ================= */
 .button.is-primary {
     background-color: var(--white);
     color: var(--intense-cherry);
@@ -390,6 +263,45 @@ h6 {
     background-color: var(--white);
     color: var(--intense-cherry);
     transform: translateY(-3px);
+}
+
+/* Origin Button Ripple Effect */
+.origin-btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.origin-btn .origin-circle {
+    position: absolute;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.origin-btn .origin-circle.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Primary Button Fill (Cherry circle, White text) */
+.button.is-primary.origin-btn .origin-circle {
+    background-color: var(--intense-cherry);
+}
+
+.button.is-primary.origin-btn.origin-active {
+    color: var(--white) !important;
+}
+
+/* Outline Button Fill (White circle, Cherry text) */
+.button.is-outline.origin-btn .origin-circle {
+    background-color: var(--white);
+}
+
+.button.is-outline.origin-btn.origin-active {
+    color: var(--intense-cherry) !important;
 }
 
 /* ================= SECTIONS & TITLES ================= */
@@ -435,17 +347,6 @@ h6 {
     text-align: center;
     padding: 1rem;
     animation: fadeInUp 0.8s ease-out forwards;
-    opacity: 0;
-}
-
-.stat-item:nth-child(1) {
-    animation-delay: 0.1s;
-}
-.stat-item:nth-child(2) {
-    animation-delay: 0.2s;
-}
-.stat-item:nth-child(3) {
-    animation-delay: 0.3s;
 }
 
 .stat-number {
@@ -492,7 +393,7 @@ h6 {
 
 .feature-card:hover .feature-icon {
     color: var(--intense-cherry);
-    transform: scale(1.1) rotate(-5deg);
+    transform: scale(1.1);
 }
 
 .feature-card h3 {
@@ -542,7 +443,6 @@ h6 {
 
 .benefit-item:hover .benefit-number {
     color: var(--intense-cherry);
-    transform: scale(1.2);
 }
 
 .benefit-content h4 {
@@ -649,20 +549,32 @@ h6 {
 
 /* ================= RESPONSIVE ================= */
 @media screen and (max-width: 768px) {
+    .navbar-burger {
+        display: block;
+    }
+    
+    .navbar-menu {
+        display: none;
+    }
+    
+    #nav-toggle:checked ~ .navbar-menu {
+        display: block;
+    }
+    
     .hero-body .title {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     
     .hero-body .subtitle {
-        font-size: 0.95rem;
+        font-size: 1rem;
     }
     
     .section-title {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     
     .stat-number {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     
     .benefit-item {
@@ -676,35 +588,12 @@ h6 {
         margin-bottom: 1rem;
     }
     
-    .columns.is-multiline>.column {
+    .columns.is-multiline > .column {
         flex: 0 0 100%;
     }
     
     .hero.is-primary {
         min-height: 50vh;
-    }
-    
-    .hero-body {
-        padding: 2rem 1rem;
-    }
-    
-    .buttons.is-centered {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .buttons.is-centered .button {
-        margin: 0.25rem 0;
-    }
-    
-    .button-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .animated-button {
-        width: 100%;
-        max-width: 280px;
     }
 }
 
@@ -715,28 +604,10 @@ h6 {
     
     .navbar-menu {
         display: flex !important;
-        background: transparent;
-        padding: 0;
     }
     
-    .navbar-end {
-        margin-left: auto;
-    }
-    
-    .main-nav .navbar-item {
-        padding: 1rem 1.5rem;
-    }
-    
-    .hero.is-primary {
-        min-height: 55vh;
-    }
-    
-    .hero-body {
-        padding: 4rem 1.5rem;
-    }
-    
-    .hero-body .title {
-        font-size: 3.2rem;
+    #nav-toggle {
+        display: none;
     }
 }
 
