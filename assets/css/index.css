@@ -1,681 +1,916 @@
-/* Mdukazi Projects - Main Stylesheet */
+/* =============================================
+   Mdukazi Projects — Main Stylesheet
+   Brand palette: intense cherry → lobster pink → old rose → cotton rose → white
+   We keep every original color variable exactly as given.
+   Only layout, responsiveness, and broken rules are fixed here.
+============================================= */
+
+/* Pull in our fonts early so there's no flash of unstyled text */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap');
 
+
+/* =============================================
+   CSS CUSTOM PROPERTIES (brand tokens)
+   Changing any of these ripples through the whole page,
+   so they're the single source of truth for color.
+============================================= */
 :root {
-  --intense-cherry: #BD3745;
-  --lobster-pink: #CE6974;
-  --old-rose: #DE9BA2;
-  --cotton-rose: #EFCDD1;
-  --white: #FFFFFF;
-  --dark-text: #2C3E50;
-  --light-text: #7F8C8D;
-  --transition-smooth: all 0.3s ease;
-  --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --intense-cherry:   #BD3745;  /* primary — nav, headings, accents */
+    --lobster-pink:     #CE6974;  /* secondary — gradient midpoint    */
+    --old-rose:         #DE9BA2;  /* tertiary — card borders, numbers */
+    --cotton-rose:      #EFCDD1;  /* light tint — stats bg, hover     */
+    --white:            #FFFFFF;
+    --dark-text:        #2C3E50;
+    --light-text:       #7F8C8D;
+    --bg-page:          #FAFAFA;
+
+    /* Reusable transition shortcuts */
+    --ease-smooth:  all 0.3s ease;
+    --ease-bounce:  all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* How tall the fixed nav is — used to offset page content below it */
+    --nav-height: 64px;
 }
 
+
+/* =============================================
+   RESET & BASE
+   Box-sizing on everything so padding never blows out widths.
+============================================= */
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+    scroll-behavior: smooth;
+    /* Offset anchor links so the fixed nav doesn't cover the target */
+    scroll-padding-top: calc(var(--nav-height) + 1rem);
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  color: var(--dark-text);
-  line-height: 1.6;
-  background-color: #FAFAFA;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--dark-text);
+    line-height: 1.7;
+    background-color: var(--bg-page);
+    /* Push all body content down by the nav height so nothing hides behind it */
+    padding-top: var(--nav-height);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  color: var(--intense-cherry);
+/* All headings use Poppins for personality */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--intense-cherry);
+    line-height: 1.2;
 }
 
-/* ================= NAVIGATION ================= */
+/* Links inherit color by default — individual sections override as needed */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* =============================================
+   LAYOUT UTILITY
+   One container that stays centred and never stretches too wide.
+   Padding on both sides ensures content never touches the screen edge.
+============================================= */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+}
+
+
+/* =============================================
+   NAVIGATION
+   Fixed at the top. Uses the CSS checkbox trick for the mobile burger —
+   no JavaScript required for the toggle itself.
+============================================= */
 .main-nav {
-  background-color: var(--intense-cherry);
-  box-shadow: 0 2px 10px rgba(189, 55, 69, 0.3);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
+    background-color: var(--intense-cherry);
+    box-shadow: 0 2px 12px rgba(189, 55, 69, 0.35);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: var(--nav-height);
 }
 
-.main-nav .navbar-item {
-  color: var(--white) !important;
-  font-weight: 500;
-  transition: var(--transition-smooth);
-  text-decoration: none;
-  padding: 1rem;
-  display: inline-block;
+/* Inner wrapper: brand on the left, links on the right */
+.nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--nav-height);
+    /* Use the shared container padding but force the full nav height */
+    flex-wrap: wrap;
 }
 
-.main-nav .navbar-item:hover,
-.main-nav .navbar-item.is-active {
-  background-color: rgba(255, 255, 255, 0.15) !important;
-  color: var(--cotton-rose) !important;
-  border-bottom: 3px solid var(--white);
+/* Brand name / logo */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; /* full width on mobile so burger floats right */
+    height: var(--nav-height);
 }
 
-.navbar-brand .navbar-item {
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--white) !important;
+/* On desktop the brand only needs to be as wide as its content */
+@media (min-width: 769px) {
+    .navbar-brand {
+        width: auto;
+    }
+}
+
+.navbar-logo {
+    color: var(--white) !important;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+/* Individual nav links */
+.navbar-item {
+    color: var(--white) !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: 4px;
+    transition: var(--ease-smooth);
+    display: inline-block;
+    border-bottom: 3px solid transparent; /* reserve space so layout doesn't jump */
+}
+
+.navbar-item:hover,
+.navbar-item.is-active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--cotton-rose) !important;
+    border-bottom-color: var(--white);
+}
+
+/* ── Mobile burger button ── */
+/* The actual checkbox is invisible — only the label (burger icon) shows */
+.nav-toggle-input {
+    display: none; /* hidden everywhere; the label does the visual work */
 }
 
 .navbar-burger {
-  cursor: pointer;
-  display: block;
-  margin-left: auto;
-  padding: 1rem;
-}
-
-.navbar-menu {
-  display: none;
-  background: var(--intense-cherry);
-  padding: 1rem 0;
-}
-
-#nav-toggle:checked ~ .navbar-menu {
-  display: block;
-  animation: slideDown 0.3s ease forwards;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    display: none; /* hidden on desktop */
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;  /* large tap target for thumbs */
+    height: 44px;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    flex-shrink: 0;
 }
 
 .navbar-burger span {
-  display: block;
-  width: 18px;
-  height: 2px;
-  background-color: var(--white);
-  margin: 4px 0;
-  transition: var(--transition-smooth);
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--white);
+    border-radius: 2px;
+    transition: var(--ease-smooth);
+    transform-origin: center;
 }
 
-#nav-toggle:checked ~ .navbar-burger span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+/* ── Desktop menu: horizontal row ── */
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 }
 
-#nav-toggle:checked ~ .navbar-burger span:nth-child(2) {
-  opacity: 0;
+/* ── Mobile layout overrides ── */
+@media (max-width: 768px) {
+
+    /* Show the burger icon */
+    .navbar-burger {
+        display: flex;
+    }
+
+    /* The nav menu collapses until the checkbox is checked */
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        background-color: var(--intense-cherry);
+        padding: 0.75rem 0 1rem;
+        gap: 0;
+        /* Push menu below the brand bar */
+        order: 3;
+    }
+
+    /* Checking the hidden checkbox reveals the menu */
+    .nav-toggle-input:checked ~ .navbar-menu {
+        display: flex;
+        animation: slideDown 0.25s ease forwards;
+    }
+
+    /* Burger → X animation when menu is open */
+    .nav-toggle-input:checked ~ .navbar-brand .navbar-burger span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .nav-toggle-input:checked ~ .navbar-brand .navbar-burger span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    .nav-toggle-input:checked ~ .navbar-brand .navbar-burger span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Each link spans the full width on mobile */
+    .navbar-item {
+        width: 100%;
+        padding: 0.75rem 1.25rem;
+        border-bottom: none;
+        border-left: 3px solid transparent;
+    }
+
+    .navbar-item:hover,
+    .navbar-item.is-active {
+        border-bottom: none;
+        border-left-color: var(--white);
+        background-color: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Navbar needs to grow taller when menu is open */
+    .main-nav {
+        height: auto;
+    }
+
+    .nav-inner {
+        height: auto;
+        min-height: var(--nav-height);
+        align-items: flex-start;
+        padding-top: 0;
+    }
 }
 
-#nav-toggle:checked ~ .navbar-burger span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -6px);
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0);    }
 }
 
-.is-hidden {
-  display: none;
+
+/* =============================================
+   HERO SECTION
+   Full-viewport feel with a gradient background, floating particles,
+   and the spring-style word-switcher animation in the subtitle.
+============================================= */
+.hero {
+    background: linear-gradient(135deg, var(--intense-cherry) 0%, var(--lobster-pink) 100%);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    /* Min-height makes it feel full without forcing a scroll on small phones */
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+.hero-body {
+    width: 100%;
+    padding: 5rem 0 4rem;
 }
 
-/* ================= HERO SECTION ================= */
-.hero.is-primary {
-  background: linear-gradient(135deg, var(--intense-cherry) 0%, var(--lobster-pink) 100%);
-  color: var(--white);
-  position: relative;
-  overflow: hidden;
-  margin-top: 4.5rem;
-  padding: 4rem 0;
+.hero-content {
+    text-align: center;
+    position: relative; /* sits above the particle layer */
+    z-index: 2;
 }
 
-.hero-body .title {
-  color: var(--white);
-  font-size: 3.5rem;
-  font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-  animation: fadeInDown 0.8s ease-out forwards;
-  opacity: 0;
+/* Big bold headline */
+.hero-title {
+    color: var(--white);
+    font-size: clamp(2rem, 6vw, 3.75rem); /* fluid: 2rem on tiny phones, 3.75rem on wide screens */
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 0.7s ease-out forwards;
 }
 
-.hero-body .subtitle {
-  color: var(--cotton-rose);
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  animation: fadeInUp 0.8s ease-out 0.3s forwards;
-  opacity: 0;
+/* Subtitle line — the word-switcher lives inside here */
+.hero-subtitle {
+    font-family: 'Poppins', sans-serif;
+    color: var(--cotton-rose);
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+    animation: fadeInUp 0.7s ease-out 0.2s both;
+    /* Flex keeps the word-switcher aligned inline without wrapping weirdly */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35em;
+    line-height: 1.4;
 }
 
-/* Rotating Text Animation */
-.rotating-text-wrapper {
-  display: inline-block;
-  position: relative;
-  width: 160px;
-  height: 1.25rem;
-  vertical-align: bottom;
-  overflow: hidden;
+/* Supporting description below the subtitle */
+.hero-description {
+    color: var(--cotton-rose);
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    max-width: 640px;
+    margin-inline: auto;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    animation: fadeInUp 0.7s ease-out 0.4s both;
 }
 
-.rotating-text {
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  transform: translateY(100%);
-  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s ease;
-  color: var(--white);
-  font-weight: 700;
+/* CTA button row */
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.7s ease-out 0.6s both;
 }
 
-.rotating-text.active {
-  opacity: 1;
-  transform: translateY(0);
+
+/* ── Word Switcher (21st.dev spring animation style) ──
+   A fixed-width clipping box. Words slide in from below and exit upward,
+   mimicking the framer-motion spring approach but in pure CSS + JS.
+   The width is set wider to fit the longest word comfortably.
+*/
+.word-switcher {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    /* Width sized to longest word ("High Speed") plus a little breathing room */
+    min-width: 150px;
+    height: 1.5em;    /* clip box: only one word visible at a time */
+    vertical-align: middle;
 }
 
-.rotating-text.exit-up {
-  opacity: 0;
-  transform: translateY(-100%);
+/* Each individual word — stacked on top of each other, hidden by default */
+.word {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(120%); /* starts below the clip box */
+    opacity: 0;
+    color: var(--white);
+    font-weight: 700;
+    white-space: nowrap;
+    /* Spring-feel: fast in, slow out */
+    transition:
+        transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity   0.4s  ease;
+    will-change: transform, opacity;
 }
 
+/* The currently visible word */
+.word.active {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* The word that just left — shoots upward and fades */
+.word.exit {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-120%);
+    transition:
+        transform 0.4s cubic-bezier(0.4, 0, 1, 1),
+        opacity   0.3s ease;
+}
+
+
+/* ── Floating background particles ──
+   These are purely decorative circles that drift upward.
+   The staggered sizes and delays make it feel organic.
+*/
 .hero-particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
 }
 
 .particle {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  animation: float 20s infinite linear;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    bottom: -120px; /* start below the fold */
+    animation: floatUp linear infinite;
 }
 
-.particle:nth-child(1) {
-  width: 80px;
-  height: 80px;
-  left: 10%;
-  bottom: -80px;
-  animation-duration: 15s;
+.particle:nth-child(1) { width: 80px;  height: 80px;  left: 10%; animation-duration: 15s; }
+.particle:nth-child(2) { width: 40px;  height: 40px;  left: 30%; animation-duration: 12s; animation-delay: 2s; }
+.particle:nth-child(3) { width: 60px;  height: 60px;  left: 50%; animation-duration: 18s; animation-delay: 4s; }
+.particle:nth-child(4) { width: 100px; height: 100px; left: 70%; animation-duration: 22s; animation-delay: 1s; }
+.particle:nth-child(5) { width: 50px;  height: 50px;  left: 88%; animation-duration: 14s; animation-delay: 3s; }
+
+@keyframes floatUp {
+    0%   { transform: translateY(0)      rotate(0deg);   opacity: 0;   }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-115vh) rotate(360deg); opacity: 0;   }
 }
 
-.particle:nth-child(2) {
-  width: 40px;
-  height: 40px;
-  left: 30%;
-  bottom: -40px;
-  animation-duration: 12s;
-  animation-delay: 2s;
+
+/* =============================================
+   BUTTONS
+   Two variants: filled primary (used on light bg) and outline (used on dark bg).
+   Both get the same padding and radius for visual consistency.
+============================================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--ease-smooth);
+    border: 2px solid transparent;
+    white-space: nowrap;
+    text-decoration: none;
 }
 
-.particle:nth-child(3) {
-  width: 60px;
-  height: 60px;
-  left: 50%;
-  bottom: -60px;
-  animation-duration: 18s;
-  animation-delay: 4s;
+/* Primary: white fill on the hero, cherry-coloured text */
+.btn-primary {
+    background-color: var(--white);
+    color: var(--intense-cherry);
+    border-color: var(--white);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+.btn-primary:hover {
+    background-color: var(--cotton-rose);
+    border-color: var(--cotton-rose);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.particle:nth-child(4) {
-  width: 100px;
-  height: 100px;
-  left: 70%;
-  bottom: -100px;
-  animation-duration: 22s;
-  animation-delay: 1s;
+/* Outline: transparent fill, white border — sits cleanly on the hero gradient */
+.btn-outline {
+    background-color: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+.btn-outline:hover {
+    background-color: var(--white);
+    color: var(--intense-cherry);
+    transform: translateY(-3px);
 }
 
-.particle:nth-child(5) {
-  width: 50px;
-  height: 50px;
-  left: 90%;
-  bottom: -50px;
-  animation-duration: 14s;
-  animation-delay: 3s;
+/* A search-specific button variant that matches the input height */
+.search-container .btn-primary {
+    background-color: var(--intense-cherry);
+    color: var(--white);
+    border-color: var(--intense-cherry);
+    box-shadow: none;
+}
+.search-container .btn-primary:hover {
+    background-color: #a02f3a;
+    border-color: #a02f3a;
+    transform: none;
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-110vh) rotate(360deg);
-    opacity: 0;
-  }
-}
 
-/* ================= BUTTONS & UTILITIES ================= */
-.hero-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.button.is-primary {
-  background-color: var(--white);
-  color: var(--intense-cherry);
-  font-weight: 600;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: var(--transition-smooth);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  cursor: pointer;
-}
-
-.button.is-primary:hover {
-  background-color: var(--cotton-rose);
-  color: var(--intense-cherry);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.button.is-outline {
-  border: 2px solid var(--white);
-  color: var(--white);
-  background: transparent;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: var(--transition-smooth);
-  cursor: pointer;
-}
-
-.button.is-outline:hover {
-  background-color: var(--white);
-  color: var(--intense-cherry);
-  transform: translateY(-3px);
-}
-
-.text-center {
-  text-align: center;
-}
-
-.mt-6 {
-  margin-top: 3rem;
-}
-
-.mb-6 {
-  margin-bottom: 3rem;
-}
-
-/* ================= SECTIONS & TITLES ================= */
-.section {
-  padding: 4rem 0;
-}
-
-.section-title {
-  color: var(--intense-cherry);
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  position: relative;
-  display: inline-block;
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--intense-cherry), var(--lobster-pink));
-  border-radius: 2px;
-  animation: expandWidth 0.8s ease-out 0.4s forwards;
-}
-
-.section-subtitle {
-  color: var(--light-text);
-  font-size: 1.1rem;
-  margin-bottom: 3rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ================= SEARCH BAR ================= */
-.search-container {
-  display: flex;
-  max-width: 500px;
-  margin: 2rem auto 0;
-  gap: 0.5rem;
-}
-
-.search-input {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  border: 2px solid var(--old-rose);
-  border-radius: 4px;
-  font-size: 1rem;
-  outline: none;
-  transition: var(--transition-smooth);
-}
-
-.search-input:focus {
-  border-color: var(--intense-cherry);
-}
-
-/* ================= STATS ================= */
+/* =============================================
+   STATS STRIP
+   Sits immediately below the hero as a confidence signal.
+   Three numbers in a row; each animates up from zero via JS.
+============================================= */
 .stats-section {
-  background-color: var(--cotton-rose);
-  padding: 3rem 0;
-  margin-top: -1px;
+    background-color: var(--cotton-rose);
+    padding: 3rem 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
 }
 
 .stat-item {
-  text-align: center;
-  padding: 1rem;
-  animation: fadeInUp 0.8s ease-out forwards;
+    text-align: center;
+    padding: 1.5rem 1rem;
 }
 
+/* The big number — counting animation runs in JS */
 .stat-number {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--intense-cherry);
-  display: block;
-  margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 700;
+    color: var(--intense-cherry);
+    display: inline;
+}
+
+.stat-suffix {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 700;
+    color: var(--intense-cherry);
 }
 
 .stat-label {
-  font-size: 1rem;
-  color: var(--dark-text);
-  font-weight: 500;
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dark-text);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
-/* ================= FEATURES ================= */
+/* Stack stats vertically on small phones */
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+}
+
+
+/* =============================================
+   SECTIONS (shared pattern)
+   All content sections use the same vertical padding.
+   The header block (title + subtitle) is centred and constrained.
+============================================= */
+.section {
+    padding: 5rem 0;
+}
+
+/* Centre-aligned header used at the top of each section */
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    color: var(--intense-cherry);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 1rem;
+    display: inline-block;
+    position: relative;
+}
+
+/* Animated underline that expands from centre after the section loads */
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--intense-cherry), var(--lobster-pink));
+    border-radius: 2px;
+    animation: expandLine 0.8s ease-out 0.4s forwards;
+}
+
+.section-subtitle {
+    color: var(--light-text);
+    font-size: 1rem;
+    max-width: 640px;
+    margin-inline: auto;
+    margin-top: 1.5rem; /* give the underline room to breathe */
+}
+
+
+/* =============================================
+   SEARCH BAR
+   Sits in the section header for the features grid.
+   Flex row on all screens; stacks on very narrow phones.
+============================================= */
+.search-container {
+    display: flex;
+    max-width: 500px;
+    margin: 2rem auto 0;
+    gap: 0.5rem;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 0; /* prevents flex child from overflowing */
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--old-rose);
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--dark-text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.25s ease;
+}
+
+.search-input:focus {
+    border-color: var(--intense-cherry);
+}
+
+.search-input::placeholder {
+    color: var(--light-text);
+}
+
+@media (max-width: 420px) {
+    .search-container {
+        flex-direction: column;
+    }
+}
+
+
+/* =============================================
+   FEATURE CARDS GRID
+   Dynamically populated by script.js.
+   Auto-fill columns ensure a nice flow without explicit breakpoints.
+============================================= */
+.features-grid {
+    display: grid;
+    /* Fill columns that are at least 260px wide; they stretch to fill gaps */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.75rem;
+}
+
+/* Each card has a cherry top border that deepens on hover */
 .feature-card {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(189, 55, 69, 0.1);
-  transition: var(--transition-smooth);
-  height: 100%;
-  border-top: 4px solid var(--old-rose);
-  animation: fadeInUp 0.6s ease-out forwards;
-  opacity: 0;
+    background: var(--white);
+    padding: 2rem 1.75rem;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(189, 55, 69, 0.08);
+    border-top: 4px solid var(--old-rose);
+    transition: var(--ease-smooth);
+    display: flex;
+    flex-direction: column;
 }
 
 .feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(189, 55, 69, 0.2);
-  border-top-color: var(--intense-cherry);
+    transform: translateY(-8px);
+    box-shadow: 0 14px 28px rgba(189, 55, 69, 0.18);
+    border-top-color: var(--intense-cherry);
 }
 
 .feature-icon {
-  font-size: 2.5rem;
-  color: var(--lobster-pink);
-  margin-bottom: 1rem;
-  display: inline-block;
-  transition: var(--transition-bounce);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    line-height: 1;
+    transition: var(--ease-bounce);
 }
 
 .feature-card:hover .feature-icon {
-  color: var(--intense-cherry);
-  transform: scale(1.1);
+    transform: scale(1.12);
 }
 
 .feature-card h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.75rem;
-  color: var(--intense-cherry);
+    font-size: 1.15rem;
+    color: var(--intense-cherry);
+    margin-bottom: 0.6rem;
 }
 
 .feature-card p {
-  color: var(--light-text);
-  font-size: 0.95rem;
+    color: var(--light-text);
+    font-size: 0.93rem;
+    line-height: 1.65;
 }
 
-/* ================= BENEFITS ================= */
+/* Empty / loading state */
+.loading-msg {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--light-text);
+    padding: 2rem;
+}
+
+
+/* =============================================
+   BENEFITS SECTION
+   Two columns on tablet+, one column on mobile.
+   Each item is a numbered card that slides right/left on hover.
+============================================= */
 .benefits-section {
-  background-color: #FAFAFA;
+    background-color: #f4f4f7; /* slightly cooler than the page bg for contrast */
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .benefit-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  background: var(--white);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: var(--transition-smooth);
-  animation: fadeInUp 0.6s ease-out forwards;
-  opacity: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: var(--ease-smooth);
 }
 
 .benefit-item:hover {
-  transform: translateX(10px);
-  box-shadow: 0 4px 16px rgba(189, 55, 69, 0.15);
+    transform: translateX(8px);
+    box-shadow: 0 4px 18px rgba(189, 55, 69, 0.14);
 }
 
 .benefit-number {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--old-rose);
-  margin-right: 1.5rem;
-  min-width: 50px;
-  text-align: center;
-  transition: var(--transition-smooth);
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--old-rose);
+    min-width: 44px;
+    text-align: center;
+    flex-shrink: 0;
+    transition: color 0.25s ease;
+    line-height: 1;
 }
 
 .benefit-item:hover .benefit-number {
-  color: var(--intense-cherry);
+    color: var(--intense-cherry);
 }
 
 .benefit-content h4 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: var(--intense-cherry);
+    font-size: 1.05rem;
+    color: var(--intense-cherry);
+    margin-bottom: 0.4rem;
 }
 
 .benefit-content p {
-  color: var(--light-text);
-  font-size: 0.95rem;
+    color: var(--light-text);
+    font-size: 0.92rem;
+    line-height: 1.6;
 }
 
-/* ================= FOOTER ================= */
+/* On very narrow phones, stack number above content */
+@media (max-width: 380px) {
+    .benefit-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+
+/* =============================================
+   FOOTER
+   Cherry background with a subtle wave shape cut into the top via clip-path.
+   Three-column grid that stacks to one column on mobile.
+============================================= */
 .main-footer {
-  background-color: var(--intense-cherry);
-  color: var(--white);
-  padding: 4rem 2rem 2rem;
-  position: relative;
-  margin-top: 2rem;
+    background-color: var(--intense-cherry);
+    color: var(--white);
+    padding: 4rem 0 2rem;
+    position: relative;
+    margin-top: 3rem;
 }
 
+/* The decorative wave above the footer */
 .main-footer::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  left: 0;
-  right: 0;
-  height: 40px;
-  background: var(--intense-cherry);
-  clip-path: ellipse(55% 100% at 50% 0%);
+    content: '';
+    position: absolute;
+    top: -36px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: var(--intense-cherry);
+    clip-path: ellipse(55% 100% at 50% 0%);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
 }
 
 .footer-title {
-  color: var(--white);
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
+    color: var(--white);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.footer-col p {
+    color: var(--cotton-rose);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+}
+
+.footer-col p i {
+    margin-right: 0.5em;
+    width: 16px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+/* Footer nav links */
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .footer-links a {
-  color: var(--cotton-rose);
-  text-decoration: none;
-  transition: var(--transition-smooth);
-  display: inline-block;
-  margin-bottom: 0.5rem;
+    color: var(--cotton-rose);
+    font-size: 0.9rem;
+    transition: var(--ease-smooth);
+    display: inline-block;
 }
 
 .footer-links a:hover {
-  color: var(--white);
-  transform: translateX(5px);
+    color: var(--white);
+    transform: translateX(5px);
 }
 
-.main-footer p {
-  color: var(--cotton-rose);
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-}
-
-/* ================= PROPER CSS INDEXING FOR ANIMATIONS ================= */
-/* Staggered animation delays for feature cards using nth-child */
-.columns.is-multiline > .column:nth-child(1) .feature-card {
-  animation-delay: 0.1s;
-}
-
-.columns.is-multiline > .column:nth-child(2) .feature-card {
-  animation-delay: 0.2s;
-}
-
-.columns.is-multiline > .column:nth-child(3) .feature-card {
-  animation-delay: 0.3s;
-}
-
-.columns.is-multiline > .column:nth-child(4) .feature-card {
-  animation-delay: 0.4s;
-}
-
-.columns.is-multiline > .column:nth-child(5) .feature-card {
-  animation-delay: 0.5s;
-}
-
-.columns.is-multiline > .column:nth-child(6) .feature-card {
-  animation-delay: 0.6s;
-}
-
-/* Staggered animation delays for benefit items using nth-child */
-.columns.is-multiline > .column:nth-child(1) .benefit-item {
-  animation-delay: 0.1s;
-}
-
-.columns.is-multiline > .column:nth-child(2) .benefit-item {
-  animation-delay: 0.2s;
-}
-
-.columns.is-multiline > .column:nth-child(3) .benefit-item {
-  animation-delay: 0.3s;
-}
-
-.columns.is-multiline > .column:nth-child(4) .benefit-item {
-  animation-delay: 0.4s;
-}
-
-.columns.is-multiline > .column:nth-child(5) .benefit-item {
-  animation-delay: 0.5s;
-}
-
-.columns.is-multiline > .column:nth-child(6) .benefit-item {
-  animation-delay: 0.6s;
-}
-
-/* ================= KEYFRAMES ================= */
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes expandWidth {
-  from {
-    width: 0;
-  }
-  to {
-    width: 60px;
-  }
-}
-
-/* ================= RESPONSIVE ================= */
-@media screen and (max-width: 768px) {
-  .hero-body .title {
-    font-size: 2.2rem;
-  }
-  
-  .hero-body .subtitle {
-    font-size: 1rem;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-  }
-  
-  .stat-number {
-    font-size: 2rem;
-  }
-  
-  .benefit-item {
-    flex-direction: column;
-    align-items: center;
+/* Copyright strip */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 1.25rem;
     text-align: center;
-  }
-  
-  .benefit-number {
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
-  
-  .columns.is-multiline > .column {
-    flex: 0 0 100%;
-  }
 }
 
-/* ================= ACCESSIBILITY ================= */
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+
+/* =============================================
+   KEYFRAME ANIMATIONS
+   Centralised here so they're easy to find and tweak.
+============================================= */
+
+/* Hero headline: drops in from above */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-24px); }
+    to   { opacity: 1; transform: translateY(0);     }
+}
+
+/* Most other elements: rise up into view */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* Section title underline: expands outward from centre */
+@keyframes expandLine {
+    from { width: 0;    }
+    to   { width: 60px; }
+}
+
+
+/* =============================================
+   ACCESSIBILITY
+   Users who have asked the OS to reduce motion get instant, no-flash transitions.
+   This is a legal requirement in some jurisdictions and good practice everywhere.
+============================================= */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+    *,
+    *::before,
+    *::after {
+        animation-duration:       0.01ms !important;
+        animation-iteration-count: 1     !important;
+        transition-duration:      0.01ms !important;
+    }
+    .word-switcher .word,
+    .word-switcher .word.active,
+    .word-switcher .word.exit {
+        transition: none !important;
+    }
 }

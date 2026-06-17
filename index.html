@@ -3,219 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 3.1 On-Page SEO: Title Tags and Meta Descriptions -->
+
+    <!-- Page title and meta for search engines — keep these tight and descriptive -->
     <title>Mdukazi Projects | Enterprise ICT Solutions</title>
     <meta name="description" content="Mdukazi Projects provides dedicated, high-speed, and secure enterprise internet access solutions. Reliable connectivity for modern businesses.">
     <meta name="keywords" content="enterprise ICT, dedicated internet, business internet, uncapped data, Mdukazi Projects">
     <meta name="author" content="Mdukazi Projects">
-    
-    <!-- Your Original Custom CSS -->
-    <link rel="stylesheet" href="assets/css/index.css">
-    <!-- AOS Animation Library CSS -->
+
+    <!-- Google Fonts: Poppins for headings (personality), Open Sans for body (readability) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome icons — loaded in <head> so they don't flash in later -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS: Animate On Scroll — handles the scroll-triggered fade-ins -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Our main stylesheet — all the visual identity lives here -->
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="container">
+    <!-- =============================================
+         NAVIGATION
+         Fixed to the top, collapses to a burger on mobile.
+         The checkbox hack drives the mobile menu — no JS needed for toggle.
+    ============================================= -->
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <div class="container nav-inner">
+
+            <!-- Brand / Logo area -->
             <div class="navbar-brand">
-                <a class="navbar-item" href="index.html">Mdukazi Projects</a>
-                <label class="navbar-burger" for="nav-toggle">
-                    <span></span><span></span><span></span>
+                <a class="navbar-logo" href="index.html">Mdukazi Projects</a>
+
+                <!-- The burger label targets the hidden checkbox below -->
+                <label class="navbar-burger" for="nav-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </label>
             </div>
-            <input type="checkbox" id="nav-toggle" class="is-hidden">
+
+            <!-- Hidden checkbox — checking this opens the mobile menu via CSS -->
+            <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-hidden="true">
+
+            <!-- The actual nav links -->
             <div class="navbar-menu">
-                <div class="navbar-end">
-                    <a class="navbar-item is-active" href="index.html">Home</a>
-                    <a class="navbar-item" href="services.html">Services</a>
-                    <a class="navbar-item" href="ict.html">Solutions</a>
-                    <a class="navbar-item" href="about.html">About Us</a>
-                    <a class="navbar-item" href="faq.html">FAQ</a>
-                    <a class="navbar-item" href="contact.html">Contact</a>
-                </div>
+                <a class="navbar-item is-active" href="index.html">Home</a>
+                <a class="navbar-item" href="services.html">Services</a>
+                <a class="navbar-item" href="ict.html">Solutions</a>
+                <a class="navbar-item" href="about.html">About Us</a>
+                <a class="navbar-item" href="faq.html">FAQ</a>
+                <a class="navbar-item" href="contact.html">Contact</a>
             </div>
+
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero is-primary">
-        <div class="hero-particles">
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-            <div class="particle"></div><div class="particle"></div>
+    <!-- =============================================
+         HERO SECTION
+         The centrepiece. Has floating particles for visual depth,
+         and the animated word-switcher (the 21st.dev style spring animation).
+    ============================================= -->
+    <section class="hero" aria-label="Hero banner">
+
+        <!-- Decorative floating bubbles — purely visual, hidden from screen readers -->
+        <div class="hero-particles" aria-hidden="true">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
         </div>
+
         <div class="hero-body">
-            <div class="container text-center" data-aos="fade-up">
-                <h1 class="title">Enterprise ICT Solutions</h1>
-                <h2 class="subtitle">
-                    Dedicated <span class="rotating-text-wrapper">
-                        <span class="rotating-text">High Speed</span>
-                        <span class="rotating-text">Secure</span>
-                        <span class="rotating-text">Reliable</span>
-                    </span> Internet Access Solutions
-                </h2>
-                <p style="color: var(--cotton-rose); max-width: 700px; margin: 0 auto 2rem auto;">
-                    Premium business internet solutions designed for the modern enterprise. Reliable, fast, and always-on connectivity for your critical operations.
+            <div class="container hero-content" data-aos="fade-up">
+
+                <!-- Main headline -->
+                <h1 class="hero-title">Enterprise ICT Solutions</h1>
+
+                <!-- Subtitle with the animated word switcher sitting in the middle -->
+                <p class="hero-subtitle">
+                    Dedicated
+                    <!-- This wrapper clips the animated words so they slide in/out vertically -->
+                    <span class="word-switcher" aria-live="polite">
+                        <span class="word active">High Speed</span>
+                        <span class="word">Secure</span>
+                        <span class="word">Reliable</span>
+                        <span class="word">Uncapped</span>
+                        <span class="word">Always-On</span>
+                    </span>
+                    Internet Access
                 </p>
+
+                <!-- Supporting description line -->
+                <p class="hero-description">
+                    Premium business internet built for the modern enterprise —
+                    fast, secure, and built to keep your operations running without interruption.
+                </p>
+
+                <!-- CTA buttons -->
                 <div class="hero-buttons">
-                    <a href="services.html" class="button is-primary">Explore Services</a>
-                    <a href="contact.html" class="button is-outline">Get in Touch</a>
+                    <a href="services.html" class="btn btn-primary">Explore Services</a>
+                    <a href="contact.html" class="btn btn-outline">Get in Touch</a>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section" data-aos="fade-up">
+    <!-- =============================================
+         STATS STRIP
+         Three quick numbers that build trust at a glance.
+         The JS animates them counting up from zero.
+    ============================================= -->
+    <section class="stats-section" aria-label="Company statistics">
         <div class="container">
-            <div class="columns is-multiline is-centered">
-                <div class="column is-4">
-                    <div class="stat-item">
-                        <span class="stat-number" data-target="99.9">0</span>%
-                        <span class="stat-label">High Speed Performance</span>
-                    </div>
+            <div class="stats-grid">
+
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="0">
+                    <span class="stat-number" data-target="99.9">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">High Speed Performance</span>
                 </div>
-                <div class="column is-4">
-                    <div class="stat-item">
-                        <span class="stat-number" data-target="24">0</span>/7
-                        <span class="stat-label">Secure Infrastructure</span>
-                    </div>
+
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <span class="stat-number" data-target="24">0</span><span class="stat-suffix">/7</span>
+                    <span class="stat-label">Secure Infrastructure</span>
                 </div>
-                <div class="column is-4">
-                    <div class="stat-item">
-                        <span class="stat-number" data-target="100">0</span>%
-                        <span class="stat-label">Uptime Reliability</span>
-                    </div>
+
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">Uptime Reliability</span>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- What We Offer Section (Dynamic Content) -->
-    <section class="section">
+    <!-- =============================================
+         WHAT WE OFFER
+         Cards are rendered by script.js from data.json (or fallback data).
+         The search bar filters them live as you type.
+    ============================================= -->
+    <section class="section" aria-label="Services offered">
         <div class="container">
-            <div class="text-center mb-6" data-aos="fade-up">
+
+            <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title">What We Offer</h2>
-                <p class="section-subtitle">Mdukazi Projects offers a range of dedicated business Internet access solutions suitable for all business applications.</p>
-                
-                <!-- Search/Filter Functionality -->
+                <p class="section-subtitle">
+                    Mdukazi Projects offers a range of dedicated business Internet access solutions
+                    suitable for all business applications.
+                </p>
+
+                <!-- Live search — filters the cards below as you type -->
                 <div class="search-container">
-                    <input type="text" id="feature-search" class="search-input" placeholder="Search services (e.g., 'uncapped', 'speed')...">
-                    <button id="search-btn" class="button is-primary">Search</button>
+                    <input
+                        type="text"
+                        id="feature-search"
+                        class="search-input"
+                        placeholder="Search services (e.g., 'uncapped', 'speed')..."
+                        aria-label="Search services"
+                    >
+                    <button id="search-btn" class="btn btn-primary" aria-label="Run search">Search</button>
                 </div>
             </div>
 
-            <!-- Dynamic Content Container (Populated by script.js) -->
-            <div class="columns is-multiline" id="features-container">
-                <div class="column is-12 text-center">
-                    <p>Loading services...</p>
-                </div>
+            <!-- script.js populates this grid with feature cards -->
+            <div class="features-grid" id="features-container">
+                <p class="loading-msg">Loading services…</p>
             </div>
+
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section class="section benefits-section">
+    <!-- =============================================
+         BENEFITS
+         Six reasons someone should pick us.
+         Each pair sits side-by-side on desktop, stacks on mobile.
+    ============================================= -->
+    <section class="section benefits-section" aria-label="Why choose us">
         <div class="container">
-            <div class="text-center mb-6" data-aos="fade-up">
+
+            <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title">Benefits</h2>
-                <p class="section-subtitle">Why choose our dedicated internet solutions</p>
+                <p class="section-subtitle">Why our dedicated internet solutions make sense for your business</p>
             </div>
-            <div class="columns is-multiline">
-                <div class="column is-6" data-aos="fade-right">
-                    <div class="benefit-item">
-                        <div class="benefit-number">1</div>
-                        <div class="benefit-content">
-                            <h4>Scalability and Flexibility</h4>
-                            <p>Grow your bandwidth as your business expands without infrastructure changes.</p>
-                        </div>
+
+            <div class="benefits-grid">
+
+                <div class="benefit-item" data-aos="fade-right">
+                    <div class="benefit-number" aria-hidden="true">1</div>
+                    <div class="benefit-content">
+                        <h4>Scalability and Flexibility</h4>
+                        <p>Grow your bandwidth as your business expands without touching the infrastructure.</p>
                     </div>
                 </div>
-                <div class="column is-6" data-aos="fade-left">
-                    <div class="benefit-item">
-                        <div class="benefit-number">2</div>
-                        <div class="benefit-content">
-                            <h4>Cost Control and Management</h4>
-                            <p>Fixed pricing models help you budget effectively with no unexpected charges.</p>
-                        </div>
+
+                <div class="benefit-item" data-aos="fade-left">
+                    <div class="benefit-number" aria-hidden="true">2</div>
+                    <div class="benefit-content">
+                        <h4>Cost Control and Management</h4>
+                        <p>Fixed pricing models mean you can budget effectively with zero surprise charges.</p>
                     </div>
                 </div>
-                <div class="column is-6" data-aos="fade-right">
-                    <div class="benefit-item">
-                        <div class="benefit-number">3</div>
-                        <div class="benefit-content">
-                            <h4>Real-Time Applications</h4>
-                            <p>Perfect for video conferencing, VoIP, cloud services, and cloud storage solutions.</p>
-                        </div>
+
+                <div class="benefit-item" data-aos="fade-right" data-aos-delay="100">
+                    <div class="benefit-number" aria-hidden="true">3</div>
+                    <div class="benefit-content">
+                        <h4>Real-Time Applications</h4>
+                        <p>Perfect for video conferencing, VoIP, cloud services, and cloud storage solutions.</p>
                     </div>
                 </div>
-                <div class="column is-6" data-aos="fade-left">
-                    <div class="benefit-item">
-                        <div class="benefit-number">4</div>
-                        <div class="benefit-content">
-                            <h4>High Reliability</h4>
-                            <p>Enterprise-grade infrastructure ensures maximum availability and uptime.</p>
-                        </div>
+
+                <div class="benefit-item" data-aos="fade-left" data-aos-delay="100">
+                    <div class="benefit-number" aria-hidden="true">4</div>
+                    <div class="benefit-content">
+                        <h4>High Reliability</h4>
+                        <p>Enterprise-grade infrastructure ensures maximum availability and uptime.</p>
                     </div>
                 </div>
-                <div class="column is-6" data-aos="fade-right">
-                    <div class="benefit-item">
-                        <div class="benefit-number">5</div>
-                        <div class="benefit-content">
-                            <h4>SLA-Enforced Performance</h4>
-                            <p>Guaranteed network uptime backed by comprehensive service level agreements.</p>
-                        </div>
+
+                <div class="benefit-item" data-aos="fade-right" data-aos-delay="200">
+                    <div class="benefit-number" aria-hidden="true">5</div>
+                    <div class="benefit-content">
+                        <h4>SLA-Enforced Performance</h4>
+                        <p>Guaranteed network uptime backed by comprehensive service level agreements.</p>
                     </div>
                 </div>
-                <div class="column is-6" data-aos="fade-left">
-                    <div class="benefit-item">
-                        <div class="benefit-number">6</div>
-                        <div class="benefit-content">
-                            <h4>Flexible Access Options</h4>
-                            <p>Choice of the most appropriate last mile access medium for your location.</p>
-                        </div>
+
+                <div class="benefit-item" data-aos="fade-left" data-aos-delay="200">
+                    <div class="benefit-number" aria-hidden="true">6</div>
+                    <div class="benefit-content">
+                        <h4>Flexible Access Options</h4>
+                        <p>Choose the most appropriate last-mile access medium for your specific location.</p>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="main-footer">
+    <!-- =============================================
+         FOOTER
+         Three columns: brand blurb, quick links, contact details.
+         The decorative wave sits above it via the ::before pseudo-element.
+    ============================================= -->
+    <footer class="main-footer" role="contentinfo">
         <div class="container">
-            <div class="columns is-multiline">
-                <div class="column is-4">
+
+            <div class="footer-grid">
+
+                <!-- Who we are in one line -->
+                <div class="footer-col">
                     <h3 class="footer-title">Mdukazi Projects</h3>
                     <p>Enterprise ICT Solutions for the modern business.</p>
                 </div>
-                <div class="column is-4">
+
+                <!-- Handy nav links so people don't have to scroll back up -->
+                <div class="footer-col">
                     <h3 class="footer-title">Quick Links</h3>
-                    <div class="footer-links">
-                        <a href="index.html">Home</a><br>
-                        <a href="services.html">Services</a><br>
-                        <a href="ict.html">Solutions</a><br>
+                    <nav class="footer-links" aria-label="Footer navigation">
+                        <a href="index.html">Home</a>
+                        <a href="services.html">Services</a>
+                        <a href="ict.html">Solutions</a>
                         <a href="contact.html">Contact</a>
-                    </div>
+                    </nav>
                 </div>
-                <div class="column is-4">
+
+                <!-- How to reach us -->
+                <div class="footer-col">
                     <h3 class="footer-title">Contact</h3>
-                    <p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p>
-                    <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
-                </div
+                    <p><i class="fas fa-envelope" aria-hidden="true"></i> info@mdukaziprojects.co.za</p>
+                    <p><i class="fas fa-phone" aria-hidden="true"></i> +27 11 123 4567</p>
+                    <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
+                </div>
+
             </div>
-            <div class="text-center mt-6" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+
+            <!-- Copyright strip at the very bottom -->
+            <div class="footer-bottom">
                 <p>&copy; 2026 Mdukazi Projects. All rights reserved.</p>
             </div>
+
         </div>
     </footer>
 
-    <!-- Font Awesome for Icons (Optional, remove if you use SVGs) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AOS Animation Library JS -->
+    <!-- AOS library — must load before our script so AOS.init() works -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Custom JavaScript -->
+
+    <!-- Our main script handles: AOS init, word animation, data fetch, search, stat counters -->
     <script src="js/script.js"></script>
+
 </body>
 </html>
