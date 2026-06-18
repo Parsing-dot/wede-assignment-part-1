@@ -6,7 +6,10 @@
 /*Modal helpers (called from inline onclick in portal.html) */
 function openModal(id)  { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
 function closeModal(id) { const m = document.getElementById(id); if (m) m.style.display = 'none'; }
-function logout()       { window.auth.logout(); window.location.href = 'account.html'; }
+function logout() { 
+    window.window.auth.logout();
+     window.location.href = 'account.html'; 
+}
 
 document.addEventListener('DOMContentLoaded', function () {
 
