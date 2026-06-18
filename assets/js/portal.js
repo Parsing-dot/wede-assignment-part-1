@@ -4,13 +4,15 @@
  */
 
 /*Modal helpers (called from inline onclick in portal.html) */
-function openModal(id)  { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
-function closeModal(id) { const m = document.getElementById(id); if (m) m.style.display = 'none'; }
+let currentIssueId = null;
+let currentClientId = null;
+
 function logout() { 
     window.window.auth.logout();
      window.location.href = 'account.html'; 
 }
-
+function openModal(id)  { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
+function closeModal(id) { const m = document.getElementById(id); if (m) m.style.display = 'none'; }
 document.addEventListener('DOMContentLoaded', function () {
 
   /* Auth guard  */

@@ -79,6 +79,19 @@ css/ — stylesheets | js/ — scripts | images/ — all assets
  
 
 ## References 
+js library - https://21st.dev/community/components/s/hero
+
+Animation library - https://www.framer.com/dictionary/framer-motion
+
+W#Schools https://www.w3schools.com/HOWTO/howto_js_mobile_navbar.asp [online]
+
+Joshcomew. How to center a div. https://www.joshwcomeau.com/css/center-a-div/ [online] 
+
+https://coolors.co/
+ 
+ Yu Hamada.  2025. User Authentication with Auth.js in Next.js App Router. Available at : https://dev.to/jamescroissant/user-authentication-with-authjs-in-nextjs-app-router-424k [ acceses 6/15/2026]
+
+Clerk. https://clerk.com/docs/nextjs/guides/development/custom-sign-in-or-up-page [online]
 
 Chaffey D & Ellis-Chadwick F. 2023. Digital Marketing. 8th ed. Pearson. 
 
