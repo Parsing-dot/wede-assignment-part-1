@@ -4,7 +4,7 @@ let currentIssueId = null;
 let currentClientId = null;
 
 function adminLogout() {
-    auth.logout();
+    window.window.auth.logout();
     window.location.href = 'account.html';
 }
 
@@ -13,7 +13,7 @@ function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
 document.addEventListener('DOMContentLoaded', function() {
     // Check if user is admin
-    const currentUser = auth.getCurrentUser();
+    const currentUser = window.auth.getCurrentUser();
     if (!currentUser || currentUser.role !== 'admin') {
         alert('Access denied! Please login as admin.');
         window.location.href = 'account.html';
@@ -85,13 +85,13 @@ function loadSectionData(section) {
 }
 
 function loadDashboard() {
-    const analytics = auth.getAnalytics();
+    const analytics = window.auth.getAnalytics();
     
     document.getElementById('totalClients').textContent = analytics.totalClients;
     document.getElementById('totalRevenue').textContent = `R ${analytics.totalRevenue.toFixed(2)}`;
     document.getElementById('totalOutstanding').textContent = `R ${analytics.totalOutstanding.toFixed(2)}`;
     
-    const allIssues = auth.getAllIssues();
+    const allIssues = window.auth.getAllIssues();
     const pendingIssues = allIssues.filter(i => i.status === 'pending');
     document.getElementById('pendingIssues').textContent = pendingIssues.length;
 
@@ -128,7 +128,7 @@ function loadDashboard() {
 }
 
 function loadIssues() {
-    const allIssues = auth.getAllIssues();
+    const allIssues = window.auth.getAllIssues();
     const issuesList = document.getElementById('issuesList');
     
     issuesList.innerHTML = allIssues.map(issue => `
@@ -158,7 +158,7 @@ function loadIssues() {
 
 function filterIssues() {
     const filter = document.getElementById('issueFilter').value;
-    const allIssues = auth.getAllIssues();
+    const allIssues = window.auth.getAllIssues();
     const filtered = filter === 'all' ? allIssues : allIssues.filter(i => i.status === filter);
     
     const issuesList = document.getElementById('issuesList');
@@ -201,7 +201,7 @@ function closeResolveModal() {
 function resolveIssue() {
     const message = document.getElementById('resolveMessage').value;
     
-    if (auth.updateIssueStatus(currentIssueId, currentClientId, 'resolved', message)) {
+    if (window.auth.updateIssueStatus(currentIssueId, currentClientId, 'resolved', message)) {
         alert('Issue resolved successfully!');
         closeResolveModal();
         loadIssues();
@@ -211,7 +211,7 @@ function resolveIssue() {
 }
 
 function loadSpecials() {
-    const specials = auth.getSpecials();
+    const specials = window.auth.getSpecials();
     const specialsList = document.getElementById('specialsList');
     
     specialsList.innerHTML = specials.map(special => `
@@ -250,7 +250,7 @@ function createSpecial() {
         targetServices: document.getElementById('specialTargetServices').value
     };
 
-    auth.createSpecial(specialData);
+    window.auth.createSpecial(specialData);
     alert('Special created successfully!');
     closeSpecialModal();
     loadSpecials();
@@ -258,14 +258,14 @@ function createSpecial() {
 
 function deleteSpecial(specialId) {
     if (confirm('Are you sure you want to delete this special?')) {
-        auth.deleteSpecial(specialId);
+        window.auth.deleteSpecial(specialId);
         loadSpecials();
     }
 }
 
 function loadPayments() {
-    const payments = auth.getAllPayments();
-    const users = auth.getAllClients();
+    const payments = window.auth.getAllPayments();
+    const users = window.auth.getAllClients();
     
     // Populate client filter
     const clientFilter = document.getElementById('paymentClient');
@@ -294,7 +294,7 @@ function filterPayments() {
     const month = document.getElementById('paymentMonth').value;
     const clientId = document.getElementById('paymentClient').value;
     
-    let payments = auth.getAllPayments();
+    let payments = window.auth.getAllPayments();
     
     if (month) {
         payments = payments.filter(p => p.date.startsWith(month));
@@ -308,7 +308,7 @@ function filterPayments() {
 }
 
 function loadOutstanding() {
-    const outstanding = auth.getOutstandingAccounts();
+    const outstanding = window.auth.getOutstandingAccounts();
     displayOutstanding(outstanding);
 }
 
@@ -337,7 +337,7 @@ function displayOutstanding(accounts) {
 
 function filterOutstanding() {
     const filter = document.getElementById('outstandingFilter').value;
-    let accounts = auth.getOutstandingAccounts();
+    let accounts = window.auth.getOutstandingAccounts();
     
     if (filter === 'overdue') {
         const today = new Date();
@@ -355,11 +355,11 @@ function sendReminder(email) {
 }
 
 function loadAnalytics() {
-    const analytics = auth.getAnalytics();
+    const analytics = window.auth.getAnalytics();
     
     // Creation Timeline
     const timeline = document.getElementById('creationTimeline');
-    const users = auth.getAllClients();
+    const users = window.auth.getAllClients();
     const groupedByDate = {};
     
     users.forEach(user => {

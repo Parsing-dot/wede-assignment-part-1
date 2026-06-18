@@ -339,7 +339,7 @@ observer.unobserve(entry.target);
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 targets.forEach(el => observer.observe(el));
 }
-// ================= STAT NUMBER COUNTER =================
+//sTAT NUMBER COUNTER 
 function animateCounters() {
 document.querySelectorAll('.stat-number').forEach(el => {
 const raw = el.textContent.trim();
@@ -366,7 +366,7 @@ const obs = new IntersectionObserver(([entry]) => {
 obs.observe(el);
 });
 }
-// ================= INITIALIZATION =================
+//  INITIALIZATION 
 document.addEventListener('DOMContentLoaded', () => {
 // Initialize Side Navigation (hamburger + sidenav)
 new SideNav();

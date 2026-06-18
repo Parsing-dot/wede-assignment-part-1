@@ -15,27 +15,27 @@
             </div>
             <nav class="sidebar-nav">
                 <a href="#" class="nav-item active" data-section="dashboard">
-                    <span class="icon">📊</span>
+                    <span class="icon"></span>
                     <span>Dashboard</span>
                 </a>
                 <a href="#" class="nav-item" data-section="issues">
-                    <span class="icon">🔧</span>
+                    <span class="icon"></span>
                     <span>Client Queries</span>
                 </a>
                 <a href="#" class="nav-item" data-section="specials">
-                    <span class="icon">🎉</span>
+                    <span class="icon"></span>
                     <span>Specials Management</span>
                 </a>
                 <a href="#" class="nav-item" data-section="payments">
-                    <span class="icon">💰</span>
+                    <span class="icon"></span>
                     <span>Payments</span>
                 </a>
                 <a href="#" class="nav-item" data-section="outstanding">
-                    <span class="icon">⚠️</span>
+                    <span class="icon"></span>
                     <span>Outstanding Accounts</span>
                 </a>
                 <a href="#" class="nav-item" data-section="analytics">
-                    <span class="icon">📈</span>
+                    <span class="icon"></span>
                     <span>Client Analytics</span>
                 </a>
             </nav>
@@ -57,28 +57,28 @@
             <section id="dashboard" class="content-section active">
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-icon">👥</div>
+                        <div class="stat-icon"></div>
                         <div class="stat-info">
                             <h3>Total Clients</h3>
                             <p id="totalClients">0</p>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">💰</div>
+                        <div class="stat-icon"></div>
                         <div class="stat-info">
                             <h3>Total Revenue</h3>
                             <p id="totalRevenue">R 0.00</p>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-icon"></div>
                         <div class="stat-info">
                             <h3>Outstanding</h3>
                             <p id="totalOutstanding">R 0.00</p>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">🔧</div>
+                        <div class="stat-icon"></div>
                         <div class="stat-info">
                             <h3>Pending Issues</h3>
                             <p id="pendingIssues">0</p>
@@ -262,19 +262,6 @@
             </form>
         </div>
     </div>
-    <script>
-  // Auth guard — runs before admin.js so the page doesn't flash
-  // auth is defined in account.js which is NOT loaded here.
-  // We read localStorage directly and let admin.js handle the full guard.
-  (function() {
-    var u = localStorage.getItem('mdukazi_current_user');
-    if (!u) { alert('Access denied! Please login.'); window.location.href = 'account.html'; }
-    try {
-      var user = JSON.parse(u);
-      if (user.role !== 'admin') { alert('Access denied! Admin only.'); window.location.href = 'account.html'; }
-    } catch(e) { window.location.href = 'account.html'; }
-  })();
-</script>
     <script src="assets/js/auth.js"></script>
     <script src="assets/js/admin.js"></script>
 </body>

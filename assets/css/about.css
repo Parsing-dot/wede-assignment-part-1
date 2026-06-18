@@ -44,8 +44,7 @@ p.lead {
   margin: 0 auto 1.5rem;
   line-height: 1.8;
 }
-
-/* ================= NAVIGATION ================= */
+/* NAVIGATION */
 .main-nav {
   background: linear-gradient(135deg, var(--intense-cherry) 0%, var(--onyx-grey) 100%);
   box-shadow: 0 2px 15px rgba(53, 56, 57, 0.35);
@@ -85,7 +84,7 @@ p.lead {
   transform: rotate(15deg) scale(1.1);
 }
 
-/* ================= HAMBURGER MENU ================= */
+/*  HAMBURGER MENU  */
 .hamburger {
   display: flex;
   flex-direction: column;
@@ -146,7 +145,7 @@ p.lead {
   box-shadow: 0 0 20px rgba(239, 205, 209, 0.4);
 }
 
-/* ================= SIDE NAV OVERLAY ================= */
+/*  SIDE NAV OVERLAY */
 .sidenav-overlay {
   position: fixed;
   inset: 0;
@@ -166,7 +165,7 @@ p.lead {
   pointer-events: auto;
 }
 
-/* ================= RIGHT SIDE NAV ================= */
+/*  RIGHT SIDE NAV  */
 .sidenav {
   position: fixed;
   top: 0;
@@ -413,7 +412,7 @@ p.lead {
   width: 16px;
 }
 
-/* ================= HERO & DIGITAL LOOM ================= */
+/*  HERO & DIGITAL LOOM  */
 .about-hero {
   background: linear-gradient(135deg, var(--intense-cherry) 0%, var(--onyx-grey) 100%);
   color: var(--white);
@@ -497,7 +496,7 @@ p.lead {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* ================= SECTION BADGES & TITLES ================= */
+/*  SECTION BADGES & TITLES  */
 .section-badge {
   display: inline-block;
   padding: 0.3rem 0.9rem;
@@ -551,7 +550,7 @@ p.lead {
   margin-right: auto;
 }
 
-/* ================= WHO WE ARE ================= */
+/* WHO WE ARE  */
 .about-content { padding: 5rem 0 3rem; }
 
 .info-block {
@@ -563,7 +562,7 @@ p.lead {
   margin-bottom: 1.5rem;
 }
 
-/* ================= MVP CARDS (Mission/Vision/Promise) ================= */
+/*  MVP CARDS (Mission/Vision/Promise)  */
 .mvp-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -701,7 +700,7 @@ p.lead {
   border-top: 1px solid var(--cotton-rose);
 }
 
-/* ================= TIMELINE ================= */
+/* TIMELINE  */
 .timeline-section-wrapper {
   background: var(--bg-light);
   padding: 5rem 0;
@@ -837,7 +836,7 @@ p.lead {
   margin-top: 0.75rem;
 }
 
-/* ================= CORE VALUES ================= */
+/*  CORE VALUES  */
 .values-section-wrapper {
   padding: 5rem 0;
   background: var(--white);
@@ -960,7 +959,7 @@ p.lead {
   color: var(--white);
 }
 
-/* ================= TEAM STATS ================= */
+/*  TEAM STATS  */
 .team-stats-section {
   background: linear-gradient(135deg, var(--cotton-rose) 0%, #f5e0e3 100%);
   padding: 5rem 0;
@@ -1024,7 +1023,7 @@ p.lead {
   letter-spacing: 1px;
 }
 
-/* ================= FOOTER ================= */
+/*  FOOTER */
 .main-footer {
   background: linear-gradient(160deg, var(--onyx-grey) 0%, var(--onyx-deep) 100%);
   color: var(--white);
@@ -1074,7 +1073,7 @@ p.lead {
   color: var(--lobster-pink);
 }
 
-/* ================= SCROLL REVEAL ================= */
+/*  SCROLL REVEAL  */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -1088,7 +1087,7 @@ p.lead {
   transform: translateY(0);
 }
 
-/* ================= KEYFRAMES ================= */
+/*  KEYFRAMES */
 @keyframes fadeInDown {
   from { opacity: 0; transform: translateY(-30px); }
   to { opacity: 1; transform: translateY(0); }
@@ -1104,7 +1103,7 @@ p.lead {
   to { width: 60px; }
 }
 
-/* ================= RESPONSIVE ================= */
+/*  RESPONSIVE  */
 @media screen and (max-width: 768px) {
   .main-nav { padding: 0.6rem 1rem; }
 
