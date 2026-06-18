@@ -1,327 +1,309 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    // ============================================================================
-    // 🍔 1. NAVBAR ENHANCEMENTS
-    // ============================================================================
-    const navToggle = document.getElementById('nav-toggle');
-    const navbarMenu = document.getElementById('navbarMenu');
-    const navLinks = document.querySelectorAll('.navbar-item');
-    const mainNav = document.querySelector('.main-nav');
+  // HAMBURGER + RIGHT-SLIDING SIDE NAV
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navToggle && navToggle.checked) navToggle.checked = false;
-        });
+  class SideNav {
+    constructor() {
+      this.hamburger = document.getElementById('hamburger');
+      this.sidenav = document.getElementById('sidenav');
+      this.overlay = document.getElementById('sidenavOverlay');
+      this.isOpen = false;
+
+      if (!this.hamburger || !this.sidenav) return;
+      this._bindEvents();
+    }
+
+    _bindEvents() {
+      this.hamburger.addEventListener('click', () => this.toggle());
+
+      this.hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.toggle();
+        }
+      });
+
+      if (this.overlay) {
+        this.overlay.addEventListener('click', () => this.close());
+      }
+
+      this.sidenav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => this.close());
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen) this.close();
+      });
+    }
+
+    toggle() { this.isOpen ? this.close() : this.open(); }
+
+    open() {
+      this.hamburger.classList.add('change');
+      this.sidenav.classList.add('open');
+      if (this.overlay) this.overlay.classList.add('active');
+      this.sidenav.setAttribute('aria-hidden', 'false');
+      this.hamburger.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('nav-open');
+      this.isOpen = true;
+
+      setTimeout(() => {
+        const firstLink = this.sidenav.querySelector('.sidenav-link');
+        if (firstLink) firstLink.focus();
+      }, 400);
+    }
+
+    close() {
+      this.hamburger.classList.remove('change');
+      this.sidenav.classList.remove('open');
+      if (this.overlay) this.overlay.classList.remove('active');
+      this.sidenav.setAttribute('aria-hidden', 'true');
+      this.hamburger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
+      this.isOpen = false;
+      this.hamburger.focus();
+    }
+  }
+
+  //  DATA GRID HERO ANIMATION (Vanilla JS port of React component)
+  class DataGridHero {
+    constructor(containerId, config) {
+      this.container = document.getElementById(containerId);
+      this.gridContainer = document.getElementById('gridContainer');
+      this.config = {
+        rows: 24,
+        cols: 40,
+        spacing: 4,
+        duration: 3,
+        color: 'rgba(53, 56, 57, 0.4)', // onyx grey cells
+        animationType: 'wave',
+        pulseEffect: true,
+        mouseGlow: true,
+        opacityMin: 0.15,
+        opacityMax: 0.65,
+        background: 'linear-gradient(135deg, var(--intense-cherry) 0%, var(--onyx-grey) 100%)',
+        ...config
+      };
+
+      if (this.container) {
+        this.init();
+        this.bindMouseEvents();
+      }
+    }
+
+    init() {
+      // Set container CSS variables
+      this.container.style.setProperty('--background', this.config.background);
+      this.container.style.setProperty('--cell-color', this.config.color);
+      this.container.style.setProperty('--duration', `${this.config.duration}s`);
+      this.container.style.setProperty('--opacity-min', this.config.opacityMin);
+      this.container.style.setProperty('--opacity-max', this.config.opacityMax);
+      this.container.style.setProperty('--mouse-glow-opacity', this.config.mouseGlow ? '1' : '0');
+
+      // Clear and rebuild grid
+      this.gridContainer.innerHTML = '';
+      this.gridContainer.style.gridTemplateColumns = `repeat(${this.config.cols}, 1fr)`;
+      this.gridContainer.style.gridTemplateRows = `repeat(${this.config.rows}, 1fr)`;
+      this.gridContainer.style.gap = `${this.config.spacing}px`;
+
+      const total = this.config.rows * this.config.cols;
+      const centerRow = Math.floor(this.config.rows / 2);
+      const centerCol = Math.floor(this.config.cols / 2);
+
+      for (let i = 0; i < total; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'grid-cell';
+        
+        if (this.config.pulseEffect) {
+          let delay;
+          const r = Math.floor(i / this.config.cols);
+          const c = i % this.config.cols;
+
+          if (this.config.animationType === 'wave') {
+            delay = (r + c) * 0.1;
+          } else if (this.config.animationType === 'random') {
+            delay = Math.random() * this.config.duration;
+          } else {
+            const dr = Math.abs(r - centerRow);
+            const dc = Math.abs(c - centerCol);
+            delay = Math.sqrt(dr * dr + dc * dc) * 0.2;
+          }
+
+          cell.style.animationDelay = `${delay.toFixed(3)}s`;
+        }
+
+        this.gridContainer.appendChild(cell);
+      }
+    }
+
+    bindMouseEvents() {
+      if (!this.config.mouseGlow) return;
+
+      const handler = (e) => {
+        const rect = this.container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        this.container.style.setProperty('--mouse-x', `${x}px`);
+        this.container.style.setProperty('--mouse-y', `${y}px`);
+      };
+
+      window.addEventListener('mousemove', handler);
+      this.cleanup = () => window.removeEventListener('mousemove', handler);
+    }
+
+    destroy() {
+      if (this.cleanup) this.cleanup();
+    }
+  }
+
+  //  GLOSSARY HOVER PEEK FEATURE
+
+  const glossaryData = {
+    'dia': {
+      term: 'Dedicated Internet Access (DIA)',
+      definition: 'A premium internet service providing exclusive, uncontended bandwidth reserved solely for your business, guaranteeing consistent speeds and 99.9% uptime.',
+      link: '#'
+    },
+    'installation': {
+      term: 'Installation',
+      definition: 'The process of setting up and configuring your dedicated internet connection, including physical infrastructure and network configuration.',
+      link: '#'
+    },
+    'sla': {
+      term: 'Service Level Agreement (SLA)',
+      definition: 'A formal contract guaranteeing specific performance metrics like uptime (99.9%), response times, and support availability.',
+      link: '#'
+    },
+    'coverage': {
+      term: 'Coverage',
+      definition: 'The geographical areas where our network infrastructure is available for service deployment.',
+      link: '#'
+    },
+    'uncapped': {
+      term: 'Uncapped & Unshaped',
+      definition: 'No data limits (uncapped) and no traffic throttling (unshaped) - you get full speed 24/7 regardless of usage.',
+      link: '#'
+    },
+    'noc': {
+      term: 'Network Operations Centre (NOC)',
+      definition: 'Our 24/7 monitoring facility staffed by experts who proactively manage and maintain your network connection.',
+      link: '#'
+    },
+    'upgrade': {
+      term: 'Upgrade',
+      definition: 'The ability to increase your bandwidth or add additional services as your business requirements evolve.',
+      link: '#'
+    },
+    'hover-peek': {
+      term: 'Hover Peek',
+      definition: 'Interactive glossary feature that displays detailed definitions when you hover over technical terms.',
+      link: '#'
+    }
+  };
+
+  function initGlossaryPeek() {
+    const peekWrapper = document.getElementById('peekWrapper');
+    const peekCard = document.getElementById('peekCard');
+    const peekTermName = document.getElementById('peekTermName');
+    const peekDefinition = document.getElementById('peekDefinition');
+    const peekLink = document.getElementById('peekLink');
+
+    let currentTimeout = null;
+
+    document.querySelectorAll('.glossary-term').forEach(termEl => {
+      const termKey = termEl.getAttribute('data-term');
+      const termData = glossaryData[termKey];
+
+      if (!termData) return;
+
+      termEl.addEventListener('mouseenter', (e) => {
+        if (currentTimeout) clearTimeout(currentTimeout);
+        
+        peekTermName.textContent = termData.term;
+        peekDefinition.textContent = termData.definition;
+        peekLink.href = termData.link;
+        
+        peekWrapper.style.left = (e.pageX + 20) + 'px';
+        peekWrapper.style.top = (e.pageY - 10) + 'px';
+        peekCard.classList.add('is-visible');
+      });
+
+      termEl.addEventListener('mousemove', (e) => {
+        peekWrapper.style.left = (e.pageX + 20) + 'px';
+        peekWrapper.style.top = (e.pageY - 10) + 'px';
+      });
+
+      termEl.addEventListener('mouseleave', () => {
+        currentTimeout = setTimeout(() => {
+          peekCard.classList.remove('is-visible');
+        }, 150);
+      });
     });
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            mainNav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-            mainNav.style.backdropFilter = 'blur(10px)';
-        } else {
-            mainNav.style.boxShadow = '0 2px 10px rgba(189, 55, 69, 0.3)';
-            mainNav.style.backdropFilter = 'none';
-        }
+    // Hide peek card when clicking elsewhere
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.glossary-term') && !e.target.closest('.peek-card')) {
+        peekCard.classList.remove('is-visible');
+      }
     });
+  }
 
-    function handleNavbarResize() {
-        if (window.innerWidth >= 769) {
-            if (navToggle) navToggle.checked = false;
-            if (navbarMenu) navbarMenu.style.display = 'flex';
-        } else {
-            if (navbarMenu) navbarMenu.style.display = '';
-        }
-    }
-    window.addEventListener('resize', handleNavbarResize);
-    handleNavbarResize();
+  
+  // MODAL LOGIN/SIGNUP
 
-    // ============================================================================
-    // 🫧 2. GOOEY TEXT ANIMATION (Hero)
-    // ============================================================================
-    const texts = [
-        'Frequently Asked',
-        'Questions',
-        'Enterprise ICT',
-        'Solutions',
-        'We\'ve Got Answers'
-    ];
-    const morphTime = 1.8;
-    const cooldownTime = 0.5;
+  function initModals() {
+    const loginModal = document.getElementById('loginModal');
+    const closeLogin = document.getElementById('closeLogin');
+    const showSignup = document.getElementById('showSignup');
 
-    const text1El = document.getElementById('gooeyText1');
-    const text2El = document.getElementById('gooeyText2');
-
-    if (text1El && text2El) {
-        let textIndex = texts.length - 1;
-        let time = new Date();
-        let morph = 0;
-        let cooldown = cooldownTime;
-
-        const setMorph = (fraction) => {
-            const blur2 = Math.min(8 / (fraction + 0.01) - 8, 100);
-            text2El.style.filter = `blur(${blur2}px)`;
-            text2El.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-
-            const fraction1 = 1 - fraction;
-            const blur1 = Math.min(8 / (fraction1 + 0.01) - 8, 100);
-            text1El.style.filter = `blur(${blur1}px)`;
-            text1El.style.opacity = `${Math.pow(fraction1, 0.4) * 100}%`;
-        };
-
-        const doCooldown = () => {
-            morph = 0;
-            text2El.style.filter = '';
-            text2El.style.opacity = '100%';
-            text1El.style.filter = '';
-            text1El.style.opacity = '0%';
-        };
-
-        const doMorph = () => {
-            morph -= cooldown;
-            cooldown = 0;
-            let fraction = morph / morphTime;
-            if (fraction > 1) {
-                cooldown = cooldownTime;
-                fraction = 1;
-            }
-            setMorph(fraction);
-        };
-
-        function animate() {
-            requestAnimationFrame(animate);
-            const newTime = new Date();
-            const shouldIncrementIndex = cooldown > 0;
-            const dt = (newTime.getTime() - time.getTime()) / 1000;
-            time = newTime;
-
-            cooldown -= dt;
-
-            if (cooldown <= 0) {
-                if (shouldIncrementIndex) {
-                    textIndex = (textIndex + 1) % texts.length;
-                    text1El.textContent = texts[textIndex % texts.length];
-                    text2El.textContent = texts[(textIndex + 1) % texts.length];
-                }
-                doMorph();
-            } else {
-                doCooldown();
-            }
-        }
-        animate();
+    if (closeLogin) {
+      closeLogin.addEventListener('click', () => {
+        loginModal.classList.remove('active');
+      });
     }
 
-    // ============================================================================
-    // 🔍 3. HOVERPEEK GLOSSARY (Spring Physics & 3D Tilt)
-    // ============================================================================
-    class HoverPeek {
-        constructor() {
-            this.terms = document.querySelectorAll('.glossary-term');
-            this.wrapper = null;
-            this.card = null;
-            this.targetX = 0;
-            this.targetY = 0;
-            this.currentX = 0;
-            this.currentY = 0;
-            this.isHovering = false;
-            this.hideTimeout = null;
-            this.init();
-        }
-
-        init() {
-            this.createCard();
-            this.animate();
-
-            this.terms.forEach(term => {
-                term.addEventListener('mouseenter', (e) => this.showCard(e, term));
-                term.addEventListener('mouseleave', () => this.scheduleHide());
-                term.addEventListener('mousemove', (e) => this.updateTarget(e));
-            });
-
-            this.card.addEventListener('mouseenter', () => this.cancelHide());
-            this.card.addEventListener('mouseleave', () => this.scheduleHide());
-        }
-
-        createCard() {
-            this.wrapper = document.createElement('div');
-            this.wrapper.className = 'peek-wrapper';
-            
-            this.card = document.createElement('div');
-            this.card.className = 'peek-card';
-            this.card.innerHTML = `
-                <div class="peek-header">
-                    <i class="fas fa-book-open"></i>
-                    <span class="peek-term-name">Term</span>
-                </div>
-                <p class="peek-definition">Definition goes here.</p>
-                <a href="#" target="_blank" class="peek-link">
-                    <i class="fab fa-google"></i> Search Meaning on Google
-                </a>
-            `;
-            
-            this.wrapper.appendChild(this.card);
-            document.body.appendChild(this.wrapper);
-        }
-
-        showCard(e, term) {
-            this.cancelHide();
-            const termName = term.getAttribute('data-term');
-            const termDef = term.getAttribute('data-def');
-            
-            this.card.querySelector('.peek-term-name').textContent = termName;
-            this.card.querySelector('.peek-definition').textContent = termDef;
-            this.card.querySelector('.peek-link').href = `https://www.google.com/search?q=what+is+${encodeURIComponent(termName)}+in+ICT+networking`;
-            
-            this.targetX = e.clientX;
-            this.targetY = e.clientY - 20;
-            this.currentX = this.targetX;
-            this.currentY = this.targetY;
-            
-            this.isHovering = true;
-            this.card.classList.add('is-visible');
-        }
-
-        scheduleHide() {
-            this.hideTimeout = setTimeout(() => {
-                this.isHovering = false;
-                this.card.classList.remove('is-visible');
-            }, 200);
-        }
-
-        cancelHide() {
-            clearTimeout(this.hideTimeout);
-            this.isHovering = true;
-        }
-
-        updateTarget(e) {
-            this.targetX = e.clientX;
-            this.targetY = e.clientY - 20;
-        }
-
-        animate() {
-            this.currentX += (this.targetX - this.currentX) * 0.15;
-            this.currentY += (this.targetY - this.currentY) * 0.15;
-
-            if (this.isHovering || this.card.classList.contains('is-visible')) {
-                const rotateY = ((this.currentX - (window.innerWidth / 2)) / (window.innerWidth / 2)) * 8;
-                const rotateX = 5; 
-                
-                this.wrapper.style.left = `${this.currentX}px`;
-                this.wrapper.style.top = `${this.currentY}px`;
-                this.wrapper.style.transform = `translate(-50%, -100%) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            }
-
-            requestAnimationFrame(() => this.animate());
-        }
-    }
-
-    if (window.matchMedia('(min-width: 769px)').matches) {
-        new HoverPeek();
-    }
-
-    // ============================================================================
-    // 🔐 4. SIGNUP / LOGIN MODAL
-    // ============================================================================
-    const modal = document.getElementById('authModal');
-    const loginBtn = document.getElementById('loginBtn');
-    const signupBtn = document.getElementById('signupBtn');
-    const closeModal = document.getElementById('closeModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalSubtitle = document.getElementById('modalSubtitle');
-    const authSubmitBtn = document.getElementById('authSubmitBtn');
-    const toggleLink = document.getElementById('toggleLink');
-    const toggleText = document.getElementById('toggleText');
-    const nameField = document.getElementById('nameField');
-    const signupName = document.getElementById('signupName');
-    const authEmail = document.getElementById('authEmail');
-    const authPassword = document.getElementById('authPassword');
-
-    let isLoginMode = true;
-
-    function openModal(mode) {
-        isLoginMode = (mode === 'login');
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-
-        if (isLoginMode) {
-            modalTitle.textContent = 'Sign In';
-            modalSubtitle.textContent = 'Welcome back to Mdukazi Projects';
-            authSubmitBtn.textContent = 'Sign In';
-            toggleText.textContent = "Don't have an account?";
-            toggleLink.textContent = 'Sign Up';
-            nameField.style.display = 'none';
-        } else {
-            modalTitle.textContent = 'Create Account';
-            modalSubtitle.textContent = 'Join Mdukazi Projects today';
-            authSubmitBtn.textContent = 'Sign Up';
-            toggleText.textContent = 'Already have an account?';
-            toggleLink.textContent = 'Sign In';
-            nameField.style.display = 'block';
-        }
-    }
-
-    function closeModalFn() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-        document.getElementById('authForm').reset();
-        nameField.style.display = 'none';
-    }
-
-    if(loginBtn) loginBtn.addEventListener('click', () => openModal('login'));
-    if(signupBtn) signupBtn.addEventListener('click', () => openModal('signup'));
-    if(closeModal) closeModal.addEventListener('click', closeModalFn);
-    if(modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModalFn(); });
-    
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) closeModalFn();
-    });
-
-    if(toggleLink) toggleLink.addEventListener('click', () => {
-        openModal(isLoginMode ? 'signup' : 'login');
-    });
-
-    const authForm = document.getElementById('authForm');
-    if(authForm) authForm.addEventListener('submit', function(e) {
+    if (showSignup) {
+      showSignup.addEventListener('click', (e) => {
         e.preventDefault();
-        const email = authEmail.value.trim();
-        const password = authPassword.value.trim();
-        const name = signupName.value.trim();
+        // In a real app, this would switch to signup form
+        console.log('Switch to signup form');
+      });
+    }
 
-        if (!email || !password) { alert('Please fill in all required fields.'); return; }
-        if (password.length < 6) { alert('Password must be at least 6 characters.'); return; }
-        if (!isLoginMode && !name) { alert('Please enter your full name.'); return; }
-
-        const action = isLoginMode ? 'signed in' : 'signed up';
-        alert(`✅ Successfully ${action} as ${email}!`);
-        closeModalFn();
+    // Close modal when clicking outside
+    loginModal.addEventListener('click', (e) => {
+      if (e.target === loginModal) {
+        loginModal.classList.remove('active');
+      }
     });
+  }
 
-    // ============================================================================
-    // ✨ 5. SCROLL REVEAL FOR FAQ ITEMS
-    // ============================================================================
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(-20px)';
-        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        item.style.transitionDelay = `${index * 0.08}s`;
+  //  INITIALIZATION
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    new SideNav();
+    new DataGridHero('dataGridHero', {
+      rows: 28,
+      cols: 45,
+      spacing: 3,
+      duration: 4,
+      color: 'rgba(53, 56, 57, 0.35)', // onyx grey
+      animationType: 'wave',
+      pulseEffect: true,
+      mouseGlow: true,
+      opacityMin: 0.1,
+      opacityMax: 0.7,
+      background: 'linear-gradient(135deg, var(--intense-cherry) 0%, var(--onyx-grey) 100%)'
     });
+    
+    initGlossaryPeek();
+    initModals();
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateX(0)';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15 });
-
-    faqItems.forEach(item => observer.observe(item));
-
-    console.log('✨ Mdukazi Projects — FAQ page fully loaded!');
-    console.log('🫧 Gooey text is morphing...');
-    console.log('🔍 Hover over highlighted terms to see definitions.');
-    console.log('🔐 Signup/Login modal ready.');
+    console.log(' Mdukazi Projects — FAQ page fully loaded!');
+    console.log('Data Grid Hero with onyx grey cells active');
+    console.log(' Glossary hover peek working');
+    console.log(' Right-sliding sidenav ready');
+  });
 
 })();

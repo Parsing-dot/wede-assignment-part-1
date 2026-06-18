@@ -866,7 +866,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.95rem;
 }
 
-/* ================= DIAGONAL SECTION ================= */
+/* DIAGONAL SECTION */
 .diagonal-section {
   background: linear-gradient(120deg, var(--white) 0%, var(--white) 50%, var(--cotton-rose) 50%);
   padding: 6rem 0;
@@ -941,7 +941,7 @@ h1, h2, h3, h4, h5, h6 {
   100% { transform: scale(1.5); opacity: 0; }
 }
 
-/* ================= MONITORING ================= */
+/*  MONITORING */
 .monitoring-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1015,7 +1015,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .monitor-panel:hover::after { transform: scaleX(1); }
 
-/* ================= TELCO / LAN / FIBRE ================= */
+/* TELCO / LAN / FIBRE */
 .telco-lan-fibre { padding-bottom: 4rem; }
 
 .col-card {
@@ -1092,7 +1092,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
 
-/* ================= WIRELESS / IT / SCHOOLS ================= */
+/* WIRELESS / IT / SCHOOLS  */
 .wireless-panel, .it-panel, .school-panel {
   background: var(--white);
   padding: 2rem;
@@ -1303,7 +1303,7 @@ h1, h2, h3, h4, h5, h6 {
   .monitoring-grid { grid-template-columns: 1fr; }
 }
 
-/* ================= ACCESSIBILITY ================= */
+/*ACCESSIBILITY */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

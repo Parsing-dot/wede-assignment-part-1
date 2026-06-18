@@ -2,205 +2,127 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Contact & Support | Mdukazi Projects</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="assets/css/contact.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
 </head>
 <body>
 
-    <!-- Navigation (Exact Match Index + Auth Buttons) -->
-    <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="index.html">
-                    <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;" />
-                    <span class="ml-2">Mdukazi Projects</span>
-                </a>
-                <label for="nav-toggle" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </label>
-            </div>
-            <input type="checkbox" id="nav-toggle" class="is-hidden" />
-            <div id="navbarMenu" class="navbar-menu">
-                <div class="navbar-end">
-                    <a href="index.html" class="navbar-item">Home</a>
-                    <a href="services.html" class="navbar-item">Services</a>
-                    <a href="ict.html" class="navbar-item">Solutions</a>
-                    <a href="about.html" class="navbar-item">About Us</a>
-                    <a href="faq.html" class="navbar-item">FAQ</a>
-                    <a href="contact.html" class="navbar-item is-active">Contact</a>
-                    
-                    <!-- Signup/Login CTA Buttons -->
-                    <div class="nav-cta-buttons">
-                        <button class="button is-outline-light" id="loginBtn">Sign In</button>
-                        <button class="button is-white" id="signupBtn">Sign Up</button>
-                    </div>
-                </div>
-            </div>
+    <!-- ================= NAVIGATION ================= -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="navbar-brand navbar-item">
+                <img src="assets/images/logo.png" alt="Logo">
+                <span>Mdukazi Projects</span>
+            </a>
+            <!-- ✅ HAMBURGER BUTTON (ID MUST BE EXACT) -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="bar1"></span>
+                <span class="bar2"></span>
+                <span class="bar3"></span>
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section (Gooey Text Animation Only) -->
-    <header class="hero contact-hero is-medium">
+    <!-- ✅ OVERLAY (ID MUST BE EXACT) -->
+    <div class="sidenav-overlay" id="sidenavOverlay"></div>
+
+    <!-- ✅ SIDE NAV (ID MUST BE EXACT) -->
+    <div class="sidenav" id="sidenav" aria-hidden="true">
+        <div class="sidenav-header">
+            <div class="sidenav-brand">
+                <img src="assets/images/logo.png" alt="Logo">
+                <span>Mdukazi Projects</span>
+            </div>
+            <p class="sidenav-tagline">Enterprise ICT Solutions</p>
+        </div>
+        <div class="sidenav-links">
+            <a href="index.html" class="sidenav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="services.html" class="sidenav-link"><i class="fas fa-server"></i> Services</a>
+            <a href="ict.html" class="sidenav-link"><i class="fas fa-network-wired"></i> Solutions</a>
+            <a href="about.html" class="sidenav-link"><i class="fas fa-building"></i> About Us</a>
+            <a href="faq.html" class="sidenav-link"><i class="fas fa-question-circle"></i> FAQ</a>
+            <a href="contact.html" class="sidenav-link active"><i class="fas fa-envelope"></i> Contact</a>
+        </div>
+        <div class="sidenav-divider"></div>
+        <div class="sidenav-cta">
+            <a href="account.html" class="sidenav-btn sidenav-btn-outline">Sign In</a>
+            <a href="account.html" class="sidenav-btn sidenav-btn-primary">Sign Up</a>
+        </div>
+        <div class="sidenav-footer">
+            <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
+            <p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p>
+        </div>
+    </div>
+
+    <!-- ✅ SVG FILTER FOR GOOEY TEXT -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;">
+        <defs>
+            <filter id="gooey-threshold">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="gooey" />
+                <feBlend in="SourceGraphic" in2="gooey" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="contact-hero">
+        <div class="hero-bg-pattern"></div>
         <div class="hero-glow"></div>
         <div class="hero-glow-left"></div>
-        <div class="hero-bg-pattern"></div>
-        <div class="hero-body has-text-centered">
-            <div class="container">
-                <div class="gooey-text-container">
-                    <div class="gooey-text-wrapper" id="gooeyTextWrapper">
-                        <!-- SVG Filter for Gooey Effect -->
-                        <svg aria-hidden="true" focusable="false">
-                            <defs>
-                                <filter id="gooey-threshold">
-                                    <feColorMatrix in="SourceGraphic" type="matrix"
-                                        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140" />
-                                </filter>
-                            </defs>
-                        </svg>
-                        <div class="gooey-filter-container">
-                            <span class="gooey-text-slot text1" id="gooeyText1">Get In Touch</span>
-                            <span class="gooey-text-slot text2" id="gooeyText2">Contact Us</span>
-                        </div>
+        <div class="hero-body container">
+            <div class="gooey-text-container">
+                <div class="gooey-text-wrapper">
+                    <div class="gooey-filter-container">
+                        <!-- ✅ GOOEY TEXT SLOTS (IDs MUST BE EXACT) -->
+                        <div id="gooeyText1" class="gooey-text-slot text1">Get In Touch</div>
+                        <div id="gooeyText2" class="gooey-text-slot text2">Contact Us</div>
                     </div>
                 </div>
+                <p class="subtitle">We're here to help you with any questions about our enterprise ICT solutions.</p>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Main Contact Section -->
-    <section class="section contact-section">
+    <!-- ================= CONTACT SECTION ================= -->
+    <section class="contact-section">
         <div class="container">
-            <div class="columns is-variable is-6">
-                <!-- Contact Info -->
-                <div class="column is-5">
-                    <div class="contact-info-card reveal-item">
+            <div class="columns is-multiline">
+                <div class="column is-12-tablet is-5-desktop reveal-item">
+                    <div class="contact-info-card">
                         <h2 class="title is-4">Contact Information</h2>
-                        <p class="mb-5">Fill up the form and our team will get back to you within 24 hours.</p>
-                        
-                        <div class="info-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <span>+27 11 123 4567</span>
-                                <span>+27 11 987 6543</span>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <span>info@mdukaziprojects.co.za</span>
-                                <span>support@mdukaziprojects.co.za</span>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <span>5940 Zone 5 Diepkloof, Soweto, 1864</span>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <span>Mon – Fri: 8:00 – 17:00</span>
-                                <span>Sat: 9:00 – 13:00</span>
-                            </div>
-                        </div>
-
-                        <div class="social-links mt-5">
+                        <p style="color: var(--light-text); margin-bottom: 1.5rem;">Fill up the form and our team will get back to you within 24 hours.</p>
+                        <div class="info-item"><i class="fas fa-phone"></i><div><strong>Phone</strong><span>+27 11 123 4567<br>+27 11 987 6543</span></div></div>
+                        <div class="info-item"><i class="fas fa-envelope"></i><div><strong>Email</strong><span>info@mdukaziprojects.co.za<br>support@mdukaziprojects.co.za</span></div></div>
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><strong>Office</strong><span>5940 Zone 5 Diepkloof, Soweto, 1864</span></div></div>
+                        <div class="info-item"><i class="fas fa-clock"></i><div><strong>Hours</strong><span>Mon – Fri: 8:00 – 17:00<br>Sat: 9:00 – 13:00</span></div></div>
+                        <div class="social-links">
                             <a href="#"><i class="fab fa-facebook-f"></i></a>
                             <a href="#"><i class="fab fa-twitter"></i></a>
                             <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Form -->
-                <div class="column is-7">
-                    <div class="contact-form-card reveal-item">
+                <div class="column is-12-tablet is-6-desktop is-offset-1-desktop reveal-item">
+                    <div class="contact-form-card">
                         <h2 class="title is-4">Send Us a Message</h2>
                         <form id="contactForm">
-                            <div class="columns is-multiline">
-                                <div class="column is-6">
-                                    <div class="field">
-                                        <label class="label">Full Name</label>
-                                        <div class="control has-icons-left">
-                                            <input class="input" type="text" placeholder="John Doe" required />
-                                            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="column is-6">
-                                    <div class="field">
-                                        <label class="label">Email Address</label>
-                                        <div class="control has-icons-left">
-                                            <input class="input" type="email" placeholder="you@example.com" required />
-                                            <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="column is-6">
-                                    <div class="field">
-                                        <label class="label">Phone Number</label>
-                                        <div class="control has-icons-left">
-                                            <input class="input" type="tel" placeholder="+27 12 345 6789" />
-                                            <span class="icon is-small is-left"><i class="fas fa-phone"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="column is-6">
-                                    <div class="field">
-                                        <label class="label">Select a Service</label>
-                                        <div class="control has-icons-left">
-                                            <div class="select is-fullwidth">
-                                                <select>
-                                                    <option>Internet Connectivity</option>
-                                                    <option>CCTV Security Systems</option>
-                                                    <option>IT Support</option>
-                                                    <option>Fiber Installation</option>
-                                                    <option>Other</option>
-                                                </select>
-                                            </div>
-                                            <span class="icon is-small is-left"><i class="fas fa-chevron-down"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="column is-12">
-                                    <div class="field">
-                                        <label class="label">Subject</label>
-                                        <div class="control has-icons-left">
-                                            <input class="input" type="text" placeholder="How can we help?" required />
-                                            <span class="icon is-small is-left"><i class="fas fa-tag"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="column is-12">
-                                    <div class="field">
-                                        <label class="label">Your Message</label>
-                                        <div class="control">
-                                            <textarea class="textarea" placeholder="Type your message here..." rows="5" required></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="column is-12">
-                                    <div class="field">
-                                        <div class="control">
-                                            <button type="submit" class="button is-primary is-fullwidth">
-                                                <span class="icon"><i class="fas fa-paper-plane"></i></span>
-                                                <span>Send Message</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="field"><label class="label">Full Name</label><div class="control"><input class="input" type="text" required></div></div>
+                            <div class="field"><label class="label">Email Address</label><div class="control"><input class="input" type="email" required></div></div>
+                            <div class="field"><label class="label">Phone Number</label><div class="control"><input class="input" type="tel"></div></div>
+                            <div class="field"><label class="label">Select a Service</label><div class="control"><div class="select is-fullwidth"><select><option>Internet Connectivity</option><option>CCTV Security Systems</option><option>IT Support</option><option>Fiber Installation</option><option>Other</option></select></div></div></div>
+                            <div class="field"><label class="label">Subject</label><div class="control"><input class="input" type="text" required></div></div>
+                            <div class="field"><label class="label">Your Message</label><div class="control"><textarea class="textarea" rows="4" required></textarea></div></div>
+                            <div class="field"><div class="control"><button type="submit" class="button is-primary is-fullwidth">Send Message</button></div></div>
                         </form>
                         <div id="formSuccess" class="success-message" style="display: none;">
                             <i class="fas fa-check-circle"></i>
-                            <p>Thank you! Your message has been sent successfully. We'll get back to you soon.</p>
+                            <h4>Thank you!</h4>
+                            <p>Your message has been sent successfully. We'll get back to you soon.</p>
                         </div>
                     </div>
                 </div>
@@ -208,87 +130,35 @@
         </div>
     </section>
 
-    <!-- Map / Office Section -->
-    <section class="section map-section">
-        <div class="container has-text-centered">
-            <h2 class="title is-3 reveal-item">Visit Our Office</h2>
-            <p class="subtitle reveal-item">5940 Zone 5 Diepkloof, 1864</p>
-            <div class="map-container reveal-item">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.22!2d27.9378!3d-26.2678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDE2JzA0LjEiUyAyN8KwNTYnMTYuMSJF!5e0!3m2!1sen!2sza!4v1620000000000" width="100%" height="400" style="border:0; border-radius: 16px;" allowfullscreen="" loading="lazy"></iframe>
+    <!-- ================= MAP SECTION ================= -->
+    <section class="map-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="title is-4">Visit Our Office</h2>
+                <p class="subtitle">5940 Zone 5 Diepkloof, 1864</p>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=-26.2678,27.9378" target="_blank" class="button is-primary">Get Directions</a>
             </div>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=-26.2678,27.9378" target="_blank" class="button is-primary is-rounded mt-5 reveal-item">
-                <span class="icon"><i class="fas fa-directions"></i></span>
-                <span>Get Directions</span>
-            </a>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3585.525724298794!2d27.9356102!3d-26.2678000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950c8b9a0b3f5d%3A0x4a7d0d1b0e0e0e0e!2s5940%20Zone%205%2C%20Diepkloof%2C%20Soweto%2C%201864!5e0!3m2!1sen!2sza!4v1718700000000!5m2!1sen!2sza" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ================= FOOTER ================= -->
     <footer class="main-footer">
         <div class="container">
             <div class="columns">
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Mdukazi Projects</h3>
-                    <p>Enterprise ITC Solutions for the modern business</p>
-                </div>
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Quick Links</h3>
-                    <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="services.html">Services</a>
-                        <a href="ict.html">Solutions</a>
-                        <a href="about.html">About Us</a>
-                        <a href="faq.html">FAQ</a>
-                        <a href="contact.html">Contact</a>
-                    </div>
-                </div>
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Contact</h3>
-                    <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
-                    <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
-                    <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
-                </div>
+                <div class="column is-4"><h4 class="footer-title">Mdukazi Projects</h4><p>Enterprise ICT Solutions for the modern business.</p></div>
+                <div class="column is-4"><h4 class="footer-title">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><br><a href="services.html">Services</a><br><a href="ict.html">Solutions</a><br><a href="about.html">About Us</a><br><a href="faq.html">FAQ</a><br><a href="contact.html">Contact</a></div></div>
+                <div class="column is-4"><h4 class="footer-title">Contact</h4><p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p><p><i class="fas fa-phone"></i> +27 11 123 4567</p><p><i class="fas fa-clock"></i> 24/7 Network Operations</p><p><i class="fas fa-map-marker-alt"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p></div>
             </div>
-            <div class="has-text-centered mt-6">
-                <p>© 2026 Mdukazi Projects. All rights reserved.</p>
+            <div class="text-center" style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+                <p>&copy; 2026 Mdukazi Projects. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Auth Modal -->
-    <div class="modal-backdrop" id="authModal">
-        <div class="modal-card">
-            <button class="close-modal" id="closeModal">&times;</button>
-            <h3 id="modalTitle">Sign In</h3>
-            <p class="subtitle" id="modalSubtitle">Welcome back to Mdukazi Projects</p>
-            <form id="authForm">
-                <div class="field" id="nameField" style="display:none;">
-                    <label class="label">Full Name</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="your name" id="signupName" />
-                    </div>
-                </div>
-                <div class="field">
-                    <label class="label">Email</label>
-                    <div class="control">
-                        <input class="input" type="email" placeholder="you@example.com" id="authEmail" required />
-                    </div>
-                </div>
-                <div class="field">
-                    <label class="label">Password</label>
-                    <div class="control">
-                        <input class="input" type="password" placeholder="••••••••" id="authPassword" required minlength="6" />
-                    </div>
-                </div>
-                <button type="submit" class="button is-primary" id="authSubmitBtn">Sign In</button>
-            </form>
-            <div class="toggle-form">
-                <span id="toggleText">Don't have an account?</span>
-                <a id="toggleLink">Sign Up</a>
-            </div>
-        </div>
-    </div>
-
-    <script src="assets/js/contact.js" defer></script>
+    <!-- Script loaded at the end of body -->
+    <script src="assets/js/contact.js"></script>
 </body>
 </html>

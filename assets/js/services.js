@@ -442,9 +442,8 @@
     });
   }
 
-  // ============================================================================
-  // 🖼️ 5. BEFORE & AFTER IMPACT SLIDER
-  // ============================================================================
+  //  BEFORE & AFTER IMPACT SLIDER
+
   let comparisonContainer = document.getElementById('imageComparison');
 
   if (comparisonContainer && !comparisonContainer.querySelector('.comparison-slider-wrapper')) {
@@ -459,7 +458,7 @@
     const beforeDiv = document.createElement('div');
     beforeDiv.style.cssText = `
       width: 100%; height: 100%;
-      background: linear-gradient(135deg, #7F8C8D, #4A4E50);
+      background: url('assets/images/services3.jpeg') center/cover no-repeat;
       display: flex; align-items: center; justify-content: center;
       flex-direction: column; gap: 1rem; color: white;
     `;
@@ -472,7 +471,7 @@
     const afterDiv = document.createElement('div');
     afterDiv.style.cssText = `
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(135deg, #BD3745, #353839);
+      background: url('assets/images/services4.jpeg') center/cover no-repeat,
       display: flex; align-items: center; justify-content: center;
       flex-direction: column; gap: 1rem; color: white;
       clip-path: inset(0 50% 0 0);

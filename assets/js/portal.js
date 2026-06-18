@@ -1,9 +1,17 @@
 // Client Portal Functionality - Updated to fetch specials from admin
 
+function openModal(id)  { document.getElementById(id).style.display = 'flex'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+function logout() {
+    auth.logout();
+    window.location.href = 'account.html';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const currentUser = auth.getCurrentUser();
-    if (!currentUser || currentUser.isAdmin) {
-        window.location.href = 'index.html';
+    if (!currentUser || currentUser.role === 'admin') {
+        window.location.href = 'account.html';
         return;
     }
 

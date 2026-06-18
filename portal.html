@@ -180,6 +180,13 @@
             </div>
         </div>
     </div>
+    <script>
+  // Auth guard — runs before portal.js loads
+  (function() {
+    var u = localStorage.getItem('mdukazi_current_user');
+    if (!u) { alert('Please login first!'); window.location.href = 'account.html'; }
+  })();
+</script>
 
     <script src="assets/js/portal.js"></script>
 </body>

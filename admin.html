@@ -262,8 +262,20 @@
             </form>
         </div>
     </div>
-
-    <script src="assets//js/auth.js"></script>
+    <script>
+  // Auth guard — runs before admin.js so the page doesn't flash
+  // auth is defined in account.js which is NOT loaded here.
+  // We read localStorage directly and let admin.js handle the full guard.
+  (function() {
+    var u = localStorage.getItem('mdukazi_current_user');
+    if (!u) { alert('Access denied! Please login.'); window.location.href = 'account.html'; }
+    try {
+      var user = JSON.parse(u);
+      if (user.role !== 'admin') { alert('Access denied! Admin only.'); window.location.href = 'account.html'; }
+    } catch(e) { window.location.href = 'account.html'; }
+  })();
+</script>
+    <script src="assets/js/auth.js"></script>
     <script src="assets/js/admin.js"></script>
 </body>
 </html>

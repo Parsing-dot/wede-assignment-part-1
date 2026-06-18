@@ -3,11 +3,20 @@
 let currentIssueId = null;
 let currentClientId = null;
 
+function adminLogout() {
+    auth.logout();
+    window.location.href = 'account.html';
+}
+
+function openModal(id)  { document.getElementById(id).style.display = 'flex'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
 document.addEventListener('DOMContentLoaded', function() {
     // Check if user is admin
     const currentUser = auth.getCurrentUser();
-    if (!currentUser || !currentUser.isAdmin) {
-        window.location.href = 'index.html';
+    if (!currentUser || currentUser.role !== 'admin') {
+        alert('Access denied! Please login as admin.');
+        window.location.href = 'account.html';
         return;
     }
 

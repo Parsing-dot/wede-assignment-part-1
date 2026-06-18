@@ -1,207 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Account | Mdukazi Projects</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="assets/css/account.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account | Mdukazi Projects</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="assets/css/account.css">
 </head>
 <body>
 
-    <!-- Navigation (Exact Match Index) -->
-    <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="index.html">
-                    <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;" />
-                    <span class="ml-2">Mdukazi Projects</span>
-                </a>
-                <label for="nav-toggle" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </label>
-            </div>
-            <input type="checkbox" id="nav-toggle" class="is-hidden" />
-            <div id="navbarMenu" class="navbar-menu">
-                <div class="navbar-end">
-                    <a href="index.html" class="navbar-item">Home</a>
-                    <a href="services.html" class="navbar-item">Services</a>
-                    <a href="ict.html" class="navbar-item">Solutions</a>
-                    <a href="about.html" class="navbar-item">About Us</a>
-                    <a href="faq.html" class="navbar-item">FAQ</a>
-                    <a href="contact.html" class="navbar-item">Contact</a>
-                    <a href="account.html" class="navbar-item is-active">Account</a>
-                </div>
-            </div>
+<!--- NAVIGATION -->
+<nav class="main-nav">
+  <div class="nav-container">
+    <a href="index.html" class="navbar-brand navbar-item">
+      <img src="assets/images/logo.png" alt="Mdukazi Projects Logo">
+      <span>Mdukazi Projects</span>
+    </a>
+
+    <!-- Animated Hamburger (Right Side) -->
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- siDE NAV OVERLAY  -->
+<div class="sidenav-overlay" id="sidenavOverlay"></div>
+
+<!-- rIGHT SIDE NAv -->
+<nav class="sidenav" id="sidenav" aria-hidden="true">
+  <div class="sidenav-header">
+    <div class="sidenav-brand">
+      <img src="assets/images/logo.png" alt="Logo">
+      <span>Mdukazi Projects</span>
+    </div>
+    <p class="sidenav-tagline">Enterprise ICT Solutions</p>
+  </div>
+
+  <div class="sidenav-links">
+    <a href="index.html" class="sidenav-link">
+      <i class="fas fa-home"></i><span>Home</span>
+    </a>
+    <a href="services.html" class="sidenav-link">
+      <i class="fas fa-cogs"></i><span>Services</span>
+    </a>
+    <a href="ict.html" class="sidenav-link">
+      <i class="fas fa-network-wired"></i><span>Solutions</span>
+    </a>
+    <a href="about.html" class="sidenav-link">
+      <i class="fas fa-info-circle"></i><span>About Us</span>
+    </a>
+    <a href="faq.html" class="sidenav-link">
+      <i class="fas fa-question-circle"></i><span>FAQ</span>
+    </a>
+    <a href="contact.html" class="sidenav-link">
+      <i class="fas fa-envelope"></i><span>Contact</span>
+    </a>
+  </div>
+
+  <div class="sidenav-divider"></div>
+
+  <div class="sidenav-cta">
+    <a href="account.html" class="sidenav-btn sidenav-btn-outline">Sign In</a>
+    <a href="account.html" class="sidenav-btn sidenav-btn-primary">Sign Up</a>
+  </div>
+
+  <div class="sidenav-footer">
+    <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
+    <p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p>
+  </div>
+</nav>
+
+<!--ACCOUNT SECTION  -->
+<section class="account-section">
+  <div class="account-card">
+    <div class="toggle-wrapper">
+      <div class="mode-toggle" id="modeToggle" data-active="login">
+        <button class="toggle-btn active" data-mode="login"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="toggle-btn" data-mode="signup"><i class="fas fa-user-plus"></i> Create Account</button>
+        <div class="toggle-slider"></div>
+      </div>
+    </div>
+
+    <div class="animated-text-container">
+      <div class="animated-text-wrapper" id="animatedTextWrapper">
+        <h2 class="animated-title" id="animatedTitle">Welcome Back</h2>
+        <svg class="animated-underline" viewBox="0 0 300 20">
+          <path class="underline-path" d="M 0,10 Q 75,0 150,10 Q 225,20 300,10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="animated-subtitle" id="animatedSubtitle">Sign in to access your enterprise portal</p>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm" class="auth-form active">
+      <div class="field">
+        <label class="label"><i class="fas fa-envelope"></i> Email Address</label>
+        <div class="control">
+          <input class="input" type="email" id="loginEmail" placeholder="admin@mdukazi.co.za" required>
         </div>
-    </nav>
-
-    <!-- Account Section -->
-    <section class="account-section">
-        <div class="container">
-            <div class="account-card">
-                
-                <!-- Mode Toggle with Animated Text -->
-                <div class="toggle-wrapper">
-                    <div class="mode-toggle" id="modeToggle">
-                        <button class="toggle-btn active" data-mode="login">
-                            <i class="fas fa-sign-in-alt"></i>
-                            <span>Login</span>
-                        </button>
-                        <button class="toggle-btn" data-mode="signup">
-                            <i class="fas fa-user-plus"></i>
-                            <span>Create Account</span>
-                        </button>
-                        <div class="toggle-slider"></div>
-                    </div>
-                    
-                    <!-- Animated Text Display -->
-                    <div class="animated-text-container">
-                        <div class="animated-text-wrapper" id="animatedTextWrapper">
-                            <h1 class="animated-title" id="animatedTitle">Welcome Back</h1>
-                            <svg class="animated-underline" viewBox="0 0 300 20" preserveAspectRatio="none">
-                                <path class="underline-path" 
-                                      d="M 0,10 Q 75,0 150,10 Q 225,20 300,10"
-                                      stroke="currentColor" 
-                                      stroke-width="2.5" 
-                                      fill="none" />
-                            </svg>
-                        </div>
-                        <p class="animated-subtitle" id="animatedSubtitle">Sign in to access your enterprise portal</p>
-                    </div>
-                </div>
-
-                <!-- Login Form -->
-                <form id="loginForm" class="auth-form active">
-                    <div class="field">
-                        <label class="label">
-                            <i class="fas fa-envelope"></i> Email Address
-                        </label>
-                        <div class="control has-icons-left">
-                            <input class="input" type="email" id="loginEmail" placeholder="you@example.com" required />
-                            <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">
-                            <i class="fas fa-lock"></i> Password
-                        </label>
-                        <div class="control has-icons-left">
-                            <input class="input" type="password" id="loginPassword" placeholder="••••••••" required minlength="6" />
-                            <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="rememberMe" />
-                            <span>Remember me</span>
-                        </label>
-                    </div>
-                    <button type="submit" class="button is-primary is-fullwidth">
-                        <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
-                        <span>Sign In</span>
-                    </button>
-                    <div class="form-footer">
-                        <p>Demo Admin: <strong>admin@mdukazi.co.za</strong> / <strong>admin123</strong></p>
-                    </div>
-                </form>
-
-                <!-- Signup Form -->
-                <form id="signupForm" class="auth-form">
-                    <div class="field">
-                        <label class="label">
-                            <i class="fas fa-user"></i> Full Name
-                        </label>
-                        <div class="control has-icons-left">
-                            <input class="input" type="text" id="signupName" placeholder="John Doe" required />
-                            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">
-                            <i class="fas fa-envelope"></i> Email Address
-                        </label>
-                        <div class="control has-icons-left">
-                            <input class="input" type="email" id="signupEmail" placeholder="you@example.com" required />
-                            <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">
-                            <i class="fas fa-phone"></i> Phone Number
-                        </label>
-                        <div class="control has-icons-left">
-                            <input class="input" type="tel" id="signupPhone" placeholder="+27 12 345 6789" required />
-                            <span class="icon is-small is-left"><i class="fas fa-phone"></i></span>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">
-                            <i class="fas fa-lock"></i> Password
-                        </label>
-                        <div class="control has-icons-left">
-                            <input class="input" type="password" id="signupPassword" placeholder="Min 6 characters" required minlength="6" />
-                            <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">
-                            <i class="fas fa-lock"></i> Confirm Password
-                        </label>
-                        <div class="control has-icons-left">
-                            <input class="input" type="password" id="signupConfirmPassword" placeholder="Re-enter password" required minlength="6" />
-                            <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
-                        </div>
-                    </div>
-                    <button type="submit" class="button is-primary is-fullwidth">
-                        <span class="icon"><i class="fas fa-user-plus"></i></span>
-                        <span>Create Account</span>
-                    </button>
-                </form>
-
-                <!-- Messages -->
-                <div id="authMessage" class="auth-message"></div>
-
-            </div>
+      </div>
+      <div class="field">
+        <label class="label"><i class="fas fa-lock"></i> Password</label>
+        <div class="control">
+          <input class="input" type="password" id="loginPassword" placeholder="••••••••" required>
         </div>
-    </section>
+      </div>
+      <div class="field">
+        <label class="checkbox-label">
+          <input type="checkbox" id="rememberMe">
+          <span>Remember me</span>
+        </label>
+      </div>
+      <button class="button is-primary" type="submit">
+        <span>Sign In</span>
+        <i class="fas fa-arrow-right ml-2"></i>
+      </button>
+      <div class="form-footer">
+        <strong>Demo Admin:</strong> admin@mdukazi.co.za / admin123<br>
+        <strong>Demo Client:</strong> client@mdukazi.co.za / client123
+      </div>
+    </form>
 
-    <!-- Footer (Exact Match) -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Mdukazi Projects</h3>
-                    <p>Enterprise ITC Solutions for the modern business</p>
-                </div>
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Quick Links</h3>
-                    <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="services.html">Services</a>
-                        <a href="ict.html">Solutions</a>
-                        <a href="about.html">About Us</a>
-                        <a href="faq.html">FAQ</a>
-                        <a href="contact.html">Contact</a>
-                    </div>
-                </div>
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Contact</h3>
-                    <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
-                    <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
-                    <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
-                </div>
-            </div>
-            <div class="has-text-centered mt-6">
-                <p>© 2026 Mdukazi Projects. All rights reserved.</p>
-            </div>
+    <!-- SIGNUP FORM -->
+    <form id="signupForm" class="auth-form">
+      <div class="field">
+        <label class="label"><i class="fas fa-user"></i> Full Name</label>
+        <div class="control">
+          <input class="input" type="text" id="signupName" placeholder="John Doe" required>
         </div>
-    </footer>
+      </div>
+      <div class="field">
+        <label class="label"><i class="fas fa-envelope"></i> Email Address</label>
+        <div class="control">
+          <input class="input" type="email" id="signupEmail" placeholder="john@example.com" required>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label"><i class="fas fa-phone"></i> Phone Number</label>
+        <div class="control">
+          <input class="input" type="tel" id="signupPhone" placeholder="+27 12 345 6789" required>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label"><i class="fas fa-lock"></i> Password</label>
+        <div class="control">
+          <input class="input" type="password" id="signupPassword" placeholder="••••••••" required>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label"><i class="fas fa-lock"></i> Confirm Password</label>
+        <div class="control">
+          <input class="input" type="password" id="signupConfirmPassword" placeholder="••••••••" required>
+        </div>
+      </div>
+      <button class="button is-primary" type="submit">
+        <span>Create Account</span>
+        <i class="fas fa-user-check ml-2"></i>
+      </button>
+    </form>
 
-    <script src="assets/js/auth.js"></script>
-    <script src="assets/js/account.js"></script>
+    <div id="authMessage" class="auth-message"></div>
+  </div>
+</section>
+
+<!---FOOTER -->
+<footer class="main-footer">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-4">
+        <h3 class="footer-title">Mdukazi Projects</h3>
+        <p>Enterprise ICT Solutions for the modern business</p>
+      </div>
+      <div class="column is-4">
+        <h3 class="footer-title">Quick Links</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a><br>
+          <a href="services.html">Services</a><br>
+          <a href="ict.html">Solutions</a><br>
+          <a href="about.html">About Us</a><br>
+          <a href="faq.html">FAQ</a><br>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="column is-4">
+        <h3 class="footer-title">Contact</h3>
+        <p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p>
+        <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
+        <p><i class="fas fa-clock"></i> 24/7 Network Operations</p>
+        <p><i class="fas fa-map-marker-alt"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
+      </div>
+    </div>
+    <hr style="border-color:rgba(255,255,255,0.15); margin:2rem 0 1rem;">
+    <p class="has-text-centered" style="font-size:0.85rem;">© 2026 Mdukazi Projects. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="account.js"></script>
 </body>
 </html>

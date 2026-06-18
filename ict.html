@@ -1,243 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Solutions By Industry | Mdukazi Projects - Enterprise ICT Solutions</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-   <link rel="stylesheet" href="assets/css/ict.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solutions By Industry | Mdukazi Projects - Enterprise ICT Solutions</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="assets/css/ict.css">
 </head>
 <body>
 
-    <!-- Navigation (fixed: burger on far right, desktop menu visible) -->
-    <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="index.html">
-                    <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;" />
-                    <span class="ml-2">Mdukazi Projects</span>
-                </a>
-                <label for="nav-toggle" class="navbar-burger" aria-label="menu">
-                    <span></span><span></span><span></span>
-                </label>
+<!-- NAVIGATION  -->
+<nav class="main-nav">
+  <div class="nav-container">
+    <a href="index.html" class="navbar-brand navbar-item">
+      <img src="assets/images/logo.png" alt="Mdukazi Projects Logo">
+      <span>Mdukazi Projects</span>
+    </a>
+
+    <!-- Animated Hamburger (Right Side) -->
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- SIDE NAV OVERLAY  -->
+<div class="sidenav-overlay" id="sidenavOverlay"></div>
+
+<!--RIGHT SIDE NAV  -->
+<nav class="sidenav" id="sidenav" aria-hidden="true">
+  <div class="sidenav-header">
+    <div class="sidenav-brand">
+      <img src="assets/images/logo.png" alt="Logo">
+      <span>Mdukazi Projects</span>
+    </div>
+    <p class="sidenav-tagline">Enterprise ICT Solutions</p>
+  </div>
+
+  <div class="sidenav-links">
+    <a href="index.html" class="sidenav-link">
+      <i class="fas fa-home"></i><span>Home</span>
+    </a>
+    <a href="services.html" class="sidenav-link">
+      <i class="fas fa-cogs"></i><span>Services</span>
+    </a>
+    <a href="ict.html" class="sidenav-link active">
+      <i class="fas fa-network-wired"></i><span>Solutions</span>
+    </a>
+    <a href="about.html" class="sidenav-link">
+      <i class="fas fa-info-circle"></i><span>About Us</span>
+    </a>
+    <a href="faq.html" class="sidenav-link">
+      <i class="fas fa-question-circle"></i><span>FAQ</span>
+    </a>
+    <a href="contact.html" class="sidenav-link">
+      <i class="fas fa-envelope"></i><span>Contact</span>
+    </a>
+  </div>
+
+  <div class="sidenav-divider"></div>
+
+  <div class="sidenav-cta">
+    <a href="account.html" class="sidenav-btn sidenav-btn-outline">Sign In</a>
+    <a href="account.html" class="sidenav-btn sidenav-btn-primary">Sign Up</a>
+  </div>
+
+  <div class="sidenav-footer">
+    <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
+    <p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p>
+  </div>
+</nav>
+
+<!-- HERO SECTIOn -->
+<section class="hero is-primary ict-hero">
+  <div class="hero-grid-bg" id="heroGrid">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+          <rect class="grid-cell" width="50" height="50" fill="rgba(255,255,255,0.02)"/>
+          <path class="grid-line" d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+    </svg>
+  </div>
+  <div class="hero-bg-lines"></div>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <span class="industry-badge">Solutions by Industry</span>
+      <h1 class="title">Tailored ICT Solutions</h1>
+      <p class="subtitle">Customized technology solutions designed for your specific sector and business needs</p>
+      <div class="buttons is-centered">
+        <a href="#solutions" class="button is-primary is-medium scroll-btn">
+          <span>Explore Solutions</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--  PRICE TOOLTIP  -->
+<div id="priceTip" class="price-tip"></div>
+
+<!--  BUSINESS / ENTERPRISE  -->
+<section class="section business-section" id="solutions">
+  <div class="container">
+    <div class="columns is-vcentered is-variable is-8">
+      <div class="column is-6">
+        <div class="content-col" style="--delay:0.1s">
+          <span class="industry-badge">Enterprise</span>
+          <h2 class="section-title">Business Solutions</h2>
+          <p class="lead">Reliable, high-speed connectivity and ICT infrastructure for small to large enterprises. We ensure your business stays connected and competitive with dedicated, always-on internet access.</p>
+          <div class="service-grid">
+            <div class="grid-tile" data-price="From R2,500/month">
+              <i class="fas fa-globe"></i>
+              <span>DIA</span>
             </div>
-            <input type="checkbox" id="nav-toggle" class="is-hidden" />
-            <div class="navbar-menu">
-                <div class="navbar-end">
-                    <a href="index.html" class="navbar-item">Home</a>
-                    <a href="services.html" class="navbar-item">Services</a>
-                    <a href="ict.html" class="navbar-item is-active">Solutions</a>
-                    <a href="about.html" class="navbar-item">About Us</a>
-                    <a href="faq.html" class="navbar-item">FAQ</a>
-                    <a href="contact.html" class="navbar-item">Contact</a>
-                </div>
+            <div class="grid-tile" data-price="From R1,800/month">
+              <i class="fas fa-ethernet"></i>
+              <span>Enterprise Fibre</span>
             </div>
+            <div class="grid-tile" data-price="From R950/month">
+              <i class="fas fa-video"></i>
+              <span>CCTV Security</span>
+            </div>
+            <div class="grid-tile" data-price="From R1,200/month">
+              <i class="fas fa-shield-alt"></i>
+              <span>VPN Solutions</span>
+            </div>
+            <div class="grid-tile" data-price="From R800/month">
+              <i class="fas fa-chart-line"></i>
+              <span>NMS Monitoring</span>
+            </div>
+            <div class="grid-tile" data-price="From R1,500/month">
+              <i class="fas fa-network-wired"></i>
+              <span>LAN Cabling</span>
+            </div>
+          </div>
+          <a href="contact.html?industry=business" class="button is-primary">
+            <span>Get a Custom Quote</span>
+          </a>
         </div>
-    </nav>
-
-    <!-- Hero Header with Animated Grid (Boxes) -->
-    <header class="hero ict-hero is-fullheight-with-navbar">
-        <!-- Animated SVG grid background -->
-        <svg class="hero-grid-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
-            <defs>
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <rect class="grid-cell" width="40" height="40" />
-                    <line class="grid-line" x1="0" y1="40" x2="40" y2="40" />
-                    <line class="grid-line" x1="40" y1="0" x2="40" y2="40" />
-                </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-
-        <div class="hero-body has-text-centered">
-            <div class="container">
-                <h1 class="title">Solutions by Industry</h1>
-                <p class="subtitle">Tailored ITC solutions designed for your specific sector and business needs</p>
-                <a href="#solutions" class="button is-primary is-rounded scroll-btn">
-                    <span>Explore Solutions</span>
-                    <span class="icon is-small"><i class="fas fa-arrow-down"></i></span>
-                </a>
+      </div>
+      <div class="column is-6">
+        <div class="stats-col" style="--delay:0.3s">
+          <div class="stat-stack">
+            <div class="stat-item">
+              <span class="stat-val">99.9%</span>
+              <span class="stat-lbl">Uptime SLA</span>
             </div>
+            <div class="stat-item">
+              <span class="stat-val">24/7</span>
+              <span class="stat-lbl">Monitoring</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-val">1:1</span>
+              <span class="stat-lbl">Dedicated Ratio</span>
+            </div>
+          </div>
         </div>
-        <div class="hero-bg-lines"></div>
-    </header>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Anchor for Smooth Scroll -->
-    <div id="solutions" class="scroll-anchor"></div>
+<!-- SCHOOLS / EDUCATION  -->
+<section class="section schools-section">
+  <div class="container">
+    <div class="has-text-centered mb-6">
+      <span class="industry-badge">Education</span>
+      <h2 class="section-title">Schools & Education</h2>
+      <p class="lead">Empowering South African learners and educators with reliable connectivity and technology solutions.</p>
+    </div>
+    <div class="strip-container">
+      <div class="strip-item" style="--delay:0.1s"><i class="fas fa-wifi"></i> High-Speed Internet</div>
+      <div class="strip-item" style="--delay:0.2s"><i class="fas fa-broadcast-tower"></i> Campus Wi-Fi</div>
+      <div class="strip-item" style="--delay:0.3s"><i class="fas fa-video"></i> CCTV & Security</div>
+      <div class="strip-item" style="--delay:0.4s"><i class="fas fa-tools"></i> IT Support</div>
+      <div class="strip-item" style="--delay:0.5s"><i class="fas fa-filter"></i> Content Filtering</div>
+      <div class="strip-item" style="--delay:0.6s"><i class="fas fa-network-wired"></i> LAN Cabling</div>
+    </div>
+    <div class="has-text-centered">
+      <a href="contact.html?industry=schools" class="button is-primary">
+        <span>Get a Custom Quote</span>
+      </a>
+    </div>
+    <div class="stats-row">
+      <div class="stat-pill" style="--delay:0.7s">
+        <i class="fas fa-database"></i>
+        <span>95% Data Recovery</span>
+      </div>
+      <div class="stat-pill" style="--delay:0.8s">
+        <i class="fas fa-headset"></i>
+        <span>24/7 IT Support</span>
+      </div>
+      <div class="stat-pill" style="--delay:0.9s">
+        <i class="fas fa-check-circle"></i>
+        <span>100% Compliant</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- 1. Business Solutions (Diagonal Clip Layout) -->
-    <section class="section industry-section business-section">
-        <div class="container">
-            <div class="columns is-vcentered">
-                <div class="column is-7 content-col" style="--delay: 0.1s;">
-                    <span class="industry-badge">Enterprise</span>
-                    <h2>Business Solutions</h2>
-                    <p class="lead">Reliable, high-speed connectivity and ICT infrastructure for small to large enterprises. We ensure your business stays connected and competitive with dedicated, always-on internet access.</p>
-                    <div class="service-grid">
-                        <div class="grid-tile" data-price="R 2,499/month"><i class="fas fa-network-wired"></i> DIA</div>
-                        <div class="grid-tile" data-price="R 4,999/month"><i class="fas fa-project-diagram"></i> Enterprise Fibre</div>
-                        <div class="grid-tile" data-price="R 1,299/month"><i class="fas fa-video"></i> CCTV Security</div>
-                        <div class="grid-tile" data-price="R 899/month"><i class="fas fa-lock"></i> VPN Solutions</div>
-                        <div class="grid-tile" data-price="R 1,599/month"><i class="fas fa-desktop"></i> NMS Monitoring</div>
-                        <div class="grid-tile" data-price="R 2,199/month"><i class="fas fa-server"></i> LAN Cabling</div>
-                    </div>
-                    <a href="contact.html?industry=business" class="button is-primary is-medium mt-4">Get a Custom Quote</a>
-                </div>
-                <div class="column is-5 stats-col" style="--delay: 0.3s;">
-                    <div class="stat-stack">
-                        <div class="stat-item" data-price="R 1,999/month">
-                            <span class="stat-val">99.9%</span>
-                            <span class="stat-lbl">Uptime SLA</span>
-                        </div>
-                        <div class="stat-item" data-price="R 1,499/month">
-                            <span class="stat-val">24/7</span>
-                            <span class="stat-lbl">Monitoring</span>
-                        </div>
-                        <div class="stat-item" data-price="R 3,299/month">
-                            <span class="stat-val">1:1</span>
-                            <span class="stat-lbl">Dedicated Ratio</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--  TELECOM / CARRIER GRADE  -->
+<section class="section telecom-section">
+  <div class="container">
+    <div class="columns is-vcentered is-variable is-8">
+      <div class="column is-6">
+        <div class="content-col" style="--delay:0.1s">
+          <span class="industry-badge">Carrier Grade</span>
+          <h2 class="section-title">Telecom Providers & ISPs</h2>
+          <p class="lead">Vendors to South Africa's fixed line network operators. Delivering carrier-grade infrastructure projects and specialised services.</p>
+          <div class="service-list">
+            <div class="list-row"><i class="fas fa-ethernet"></i> Fibre Longhaul & FTTH</div>
+            <div class="list-row"><i class="fas fa-broadcast-tower"></i> Microwave / Metro Ethernet</div>
+            <div class="list-row"><i class="fas fa-server"></i> Router & DC Power Installations</div>
+            <div class="list-row"><i class="fas fa-mobile-alt"></i> Cellular Highsite Build</div>
+            <div class="list-row"><i class="fas fa-chart-line"></i> NMS Monitoring Solutions</div>
+            <div class="list-row"><i class="fas fa-bell"></i> Critical Alarm Wiring</div>
+          </div>
+          <a href="contact.html?industry=telecom" class="button is-primary">
+            <span>Get a Custom Quote</span>
+          </a>
         </div>
-    </section>
-
-    <!-- 2. Schools & Education (Horizontal Reveal Strips) -->
-    <section class="section industry-section schools-section">
-        <div class="container has-text-centered">
-            <span class="industry-badge">Education</span>
-            <h2 style="--delay: 0.1s;">Schools & Education</h2>
-            <p class="lead mb-5" style="--delay: 0.2s;">Empowering South African learners and educators with reliable connectivity and technology solutions.</p>
-            <div class="strip-container">
-                <div class="strip-item" style="--delay: 0.3s;" data-price="R 1,299/month"><i class="fas fa-wifi"></i> High-Speed Internet</div>
-                <div class="strip-item" style="--delay: 0.4s;" data-price="R 2,499/month"><i class="fas fa-broadcast-tower"></i> Campus Wi-Fi</div>
-                <div class="strip-item" style="--delay: 0.5s;" data-price="R 1,199/month"><i class="fas fa-shield-alt"></i> CCTV & Security</div>
-                <div class="strip-item" style="--delay: 0.6s;" data-price="R 899/month"><i class="fas fa-tools"></i> IT Support</div>
-                <div class="strip-item" style="--delay: 0.7s;" data-price="R 699/month"><i class="fas fa-filter"></i> Content Filtering</div>
-                <div class="strip-item" style="--delay: 0.8s;" data-price="R 1,799/month"><i class="fas fa-plug"></i> LAN Cabling</div>
+      </div>
+      <div class="column is-6">
+        <div class="grid-col" style="--delay:0.3s">
+          <div class="telecom-grid">
+            <div class="grid-box">
+              <span class="grid-val">10Gbps</span>
+              <span class="grid-lbl">Max Speed</span>
             </div>
-            <a href="contact.html?industry=schools" class="button is-primary is-medium mt-5">Get a Custom Quote</a>
-            <div class="stats-row mt-5">
-                <div class="stat-pill" style="--delay: 0.9s;" data-price="R 1,299/month"><i class="fas fa-hdd"></i> 95% Data Recovery</div>
-                <div class="stat-pill" style="--delay: 1.0s;" data-price="R 899/month"><i class="fas fa-headset"></i> 24/7 IT Support</div>
-                <div class="stat-pill" style="--delay: 1.1s;" data-price="R 499/month"><i class="fas fa-check-circle"></i> 100% Compliant</div>
+            <div class="grid-box">
+              <span class="grid-val">&lt;5ms</span>
+              <span class="grid-lbl">Latency</span>
             </div>
+            <div class="grid-box">
+              <span class="grid-val">4hr</span>
+              <span class="grid-lbl">SLA Repair</span>
+            </div>
+            <div class="grid-box highlight wide">
+              <i class="fas fa-clock" style="margin-right:1rem;"></i>
+              <span>24/7 Uptime</span>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- 3. Telecom Providers (Asymmetrical Grid with Side Accents) -->
-    <section class="section industry-section telecom-section">
-        <div class="container">
-            <div class="columns is-variable is-8">
-                <div class="column is-5" style="--delay: 0.1s;">
-                    <span class="industry-badge">Carrier Grade</span>
-                    <h2>Telecom Providers & ISPs</h2>
-                    <p class="lead">Vendors to South Africa's fixed line network operators. Delivering carrier-grade infrastructure projects and specialised services.</p>
-                    <div class="service-list">
-                        <div class="list-row" data-price="R 5,999/month"><i class="fas fa-project-diagram"></i> Fibre Longhaul & FTTH</div>
-                        <div class="list-row" data-price="R 4,499/month"><i class="fas fa-satellite"></i> Microwave / Metro Ethernet</div>
-                        <div class="list-row" data-price="R 3,299/month"><i class="fas fa-bolt"></i> Router & DC Power Installations</div>
-                        <div class="list-row" data-price="R 6,499/month"><i class="fas fa-broadcast-tower"></i> Cellular Highsite Build</div>
-                        <div class="list-row" data-price="R 2,199/month"><i class="fas fa-tv"></i> NMS Monitoring Solutions</div>
-                        <div class="list-row" data-price="R 1,299/month"><i class="fas fa-exchange-alt"></i> Critical Alarm Wiring</div>
-                    </div>
-                </div>
-                <div class="column is-7 grid-col" style="--delay: 0.3s;">
-                    <div class="telecom-grid">
-                        <div class="grid-box highlight" data-price="R 8,999/month"><span class="grid-val">10Gbps</span><span class="grid-lbl">Max Speed</span></div>
-                        <div class="grid-box" data-price="R 4,999/month"><span class="grid-val">&lt;5ms</span><span class="grid-lbl">Latency</span></div>
-                        <div class="grid-box" data-price="R 3,499/month"><span class="grid-val">4hr</span><span class="grid-lbl">SLA Repair</span></div>
-                        <div class="grid-box" data-price="R 2,899/month"><span class="grid-val">24/7</span><span class="grid-lbl">Uptime</span></div>
-                        <div class="grid-box wide" data-price="R 7,499/month"><i class="fas fa-network-wired" style="font-size: 3rem;"></i></div>
-                    </div>
-                </div>
-            </div>
-            <a href="contact.html?industry=telecom" class="button is-primary is-medium is-centered mt-5">Get a Custom Quote</a>
+<!--  RESIDENTIAL / HOME  -->
+<section class="section residential-section">
+  <div class="container">
+    <div class="has-text-centered mb-6">
+      <span class="industry-badge">Home & Lifestyle</span>
+      <h2 class="section-title">Residential Customers</h2>
+      <p class="lead">Reliable, affordable home internet and security solutions. Experience uncapped, high-speed connectivity.</p>
+    </div>
+    <div class="radial-layout" id="orbitContainer">
+      <div class="radial-center">
+        <i class="fas fa-home"></i>
+        <span>Home Hub</span>
+      </div>
+      <div class="radial-item top-left orbit-item" data-angle="45" data-price="From R499/month">
+        <i class="fas fa-wifi"></i>
+        <span>Fixed Wireless</span>
+      </div>
+      <div class="radial-item top-right orbit-item" data-angle="135" data-price="From R699/month">
+        <i class="fas fa-ethernet"></i>
+        <span>Home Fibre</span>
+      </div>
+      <div class="radial-item bottom-left orbit-item" data-angle="225" data-price="From R399/month">
+        <i class="fas fa-video"></i>
+        <span>CCTV Security</span>
+      </div>
+      <div class="radial-item bottom-right orbit-item" data-angle="315" data-price="From R299/month">
+        <i class="fas fa-tools"></i>
+        <span>IT Support</span>
+      </div>
+      <div class="radial-item orbit-item" data-angle="0" data-price="From R199/month" style="top:50%;left:0;transform:translateY(-50%);">
+        <i class="fas fa-cloud"></i>
+        <span>Cloud Backup</span>
+      </div>
+    </div>
+    <div class="has-text-centered">
+      <a href="contact.html?industry=residential" class="button is-primary">
+        <span>Get a Custom Quote</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER-->
+<footer class="main-footer">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-4">
+        <h3 class="footer-title">Mdukazi Projects</h3>
+        <p>Enterprise ICT Solutions for the modern business</p>
+      </div>
+      <div class="column is-4">
+        <h3 class="footer-title">Quick Links</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a><br>
+          <a href="services.html">Services</a><br>
+          <a href="ict.html">Solutions</a><br>
+          <a href="about.html">About Us</a><br>
+          <a href="faq.html">FAQ</a><br>
+          <a href="contact.html">Contact</a>
         </div>
-    </section>
+      </div>
+      <div class="column is-4">
+        <h3 class="footer-title">Contact</h3>
+        <p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p>
+        <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
+        <p><i class="fas fa-clock"></i> 24/7 Network Operations</p>
+        <p><i class="fas fa-map-marker-alt"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
+      </div>
+    </div>
+    <hr style="border-color:rgba(255,255,255,0.15); margin:2rem 0 1rem;">
+    <p class="has-text-centered" style="font-size:0.85rem;">© 2026 Mdukazi Projects. All rights reserved.</p>
+  </div>
+</footer>
 
-    <!-- 4. Residential Customers (Orbiting animation) -->
-    <section class="section industry-section residential-section">
-        <div class="container has-text-centered">
-            <span class="industry-badge">Home & Lifestyle</span>
-            <h2 style="--delay: 0.1s;">Residential Customers</h2>
-            <p class="lead mb-5" style="--delay: 0.2s;">Reliable, affordable home internet and security solutions. Experience uncapped, high-speed connectivity.</p>
-
-            <div class="radial-layout" id="orbitContainer">
-                <div class="radial-center" style="--delay: 0.3s;">
-                    <i class="fas fa-home"></i>
-                    <span>Home Hub</span>
-                </div>
-                <!-- Orbit items will be positioned by JS -->
-                <div class="orbit-item" data-price="R 699/month" data-angle="0">
-                    <i class="fas fa-wifi"></i>
-                    <span>Fixed Wireless</span>
-                </div>
-                <div class="orbit-item" data-price="R 899/month" data-angle="72">
-                    <i class="fas fa-project-diagram"></i>
-                    <span>Home Fibre</span>
-                </div>
-                <div class="orbit-item" data-price="R 1,199/month" data-angle="144">
-                    <i class="fas fa-video"></i>
-                    <span>CCTV Security</span>
-                </div>
-                <div class="orbit-item" data-price="R 549/month" data-angle="216">
-                    <i class="fas fa-tools"></i>
-                    <span>IT Support</span>
-                </div>
-                <div class="orbit-item" data-price="R 799/month" data-angle="288">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <span>Cloud Backup</span>
-                </div>
-            </div>
-
-            <div class="stats-row mt-5">
-                <div class="stat-pill" style="--delay: 0.8s;" data-price="R 899/month"><i class="fas fa-bolt"></i> 1Gbps Max</div>
-                <div class="stat-pill" style="--delay: 0.9s;" data-price="R 649/month"><i class="fas fa-infinity"></i> ∞ Uncapped</div>
-                <div class="stat-pill" style="--delay: 1.0s;" data-price="R 499/month"><i class="fas fa-headset"></i> 24/7 Support</div>
-            </div>
-            <a href="contact.html?industry=residential" class="button is-primary is-medium mt-5">Get a Custom Quote</a>
-        </div>
-    </section>
-
-    <!-- Price Tooltip -->
-    <div class="price-tip" id="priceTip"></div>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Mdukazi Projects</h3>
-                    <p>Enterprise ITC Solutions for the modern business</p>
-                </div>
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Quick Links</h3>
-                    <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="services.html">Services</a>
-                        <a href="ict.html">Solutions</a>
-                        <a href="about.html">About Us</a>
-                        <a href="faq.html">FAQ</a>
-                        <a href="contact.html">Contact</a>
-                    </div>
-                </div>
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Contact</h3>
-                    <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
-                    <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
-                    <p><i class="fas fa-headset mr-2"></i> 24/7 Network Operations</p>
-                    <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
-                </div>
-            </div>
-            <div class="has-text-centered mt-6">
-                <p>© 2026 Mdukazi Projects. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="assets/js/ict.js"></script>
+<script src="assets/js/ict.js"></script>
 </body>
 </html>
