@@ -1,622 +1,629 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    // ============================================================================
-    // 🍔 1. NAVBAR ENHANCEMENTS & MOBILE MENU FIX
-    // ============================================================================
-    // Even though we have CSS handling the basic visibility of the mobile menu, 
-    // we want to make the user experience buttery smooth. This section ensures 
-    // that when a user clicks a link on mobile, the menu gracefully closes. 
-    // We also add a subtle visual cue to the navbar when they scroll down, 
-    // and force the correct layout if they resize their browser window.
-    
-    const navToggle = document.getElementById('nav-toggle');
-    const navbarMenu = document.querySelector('.navbar-menu');
-    const navLinks = document.querySelectorAll('.navbar-item');
-    const mainNav = document.querySelector('.main-nav');
+  // ============================================================================
+  // 🍔 1. HAMBURGER + RIGHT-SLIDING SIDE NAV
+  // ============================================================================
+  class SideNav {
+    constructor() {
+      this.hamburger = document.getElementById('hamburger');
+      this.sidenav = document.getElementById('sidenav');
+      this.overlay = document.getElementById('sidenavOverlay');
+      this.isOpen = false;
 
-    // Close the mobile menu when a link is clicked so they don't have to manually close it
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navToggle && navToggle.checked) {
-                navToggle.checked = false;
-            }
+      if (!this.hamburger || !this.sidenav) return;
+      this._bindEvents();
+    }
+
+    _bindEvents() {
+      this.hamburger.addEventListener('click', () => this.toggle());
+
+      this.hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.toggle();
+        }
+      });
+
+      if (this.overlay) {
+        this.overlay.addEventListener('click', () => this.close());
+      }
+
+      this.sidenav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => this.close());
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen) this.close();
+      });
+    }
+
+    toggle() { this.isOpen ? this.close() : this.open(); }
+
+    open() {
+      this.hamburger.classList.add('change');
+      this.sidenav.classList.add('open');
+      if (this.overlay) this.overlay.classList.add('active');
+      this.sidenav.setAttribute('aria-hidden', 'false');
+      this.hamburger.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('nav-open');
+      this.isOpen = true;
+
+      setTimeout(() => {
+        const firstLink = this.sidenav.querySelector('.sidenav-link');
+        if (firstLink) firstLink.focus();
+      }, 400);
+    }
+
+    close() {
+      this.hamburger.classList.remove('change');
+      this.sidenav.classList.remove('open');
+      if (this.overlay) this.overlay.classList.remove('active');
+      this.sidenav.setAttribute('aria-hidden', 'true');
+      this.hamburger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
+      this.isOpen = false;
+      this.hamburger.focus();
+    }
+  }
+
+  // ============================================================================
+  // ✨ 2. SPARKLES TEXT EFFECT (Vanilla JS port of React SparklesText)
+  // ============================================================================
+  class SparklesText {
+    constructor(element) {
+      this.el = element;
+      this.colors = ['#BD3745', '#CE6974', '#EFCDD1', '#FFFFFF', '#353839']; // brand + onyx
+      this.sparklesCount = 14;
+      this.sparkles = [];
+      this.container = null;
+      this.intervalId = null;
+      this.init();
+    }
+
+    init() {
+      // Wrap the title content
+      this.el.style.position = 'relative';
+      this.el.style.display = 'inline-block';
+
+      this.container = document.createElement('div');
+      this.container.className = 'sparkles-container';
+      this.el.appendChild(this.container);
+
+      // Initial sparkles
+      for (let i = 0; i < this.sparklesCount; i++) {
+        this.sparkles.push(this._generateSparkle());
+      }
+      this._render();
+
+      // Update sparkles every 100ms (like the React version)
+      this.intervalId = setInterval(() => this._update(), 100);
+
+      // Pause when tab hidden
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          clearInterval(this.intervalId);
+        } else {
+          this.intervalId = setInterval(() => this._update(), 100);
+        }
+      });
+    }
+
+    _generateSparkle() {
+      return {
+        id: `${Date.now()}-${Math.random()}`,
+        x: `${Math.random() * 100}%`,
+        y: `${Math.random() * 100}%`,
+        color: this.colors[Math.floor(Math.random() * this.colors.length)],
+        delay: Math.random() * 2,
+        scale: Math.random() * 1 + 0.3,
+        lifespan: Math.random() * 10 + 5
+      };
+    }
+
+    _update() {
+      this.sparkles = this.sparkles.map(star => {
+        if (star.lifespan <= 0) {
+          return this._generateSparkle();
+        }
+        return { ...star, lifespan: star.lifespan - 0.1 };
+      });
+      this._render();
+    }
+
+    _render() {
+      // Clear old SVGs
+      this.container.innerHTML = '';
+
+      this.sparkles.forEach(sparkle => {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('class', 'sparkle-svg');
+        svg.setAttribute('width', '21');
+        svg.setAttribute('height', '21');
+        svg.setAttribute('viewBox', '0 0 21 21');
+        svg.style.left = sparkle.x;
+        svg.style.top = sparkle.y;
+        svg.style.color = sparkle.color;
+        svg.style.animationDelay = `${sparkle.delay}s`;
+        svg.style.transform = `translate(-50%, -50%) scale(${sparkle.scale})`;
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', 'M9.82531 0.843845C10.0553 0.215178 10.9446 0.215178 11.1746 0.843845L11.8618 2.72026C12.4006 4.19229 12.3916 6.39157 13.5 7.5C14.6084 8.60843 16.8077 8.59935 18.2797 9.13822L20.1561 9.82534C20.7858 10.0553 20.7858 10.9447 20.1561 11.1747L18.2797 11.8618C16.8077 12.4007 14.6084 12.3916 13.5 13.5C12.3916 14.6084 12.4006 16.8077 11.8618 18.2798L11.1746 20.1562C10.9446 20.7858 10.0553 20.7858 9.82531 20.1562L9.13819 18.2798C8.59932 16.8077 8.60843 14.6084 7.5 13.5C6.39157 12.3916 4.19225 12.4007 2.72023 11.8618L0.843814 11.1747C0.215148 10.9447 0.215148 10.0553 0.843814 9.82534L2.72023 9.13822C4.19225 8.59935 6.39157 8.60843 7.5 7.5C8.60843 6.39157 8.59932 4.19229 9.13819 2.72026L9.82531 0.843845Z');
+        path.setAttribute('fill', 'currentColor');
+
+        svg.appendChild(path);
+        this.container.appendChild(svg);
+      });
+    }
+  }
+
+  // ============================================================================
+  // 🎨 3. PIXEL CANVAS (same as index, with onyx palette)
+  // ============================================================================
+  class PixelCanvasAnimation {
+    constructor(canvasId) {
+      this.canvas = document.getElementById(canvasId);
+      if (!this.canvas) return;
+
+      this.ctx = this.canvas.getContext('2d');
+      this.pixels = [];
+      this.animFrame = null;
+      this.lastFrame = performance.now();
+      this.mouseX = -9999;
+      this.mouseY = -9999;
+
+      this.colors = [
+        'rgba(255, 255, 255, 0.18)',
+        'rgba(239, 205, 209, 0.28)',
+        'rgba(222, 155, 162, 0.22)',
+        'rgba(206, 105, 116, 0.16)',
+        'rgba(189, 55, 69,  0.12)',
+        'rgba(53, 56, 57,  0.22)',
+        'rgba(74, 78, 80,  0.18)',
+        'rgba(255, 255, 255, 0.10)',
+      ];
+
+      this.init();
+
+      const hero = this.canvas.parentElement;
+      hero.addEventListener('pointermove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        this.mouseX = e.clientX - rect.left;
+        this.mouseY = e.clientY - rect.top;
+        hero.style.setProperty('--mouse-x', `${((this.mouseX / this.w) * 100).toFixed(1)}%`);
+        hero.style.setProperty('--mouse-y', `${((this.mouseY / this.h) * 100).toFixed(1)}%`);
+      });
+      hero.addEventListener('pointerleave', () => {
+        this.mouseX = -9999;
+        this.mouseY = -9999;
+        hero.style.setProperty('--mouse-x', '50%');
+        hero.style.setProperty('--mouse-y', '50%');
+      });
+      hero.addEventListener('pointerdown', (e) => {
+        const rect = hero.getBoundingClientRect();
+        this.triggerRipple(e.clientX - rect.left, e.clientY - rect.top);
+      });
+
+      window.addEventListener('resize', () => this.init());
+      this.animFrame = requestAnimationFrame((t) => this.loop(t));
+    }
+
+    rand(min, max) { return Math.random() * (max - min) + min; }
+
+    triggerRipple(x, y) {
+      const now = performance.now();
+      for (const p of this.pixels) {
+        const dx = p.x - x;
+        const dy = p.y - y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        p.rippleDelay = dist * 0.55;
+        p.rippleStart = now;
+        p.phase = 'ripple-out';
+      }
+    }
+
+    createPixel(x, y, delay) {
+      const r = this.rand.bind(this);
+      return {
+        x, y,
+        color: this.colors[Math.floor(Math.random() * this.colors.length)],
+        size: 0,
+        sizeStep: r(0.10, 0.24),
+        minSize: 0.3,
+        maxSize: r(0.6, 2.2),
+        maxSizeInt: 2,
+        delay,
+        elapsed: 0,
+        phase: 'appear',
+        shimmerDir: 1,
+        shimmerSpeed: r(0.008, 0.028),
+        rippleDelay: 0,
+        rippleStart: 0,
+      };
+    }
+
+    init() {
+      const parent = this.canvas.parentElement;
+      const rect = parent.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+
+      this.w = rect.width;
+      this.h = rect.height;
+      this.gap = this.w < 768 ? 11 : 7;
+
+      this.canvas.width = Math.round(this.w * dpr);
+      this.canvas.height = Math.round(this.h * dpr);
+      this.canvas.style.width = `${this.w}px`;
+      this.canvas.style.height = `${this.h}px`;
+
+      this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+      this.ctx.scale(dpr, dpr);
+
+      this.pixels = [];
+      const cx = this.w / 2, cy = this.h / 2;
+
+      for (let x = 0; x < this.w; x += this.gap) {
+        for (let y = 0; y < this.h; y += this.gap) {
+          const dx = x - cx, dy = y - cy;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const delay = dist * 0.72 + (this.w + this.h) * 0.004;
+          this.pixels.push(this.createPixel(x, y, delay));
+        }
+      }
+    }
+
+    loop(now) {
+      const frameInterval = 1000 / 60;
+      this.animFrame = requestAnimationFrame((t) => this.loop(t));
+
+      const elapsed = now - this.lastFrame;
+      if (elapsed < frameInterval) return;
+      this.lastFrame = now - (elapsed % frameInterval);
+
+      const ctx = this.ctx;
+      ctx.clearRect(0, 0, this.w, this.h);
+
+      const dt = Math.min(elapsed, 32);
+
+      for (const p of this.pixels) {
+        if (p.phase === 'ripple-out') {
+          const age = now - p.rippleStart;
+          if (age < p.rippleDelay) continue;
+          p.size += p.sizeStep * 1.8;
+          if (p.size >= p.maxSize) {
+            p.size = p.maxSize;
+            p.phase = 'shimmer';
+          }
+          this._draw(p);
+          continue;
+        }
+
+        p.elapsed += dt;
+        if (p.elapsed < p.delay) continue;
+
+        if (p.phase === 'appear') {
+          p.size += p.sizeStep;
+          if (p.size >= p.maxSize) {
+            p.size = p.maxSize;
+            p.phase = 'shimmer';
+          }
+        } else if (p.phase === 'shimmer') {
+          const mdx = p.x - this.mouseX;
+          const mdy = p.y - this.mouseY;
+          const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+          const proximity = Math.max(0, 1 - mDist / 90);
+          const boost = 1 + proximity * 1.4;
+
+          p.size += p.shimmerSpeed * p.shimmerDir * boost;
+          const maxS = p.maxSize * (1 + proximity * 0.5);
+          if (p.size >= maxS) { p.size = maxS; p.shimmerDir = -1; }
+          else if (p.size <= p.minSize) { p.size = p.minSize; p.shimmerDir = 1; }
+        }
+
+        this._draw(p);
+      }
+    }
+
+    _draw(p) {
+      const offset = (p.maxSizeInt - p.size) * 0.5;
+      this.ctx.fillStyle = p.color;
+      this.ctx.fillRect(p.x + offset, p.y + offset, p.size, p.size);
+    }
+  }
+
+  // ============================================================================
+  // 🔍 4. SMART SERVICE SEARCH
+  // ============================================================================
+  const searchInput = document.getElementById('serviceSearch');
+  const suggestionsBox = document.getElementById('searchSuggestions');
+
+  if (searchInput && suggestionsBox) {
+    function getAllServiceTexts() {
+      const serviceSections = document.querySelectorAll('.split-section, .diagonal-section, .monitoring-section, .telco-lan-fibre, .wireless-it-section');
+      const texts = [];
+
+      serviceSections.forEach(section => {
+        section.querySelectorAll('h2, h3, .section-title').forEach(h => {
+          const txt = h.textContent.trim();
+          if (txt.length > 2) texts.push(txt);
         });
+        section.querySelectorAll('p').forEach(p => {
+          const txt = p.textContent.trim();
+          if (txt.length > 5) texts.push(txt);
+        });
+        section.querySelectorAll('li, .strip-item, .grid-item h3, .school-grid span').forEach(el => {
+          const txt = el.textContent.trim();
+          if (txt.length > 2) texts.push(txt);
+        });
+      });
+
+      return [...new Set(texts)];
+    }
+
+    const serviceTexts = getAllServiceTexts();
+
+    function scrollToService(text) {
+      const allElements = document.querySelectorAll('h2, h3, p, li, .strip-item, .grid-item');
+      for (let el of allElements) {
+        if (el.textContent.trim().toLowerCase().includes(text.toLowerCase())) {
+          const section = el.closest('section') || el.closest('.split-section') || el.closest('.diagonal-section');
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            section.style.transition = 'background 0.4s ease';
+            section.style.background = 'rgba(53, 56, 57, 0.08)'; // onyx tint
+            setTimeout(() => { section.style.background = ''; }, 1500);
+            return;
+          }
+        }
+      }
+    }
+
+    function renderSuggestions(results, query) {
+      suggestionsBox.innerHTML = '';
+
+      if (results.length === 0 && query.length > 1) {
+        const noResult = document.createElement('div');
+        noResult.className = 'no-result';
+        noResult.innerHTML = `<i class="fas fa-exclamation-circle" style="color:#BD3745;margin-right:8px;"></i> Service not found. Try: CCTV, Fibre, LAN, or Monitoring.`;
+        suggestionsBox.appendChild(noResult);
+
+        ['CCTV Installation', 'Dedicated Internet', 'Fibre Solutions', 'Network Monitoring', 'IT Support'].forEach(s => {
+          const item = document.createElement('div');
+          item.className = 'suggestion-item';
+          item.textContent = `💡 ${s}`;
+          item.addEventListener('click', () => {
+            searchInput.value = s;
+            suggestionsBox.classList.remove('show');
+            scrollToService(s);
+          });
+          suggestionsBox.appendChild(item);
+        });
+      } else if (results.length > 0) {
+        results.slice(0, 6).forEach(text => {
+          const item = document.createElement('div');
+          item.className = 'suggestion-item';
+          item.textContent = text.length > 60 ? text.substring(0, 60) + '...' : text;
+          item.addEventListener('click', () => {
+            searchInput.value = text;
+            suggestionsBox.classList.remove('show');
+            scrollToService(text);
+          });
+          suggestionsBox.appendChild(item);
+        });
+      } else {
+        suggestionsBox.classList.remove('show');
+        return;
+      }
+
+      if (query.length > 1) suggestionsBox.classList.add('show');
+      else suggestionsBox.classList.remove('show');
+    }
+
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      const query = this.value.trim();
+
+      searchTimeout = setTimeout(() => {
+        if (query.length === 0) {
+          suggestionsBox.classList.remove('show');
+          return;
+        }
+        const lower = query.toLowerCase();
+        const results = serviceTexts.filter(text => text.toLowerCase().includes(lower));
+        renderSuggestions(results, query);
+      }, 150);
     });
 
-    // Add a nice shadow and blur to the navbar when scrolling down
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            mainNav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-            mainNav.style.backdropFilter = 'blur(10px)';
-        } else {
-            mainNav.style.boxShadow = '0 2px 10px rgba(189, 55, 69, 0.3)';
-            mainNav.style.backdropFilter = 'none';
-        }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.search-box-wrapper')) {
+        suggestionsBox.classList.remove('show');
+      }
+    });
+  }
+
+  // ============================================================================
+  // 🖼️ 5. BEFORE & AFTER IMPACT SLIDER
+  // ============================================================================
+  let comparisonContainer = document.getElementById('imageComparison');
+
+  if (comparisonContainer && !comparisonContainer.querySelector('.comparison-slider-wrapper')) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'comparison-slider-wrapper';
+    wrapper.style.cssText = `
+      position: relative; width: 100%; max-width: 800px; margin: 0 auto;
+      aspect-ratio: 16/9; background: #f0f0f0; border-radius: 16px;
+      overflow: hidden; user-select: none; box-shadow: 0 20px 50px rgba(53,56,57,0.2);
+    `;
+
+    const beforeDiv = document.createElement('div');
+    beforeDiv.style.cssText = `
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #7F8C8D, #4A4E50);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem; color: white;
+    `;
+    beforeDiv.innerHTML = `
+      <i class="fas fa-network-wired" style="font-size: 4rem; opacity: 0.6;"></i>
+      <span style="font-size: 1.2rem; font-weight: 600; letter-spacing: 1px;">Legacy Infrastructure</span>
+    `;
+    wrapper.appendChild(beforeDiv);
+
+    const afterDiv = document.createElement('div');
+    afterDiv.style.cssText = `
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(135deg, #BD3745, #353839);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem; color: white;
+      clip-path: inset(0 50% 0 0);
+    `;
+    afterDiv.innerHTML = `
+      <i class="fas fa-cloud-upload-alt" style="font-size: 4rem; opacity: 0.9;"></i>
+      <span style="font-size: 1.2rem; font-weight: 600; letter-spacing: 1px;">Modern ICT Solutions</span>
+    `;
+    wrapper.appendChild(afterDiv);
+
+    const handle = document.createElement('div');
+    handle.style.cssText = `
+      position: absolute; top: 0; bottom: 0; width: 4px;
+      background: rgba(255,255,255,0.9); cursor: ew-resize;
+      display: flex; align-items: center; justify-content: center;
+      left: calc(50% - 2px); z-index: 10;
+    `;
+
+    const knob = document.createElement('div');
+    knob.style.cssText = `
+      background: white; border-radius: 50%; width: 50px; height: 50px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    `;
+    knob.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BD3745" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="15" y1="18" x2="9" y2="12"></line>
+        <line x1="9" y1="6" x2="15" y2="12"></line>
+      </svg>
+    `;
+    handle.appendChild(knob);
+    wrapper.appendChild(handle);
+
+    const labelBefore = document.createElement('div');
+    labelBefore.className = 'before-after-label before';
+    labelBefore.textContent = '🔴 Before';
+    wrapper.appendChild(labelBefore);
+
+    const labelAfter = document.createElement('div');
+    labelAfter.className = 'before-after-label after';
+    labelAfter.textContent = '✨ After';
+    wrapper.appendChild(labelAfter);
+
+    comparisonContainer.appendChild(wrapper);
+
+    let isDragging = false;
+
+    function setPosition(clientX) {
+      const rect = wrapper.getBoundingClientRect();
+      let x = ((clientX - rect.left) / rect.width) * 100;
+      x = Math.max(0, Math.min(100, x));
+      afterDiv.style.clipPath = `inset(0 ${100 - x}% 0 0)`;
+      handle.style.left = `calc(${x}% - 2px)`;
+    }
+
+    handle.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      knob.style.transform = 'scale(1.2)';
+      e.preventDefault();
+    });
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      knob.style.transform = 'scale(1)';
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging) setPosition(e.clientX);
     });
 
-    // Guarantee the navbar layout is correct when resizing the window
-    function handleNavbarResize() {
-        if (window.innerWidth >= 1024) {
-            // Desktop: Force menu open, ensure burger is unchecked
-            if (navToggle) navToggle.checked = false;
-            if (navbarMenu) navbarMenu.style.display = 'flex';
-        } else {
-            // Mobile: Reset menu display to let the CSS toggle handle it
-            if (navbarMenu) navbarMenu.style.display = '';
-        }
-    }
-    window.addEventListener('resize', handleNavbarResize);
-    handleNavbarResize(); // Run on initial load just in case
+    handle.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      knob.style.transform = 'scale(1.2)';
+      e.preventDefault();
+    });
+    window.addEventListener('touchend', () => {
+      isDragging = false;
+      knob.style.transform = 'scale(1)';
+    });
+    window.addEventListener('touchmove', (e) => {
+      if (isDragging) setPosition(e.touches[0].clientX);
+    }, { passive: true });
 
+    setPosition(window.innerWidth / 2);
+  }
 
-    // ============================================================================
-    // 🫧 2. GOOEY HERO ANIMATION (Lava Lamp Effect) - FIXED & SMOOTHER
-    // ============================================================================
-    // You know those cool, satisfying lava lamp animations where blobs merge and 
-    // separate? That's exactly what we're building here! We use an SVG filter 
-    // (specifically feGaussianBlur and feColorMatrix) to create a "gooey" effect.
-    // When we animate some circular blobs, the filter makes them stick together 
-    // and pull apart like liquid. We're using the company's beautiful cherry and 
-    // rose color palette to make it perfectly on-brand.
+  // ============================================================================
+  // ✨ 6. SCROLL REVEAL (Intersection Observer)
+  // ============================================================================
+  function initScrollReveal() {
+    const revealElements = document.querySelectorAll(
+      '.split-content, .split-visual, .grid-item, .monitor-panel, .col-card, ' +
+      '.wireless-panel, .it-panel, .school-panel, .icon-strip, .info-panel, .visual-block'
+    );
 
-    function initGooeyHero() {
-        const hero = document.querySelector('.services-hero');
-        if (!hero) return;
-
-        // Remove any existing gooey containers to prevent duplicates
-        const existingContainer = hero.querySelector('.gooey-blobs-container');
-        if (existingContainer) {
-            existingContainer.remove();
-        }
-
-        // 1. Inject the SVG Gooey Filter into the DOM
-        // We hide it visually, but the browser still uses it for our CSS filter.
-        const svgNS = "http://www.w3.org/2000/svg";
-        let svg = document.querySelector('svg[data-gooey="true"]');
-        if (!svg) {
-            svg = document.createElementNS(svgNS, "svg");
-            svg.setAttribute('data-gooey', 'true');
-            svg.style.position = 'absolute';
-            svg.style.width = '0';
-            svg.style.height = '0';
-            
-            const defs = document.createElementNS(svgNS, "defs");
-            const filter = document.createElementNS(svgNS, "filter");
-            filter.setAttribute("id", "goo-filter");
-            
-            const blur = document.createElementNS(svgNS, "feGaussianBlur");
-            blur.setAttribute("in", "SourceGraphic");
-            blur.setAttribute("stdDeviation", "14"); // Increased for smoother blending
-            blur.setAttribute("result", "blur");
-            
-            const colorMatrix = document.createElementNS(svgNS, "feColorMatrix");
-            colorMatrix.setAttribute("in", "blur");
-            colorMatrix.setAttribute("mode", "matrix");
-            // The magic numbers that create the sharp "goo" edges by increasing alpha contrast
-            colorMatrix.setAttribute("values", "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -11"); 
-            colorMatrix.setAttribute("result", "goo");
-            
-            const composite = document.createElementNS(svgNS, "feComposite");
-            composite.setAttribute("in", "SourceGraphic");
-            composite.setAttribute("in2", "goo");
-            composite.setAttribute("operator", "atop");
-            
-            filter.appendChild(blur);
-            filter.appendChild(colorMatrix);
-            filter.appendChild(composite);
-            defs.appendChild(filter);
-            svg.appendChild(defs);
-            document.body.appendChild(svg);
-        }
-
-        // 2. Create the container for the blobs and apply the filter
-        const gooeyContainer = document.createElement('div');
-        gooeyContainer.className = 'gooey-blobs-container';
-        gooeyContainer.style.cssText = `
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; z-index: 0; filter: url(#goo-filter); pointer-events: none;
-        `;
-        hero.insertBefore(gooeyContainer, hero.firstChild);
-
-        // 3. Generate the animated blobs using our exact brand colors
-        const colors = ['#BD3745', '#CE6974', '#DE9BA2', '#EFCDD1'];
-        const blobs = [];
-        
-        for (let i = 0; i < 8; i++) {
-            const blob = document.createElement('div');
-            const size = Math.random() * 180 + 100; // Random size between 100px and 280px
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            
-            // Distribute blobs evenly across the hero area with some randomness
-            const xPos = 10 + Math.random() * 80; // 10% to 90%
-            const yPos = 10 + Math.random() * 80; // 10% to 90%
-            
-            blob.style.cssText = `
-                position: absolute;
-                width: ${size}px; height: ${size}px;
-                background-color: ${color};
-                border-radius: 50%;
-                opacity: 0.45;
-                top: ${yPos}%;
-                left: ${xPos}%;
-                will-change: transform;
-                transition: none;
-            `;
-            gooeyContainer.appendChild(blob);
-            
-            // Store blob data for animation
-            blobs.push({
-                element: blob,
-                x: parseFloat(xPos),
-                y: parseFloat(yPos),
-                size: size,
-                speedX: (Math.random() - 0.5) * 0.15,
-                speedY: (Math.random() - 0.5) * 0.15,
-                phase: Math.random() * Math.PI * 2,
-                amplitude: 5 + Math.random() * 12
-            });
-        }
-
-        // 4. Animate the blobs with requestAnimationFrame for smooth 60fps motion
-        // This is much smoother than CSS animations and gives us total control
-        let lastTime = 0;
-        let animationId = null;
-        let isTabVisible = true;
-
-        // Pause animation when tab is hidden to save resources
-        document.addEventListener('visibilitychange', () => {
-            isTabVisible = !document.hidden;
-            if (!isTabVisible && animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-            } else if (isTabVisible && !animationId) {
-                lastTime = 0;
-                animationId = requestAnimationFrame(animateBlobs);
-            }
-        });
-
-        function animateBlobs(timestamp) {
-            if (!isTabVisible) return;
-            
-            if (lastTime === 0) lastTime = timestamp;
-            const delta = Math.min((timestamp - lastTime) / 1000, 0.05); // Cap delta to prevent jumps
-            lastTime = timestamp;
-            
-            // Use very slow, smooth movement with sine-wave patterns
-            const time = timestamp / 1000; // seconds
-            
-            blobs.forEach((blob, index) => {
-                // Each blob follows a gentle, drifting path using sine/cosine
-                // The slow speed creates a mesmerizing lava-lamp effect
-                const slowTime = time * 0.08 + index * 0.5;
-                
-                // Smooth circular/elliptical paths with varying radii
-                const orbitRadiusX = blob.amplitude * (0.8 + 0.4 * Math.sin(index));
-                const orbitRadiusY = blob.amplitude * (0.8 + 0.4 * Math.cos(index * 0.7));
-                
-                const offsetX = Math.sin(slowTime * 0.7 + blob.phase) * orbitRadiusX;
-                const offsetY = Math.cos(slowTime * 0.5 + blob.phase * 1.3) * orbitRadiusY;
-                
-                // Add some gentle pulsing to make them feel alive
-                const pulse = 1 + 0.05 * Math.sin(slowTime * 0.3 + index);
-                const currentSize = blob.size * pulse;
-                
-                // Apply the position with smooth transitions
-                blob.element.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${pulse})`;
-                blob.element.style.width = `${currentSize}px`;
-                blob.element.style.height = `${currentSize}px`;
-                
-                // Subtle opacity shift for depth
-                const opacityBase = 0.35 + 0.15 * Math.sin(slowTime * 0.2 + index * 0.5);
-                blob.element.style.opacity = opacityBase;
-            });
-            
-            animationId = requestAnimationFrame(animateBlobs);
-        }
-
-        // Start the animation
-        if (isTabVisible) {
-            animationId = requestAnimationFrame(animateBlobs);
-        }
-
-        // Clean up on page unload
-        window.addEventListener('beforeunload', () => {
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-            }
-        });
-
-        // Handle window resize to reposition blobs if needed
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                // No need to reposition, blobs are in % units
-            }, 250);
-        });
+    if (!('IntersectionObserver' in window)) {
+      revealElements.forEach(el => el.classList.add('revealed'));
+      return;
     }
 
-    initGooeyHero();
-
-
-    // ============================================================================
-    // 🔍 3. SMART SERVICE SEARCH & DISCOVERY
-    // ============================================================================
-    // Finding exactly what you need on a massive enterprise services page can be 
-    // a headache. That's why we've built a smart, forgiving search bar right in 
-    // the hero section. As the user types, we instantly scan the page for matching 
-    // headings, paragraphs, and list items. If we find a match, we show it in a 
-    // neat dropdown. If they misspell something, we don't just say "Error" – we 
-    // gently suggest some of our most popular services to keep them moving forward.
-
-    // Inject the search bar into the hero if it doesn't already exist in the HTML
-    const heroBody = document.querySelector('.services-hero .hero-body');
-    if (heroBody && !document.getElementById('serviceSearch')) {
-        const searchWrapper = document.createElement('div');
-        searchWrapper.className = 'search-box-wrapper';
-        searchWrapper.innerHTML = `
-            <div class="control">
-                <input id="serviceSearch" class="input" type="text" placeholder="Search services (e.g., CCTV, Fibre, Monitoring)...">
-                <span class="search-icon">
-                    <i class="fas fa-search"></i>
-                </span>
-            </div>
-            <div id="searchSuggestions" class="search-suggestions"></div>
-        `;
-        const subtitle = heroBody.querySelector('.subtitle');
-        if (subtitle) {
-            subtitle.insertAdjacentElement('afterend', searchWrapper);
-        } else {
-            heroBody.appendChild(searchWrapper);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
         }
-    }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    });
 
-    const searchInput = document.getElementById('serviceSearch');
-    const suggestionsBox = document.getElementById('searchSuggestions');
+    revealElements.forEach(el => observer.observe(el));
+  }
 
-    if (searchInput && suggestionsBox) {
-        // Helper: Gather all searchable text from the page's service sections
-        function getAllServiceTexts() {
-            const serviceSections = document.querySelectorAll('.split-section, .ict-solutions, .diagonal-section, .monitoring-section, .telco-lan-fibre, .wireless-it-section, .school-panel');
-            const texts = [];
-            
-            serviceSections.forEach(section => {
-                section.querySelectorAll('h2, h3, .title, .subtitle').forEach(h => {
-                    const txt = h.textContent.trim();
-                    if (txt.length > 2) texts.push(txt);
-                });
-                section.querySelectorAll('p').forEach(p => {
-                    const txt = p.textContent.trim();
-                    if (txt.length > 5) texts.push(txt);
-                });
-                section.querySelectorAll('li, .strip-item, .grid-item h3, .school-grid span').forEach(el => {
-                    const txt = el.textContent.trim();
-                    if (txt.length > 2) texts.push(txt);
-                });
-            });
-            
-            // Remove duplicates so the suggestions aren't repetitive
-            return [...new Set(texts)];
-        }
-
-        const serviceTexts = getAllServiceTexts();
-
-        // Helper: Smoothly scroll to the relevant section and give it a quick highlight
-        function scrollToService(text) {
-            const allElements = document.querySelectorAll('h2, h3, p, li, .strip-item, .grid-item');
-            for (let el of allElements) {
-                if (el.textContent.trim().toLowerCase().includes(text.toLowerCase())) {
-                    const section = el.closest('section') || el.closest('.split-section') || el.closest('.diagonal-section') || el.closest('.monitoring-section') || el.closest('.telco-lan-fibre') || el.closest('.wireless-it-section') || el.closest('.school-panel');
-                    
-                    if (section) {
-                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        
-                        // Quick visual flash to show the user exactly where they landed
-                        section.style.transition = 'background 0.4s ease';
-                        section.style.background = 'rgba(239, 205, 209, 0.3)'; // Cotton Rose tint
-                        setTimeout(() => { 
-                            section.style.background = ''; 
-                        }, 1500);
-                        return;
-                    }
-                }
-            }
-        }
-
-        // Helper: Render the dropdown suggestions
-        function renderSuggestions(results, query) {
-            suggestionsBox.innerHTML = '';
-            
-            if (results.length === 0 && query.length > 1) {
-                // The "We couldn't find that, but here's some inspiration" state
-                const noResult = document.createElement('div');
-                noResult.className = 'no-result';
-                noResult.innerHTML = `<i class="fas fa-exclamation-circle" style="color:#BD3745;margin-right:8px;"></i> Service not found. Try searching for: CCTV, Fibre, LAN, or Monitoring.`;
-                suggestionsBox.appendChild(noResult);
-
-                // Show some popular suggestions to get them back on track
-                const popularSuggestions = ['CCTV Installation', 'Dedicated Internet', 'Fibre Solutions', 'Network Monitoring', 'IT Support'];
-                popularSuggestions.forEach(s => {
-                    const item = document.createElement('div');
-                    item.className = 'suggestion-item';
-                    item.textContent = `💡 ${s}`;
-                    item.addEventListener('click', () => {
-                        searchInput.value = s;
-                        suggestionsBox.classList.remove('show');
-                        scrollToService(s);
-                    });
-                    suggestionsBox.appendChild(item);
-                });
-            } else if (results.length > 0) {
-                // Show the actual matches
-                results.slice(0, 6).forEach(text => {
-                    const item = document.createElement('div');
-                    item.className = 'suggestion-item';
-                    item.textContent = text.length > 60 ? text.substring(0, 60) + '...' : text;
-                    item.addEventListener('click', () => {
-                        searchInput.value = text;
-                        suggestionsBox.classList.remove('show');
-                        scrollToService(text);
-                    });
-                    suggestionsBox.appendChild(item);
-                });
-            } else {
-                suggestionsBox.classList.remove('show');
-                return;
-            }
-            
-            if (query.length > 1) {
-                suggestionsBox.classList.add('show');
-            } else {
-                suggestionsBox.classList.remove('show');
-            }
-        }
-
-        // Debounce the search input to improve performance
-        let searchTimeout;
-        searchInput.addEventListener('input', function() {
-            clearTimeout(searchTimeout);
-            const query = this.value.trim();
-            
-            searchTimeout = setTimeout(() => {
-                if (query.length === 0) {
-                    suggestionsBox.classList.remove('show');
-                    return;
-                }
-                const lower = query.toLowerCase();
-                const results = serviceTexts.filter(text => text.toLowerCase().includes(lower));
-                renderSuggestions(results, query);
-            }, 150);
+  // ============================================================================
+  // 🎯 7. SMOOTH SCROLL FOR ANCHOR LINKS
+  // ============================================================================
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest'
         });
+      }
+    });
+  });
 
-        // Close the dropdown if the user clicks anywhere else on the page
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.search-box-wrapper')) {
-                suggestionsBox.classList.remove('show');
-            }
-        });
-    }
+  // ============================================================================
+  // 🚀 INITIALIZATION
+  // ============================================================================
+  document.addEventListener('DOMContentLoaded', () => {
+    new SideNav();
+    new PixelCanvasAnimation('pixel-canvas');
 
-
-    // ============================================================================
-    // 🖼️ 4. BEFORE & AFTER IMPACT SLIDER
-    // ============================================================================
-    // People love seeing the "after" picture, but letting them interact with it 
-    // makes it memorable. This section creates a draggable slider that reveals 
-    // the "modernized" network state over the "legacy" state. We handle both 
-    // mouse and touch events here so it feels just as smooth on a smartphone 
-    // as it does on a desktop.
-
-    // Inject the comparison container if it doesn't exist in the HTML
-    let comparisonContainer = document.getElementById('imageComparison');
-    if (!comparisonContainer) {
-        const impactSection = document.querySelector('.comparison-section') || document.querySelector('.section:last-of-type');
-        if (impactSection) {
-            comparisonContainer = document.createElement('div');
-            comparisonContainer.id = 'imageComparison';
-            comparisonContainer.style.padding = '2rem 0';
-            impactSection.appendChild(comparisonContainer);
-        }
-    }
-
-    if (comparisonContainer) {
-        // Check if slider already exists to prevent duplicates
-        if (!comparisonContainer.querySelector('.comparison-slider-wrapper')) {
-            // Build the slider UI dynamically using pure JS
-            const wrapper = document.createElement('div');
-            wrapper.className = 'comparison-slider-wrapper';
-            wrapper.style.cssText = `
-                position: relative; width: 100%; max-width: 800px; margin: 0 auto;
-                aspect-ratio: 16/9; background: #f0f0f0; border-radius: 16px;
-                overflow: hidden; user-select: none; box-shadow: 0 20px 50px rgba(189,55,69,0.15);
-            `;
-
-            // "Before" Layer (Legacy Network)
-            const beforeDiv = document.createElement('div');
-            beforeDiv.style.cssText = `
-                width: 100%; height: 100%; 
-                background: linear-gradient(135deg, #d4a5a5, #b87373);
-                display: flex; align-items: center; justify-content: center;
-                flex-direction: column; gap: 1rem; color: white;
-            `;
-            beforeDiv.innerHTML = `
-                <i class="fas fa-network-wired" style="font-size: 4rem; opacity: 0.6;"></i>
-                <span style="font-size: 1.2rem; font-weight: 600; letter-spacing: 1px;">Legacy Infrastructure</span>
-            `;
-            wrapper.appendChild(beforeDiv);
-
-            // "After" Layer (Modern ICT) - This one gets clipped by the slider
-            const afterDiv = document.createElement('div');
-            afterDiv.style.cssText = `
-                position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-                background: linear-gradient(135deg, #BD3745, #CE6974);
-                display: flex; align-items: center; justify-content: center;
-                flex-direction: column; gap: 1rem; color: white;
-                clip-path: inset(0 50% 0 0); /* Start at 50% */
-            `;
-            afterDiv.innerHTML = `
-                <i class="fas fa-cloud-upload-alt" style="font-size: 4rem; opacity: 0.9;"></i>
-                <span style="font-size: 1.2rem; font-weight: 600; letter-spacing: 1px;">Modern ICT Solutions</span>
-            `;
-            wrapper.appendChild(afterDiv);
-
-            // The Draggable Handle
-            const handle = document.createElement('div');
-            handle.style.cssText = `
-                position: absolute; top: 0; bottom: 0; width: 4px;
-                background: rgba(255,255,255,0.9); cursor: ew-resize;
-                display: flex; align-items: center; justify-content: center;
-                left: calc(50% - 2px); z-index: 10;
-            `;
-
-            const knob = document.createElement('div');
-            knob.style.cssText = `
-                background: white; border-radius: 50%; width: 50px; height: 50px;
-                display: flex; align-items: center; justify-content: center;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-                transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            `;
-            knob.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BD3745" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="15" y1="18" x2="9" y2="12"></line>
-                    <line x1="9" y1="6" x2="15" y2="12"></line>
-                </svg>
-            `;
-            handle.appendChild(knob);
-            wrapper.appendChild(handle);
-
-            // "Before" and "After" Labels
-            const labelBefore = document.createElement('div');
-            labelBefore.className = 'before-after-label before';
-            labelBefore.textContent = '🔴 Before';
-            wrapper.appendChild(labelBefore);
-
-            const labelAfter = document.createElement('div');
-            labelAfter.className = 'before-after-label after';
-            labelAfter.textContent = '✨ After';
-            wrapper.appendChild(labelAfter);
-
-            comparisonContainer.appendChild(wrapper);
-
-            // --- The Drag Logic ---
-            let isDragging = false;
-
-            function setPosition(clientX) {
-                const rect = wrapper.getBoundingClientRect();
-                // Calculate percentage, ensuring it stays between 0 and 100
-                let x = ((clientX - rect.left) / rect.width) * 100;
-                x = Math.max(0, Math.min(100, x));
-                
-                // Update the clip-path to reveal the "After" image
-                afterDiv.style.clipPath = `inset(0 ${100 - x}% 0 0)`;
-                handle.style.left = `calc(${x}% - 2px)`;
-            }
-
-            // Mouse Events
-            handle.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                knob.style.transform = 'scale(1.2)'; // Satisfying tactile feedback
-                e.preventDefault();
-            });
-            window.addEventListener('mouseup', () => {
-                isDragging = false;
-                knob.style.transform = 'scale(1)';
-            });
-            window.addEventListener('mousemove', (e) => {
-                if (isDragging) setPosition(e.clientX);
-            });
-
-            // Touch Events (for mobile users)
-            handle.addEventListener('touchstart', (e) => {
-                isDragging = true;
-                knob.style.transform = 'scale(1.2)';
-                e.preventDefault();
-            });
-            window.addEventListener('touchend', () => {
-                isDragging = false;
-                knob.style.transform = 'scale(1)';
-            });
-            window.addEventListener('touchmove', (e) => {
-                if (isDragging) setPosition(e.touches[0].clientX);
-            }, { passive: true });
-
-            // Set initial position to the middle
-            setPosition(window.innerWidth / 2);
-        }
-    }
-
-
-    // ============================================================================
-    // ✨ 5. SCROLL REVEAL ANIMATIONS (Intersection Observer)
-    // ============================================================================
-    // To make the page feel alive and dynamic, we don't just want everything to 
-    // pop in at once. We use the Intersection Observer API to watch for elements 
-    // entering the viewport. When they do, we trigger a smooth fade-and-slide-up 
-    // animation. It's a subtle touch that makes scrolling feel incredibly premium.
-
-    function initScrollReveal() {
-        const revealElements = document.querySelectorAll('.split-content, .split-visual, .grid-item, .monitor-panel, .col-card, .wireless-panel, .it-panel, .school-panel');
-        
-        // Initially hide them so they can animate in when scrolled to
-        revealElements.forEach(el => {
-            // Only apply if they don't already have an animation from CSS
-            if (!el.style.animation) {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-            }
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Stagger the animation slightly based on the element's delay variable if it exists
-                    const delay = entry.target.style.getPropertyValue('--delay') || '0s';
-                    entry.target.style.transitionDelay = delay;
-                    
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target); // Stop watching once it's revealed to save performance
-                }
-            });
-        }, {
-            threshold: 0.15, // Trigger when 15% of the element is visible
-            rootMargin: '0px 0px -50px 0px' // Trigger just before it fully enters
-        });
-
-        revealElements.forEach(el => observer.observe(el));
+    // Initialize sparkles on the hero title
+    const sparklesTitle = document.querySelector('[data-sparkles]');
+    if (sparklesTitle) {
+      new SparklesText(sparklesTitle);
     }
 
     initScrollReveal();
 
-    // ============================================================================
-    // 🎯 6. SMOOTH SCROLL FOR ANCHOR LINKS
-    // ============================================================================
-    // All anchor links on the page (like the scroll indicator) get smooth scrolling
-    // behavior with a nice easing curve for a premium feel.
-    
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                e.preventDefault();
-                targetElement.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start',
-                    inline: 'nearest'
-                });
-            }
-        });
-    });
-
-    console.log('✨ Mdukazi Projects — Services page fully loaded and interactive!');
-    console.log('🔍 Try the smart search bar in the hero section.');
-    console.log('🖼️ Drag the slider to see our network transformation impact.');
-    console.log('🫧 The gooey hero animation is now smooth and slow!');
+    console.log('✨ Mdukazi Projects — Services page fully loaded!');
+    console.log('✨ Sparkles text animation active on hero title');
+    console.log('🍔 Right-sliding sidenav ready');
+  });
 
 })();

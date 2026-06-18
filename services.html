@@ -1,308 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services | Mdukazi Projects - Enterprise ICT Solutions</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/service.css">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Services | Mdukazi Projects - Enterprise ICT Solutions</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="assets/css/service.css">
 </head>
 <body>
 
-    <!-- Navigation (fixed: hamburger on far right, desktop menu visible) -->
-    <nav class="navbar main-nav is-fixed-top" role="navigation" aria-label="main navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="index.html">
-                    <img src="assets/images/logo.png" alt="Mdukazi Logo" style="max-height: 3rem;">
-                    <span class="ml-2">Mdukazi Projects</span>
-                </a>
-                <!-- burger appears on right side via flex: space-between -->
-                <label for="nav-toggle" class="navbar-burger" aria-label="menu">
-                    <span></span><span></span><span></span>
-                </label>
-            </div>
-            <input type="checkbox" id="nav-toggle" class="is-hidden">
-            <div class="navbar-menu">
-                <div class="navbar-end">
-                    <a href="index.html" class="navbar-item">Home</a>
-                    <a href="services.html" class="navbar-item is-active">Services</a>
-                    <a href="ict.html" class="navbar-item">Solutions</a>
-                    <a href="about.html" class="navbar-item">About Us</a>
-                    <a href="faq.html" class="navbar-item">FAQ</a>
-                    <a href="contact.html" class="navbar-item">Contact</a>
-                </div>
-            </div>
+<!-- ============ NAVIGATION ============ -->
+<nav class="main-nav">
+  <div class="nav-container">
+    <a href="index.html" class="navbar-brand navbar-item">
+      <img src="assets/images/logo.png" alt="Mdukazi Projects Logo">
+      <span>Mdukazi Projects</span>
+    </a>
+
+    <!-- Animated Hamburger (Right Side) -->
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ SIDE NAV OVERLAY ============ -->
+<div class="sidenav-overlay" id="sidenavOverlay"></div>
+
+<!-- ============ RIGHT SIDE NAV ============ -->
+<nav class="sidenav" id="sidenav" aria-hidden="true">
+  <div class="sidenav-header">
+    <div class="sidenav-brand">
+      <img src="assets/images/logo.png" alt="Logo">
+      <span>Mdukazi Projects</span>
+    </div>
+    <p class="sidenav-tagline">Enterprise ICT Solutions</p>
+  </div>
+
+  <div class="sidenav-links">
+    <a href="index.html" class="sidenav-link">
+      <i class="fas fa-home"></i><span>Home</span>
+    </a>
+    <a href="services.html" class="sidenav-link active">
+      <i class="fas fa-cogs"></i><span>Services</span>
+    </a>
+    <a href="ict.html" class="sidenav-link">
+      <i class="fas fa-network-wired"></i><span>Solutions</span>
+    </a>
+    <a href="about.html" class="sidenav-link">
+      <i class="fas fa-info-circle"></i><span>About Us</span>
+    </a>
+    <a href="faq.html" class="sidenav-link">
+      <i class="fas fa-question-circle"></i><span>FAQ</span>
+    </a>
+    <a href="contact.html" class="sidenav-link">
+      <i class="fas fa-envelope"></i><span>Contact</span>
+    </a>
+  </div>
+
+  <div class="sidenav-divider"></div>
+
+  <div class="sidenav-cta">
+    <a href="account.html" class="sidenav-btn sidenav-btn-outline">Sign In</a>
+    <a href="account.html" class="sidenav-btn sidenav-btn-primary">Sign Up</a>
+  </div>
+
+  <div class="sidenav-footer">
+    <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
+    <p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p>
+  </div>
+</nav>
+
+<!-- ============ HERO SECTION ============ -->
+<section class="hero is-primary services-hero">
+  <canvas id="pixel-canvas" class="hero-canvas"></canvas>
+  <div class="hero-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <span class="section-badge">Our Services</span>
+      <h1 class="title sparkles-title" data-sparkles>Our Enterprise Services</h1>
+      <p class="subtitle">End-to-end ICT, security, and connectivity solutions tailored for modern business operations</p>
+      <div class="scroll-indicator" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEARCH BOX ============ -->
+<section class="section search-section">
+  <div class="container">
+    <div class="search-box-wrapper">
+      <div class="control">
+        <input id="serviceSearch" class="input" type="text" placeholder="Search services (e.g., CCTV, Fibre, Monitoring)...">
+        <span class="search-icon"><i class="fas fa-search"></i></span>
+      </div>
+      <div id="searchSuggestions" class="search-suggestions"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECURITY & SURVEILLANCE ============ -->
+<section class="section split-section">
+  <div class="container">
+    <div class="columns is-vcentered is-variable is-8">
+      <div class="column is-6">
+        <div class="split-content" style="--delay:0.1s">
+          <span class="section-badge">Security & Surveillance</span>
+          <h2 class="section-title">Closed Circuit Television (CCTV)</h2>
+          <p>We provide state-of-the-art home and business security systems combining motion detection, entry point sensors, CCTV, and remote access. Customized installations by certified consultants to maximize your premises protection.</p>
         </div>
-    </nav>
-
-    <!-- Hero Header with Gooey Filter & Search Bar -->
-    <header class="hero services-hero is-fullheight-with-navbar gooey-hero">
-        <div class="hero-body has-text-centered">
-            <div class="container">
-                <h1 class="title">Our Enterprise Services</h1>
-                <p class="subtitle">End-to-end ICT, security, and connectivity solutions tailored for modern business operations</p>
-                <!-- Search bar for services -->
-                <div class="search-box-wrapper">
-                    <div class="control has-icons-left">
-                        <input id="serviceSearch" class="input" type="text" placeholder="Search our services..." autocomplete="off">
-                        <span class="search-icon"><i class="fas fa-search"></i></span>
-                    </div>
-                    <div id="searchSuggestions" class="search-suggestions"></div>
-                </div>
-                <div class="scroll-indicator"></div>
-            </div>
+      </div>
+      <div class="column is-6">
+        <div class="split-visual" style="--delay:0.3s">
+          <div class="visual-card"><i class="fas fa-video"></i></div>
         </div>
-        <!-- Inline SVG for Gooey Filter (using company colors) -->
-        <svg class="hidden absolute" style="position:absolute;width:0;height:0;">
-            <defs>
-                <filter id="goo-filter">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
-                    <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                    <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-                </filter>
-            </defs>
-        </svg>
-    </header>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- CCTV & Security (Alternating Split Layout) -->
-    <section class="section split-section cctv-section">
-        <div class="container">
-            <div class="columns is-vcentered">
-                <div class="column is-6 split-content" style="--delay: 0.1s;">
-                    <span class="section-badge">Security & Surveillance</span>
-                    <h2>Closed Circuit Television (CCTV)</h2>
-                    <p>We provide state-of-the-art home and business security systems combining motion detection, entry point sensors, CCTV, and remote access. Customized installations by certified consultants to maximize your premises protection.</p>
-                </div>
-                <div class="column is-6 split-visual cctv-visual" style="--delay: 0.3s;">
-                    <div class="visual-card"><i class="fas fa-video"></i></div>
-                </div>
-            </div>
-            <div class="columns is-vcentered is-reversed-mobile">
-                <div class="column is-6 split-visual guards-visual" style="--delay: 0.5s;">
-                    <div class="visual-card"><i class="fas fa-user-shield"></i></div>
-                </div>
-                <div class="column is-6 split-content" style="--delay: 0.2s;">
-                    <span class="section-badge">Remote Monitoring</span>
-                    <h2>Virtual Guards & Wireless Solutions</h2>
-                    <p>Our trained operators remotely monitor live CCTV footage during alarm events to verify threats instantly. Paired with our cable-free RF wireless security systems for rapid, flexible deployment across any property.</p>
-                </div>
-            </div>
+<!-- ============ REMOTE MONITORING ============ -->
+<section class="section split-section has-background-light">
+  <div class="container">
+    <div class="columns is-vcentered is-variable is-8 is-reversed-mobile">
+      <div class="column is-6">
+        <div class="split-visual" style="--delay:0.1s">
+          <div class="visual-card"><i class="fas fa-satellite-dish"></i></div>
         </div>
-    </section>
-
-    <!-- Enterprise ICT Solutions (Icon Strip + Grid) -->
-    <section class="section ict-solutions">
-        <div class="container has-text-centered">
-            <h2 class="section-title" style="--delay: 0.1s;">Enterprise ICT Solutions</h2>
-            <p class="section-subtitle" style="--delay: 0.2s;">Dedicated Internet Access over various mediums for premium business applications</p>
-            
-            <div class="icon-strip" style="--delay: 0.3s;">
-                <div class="strip-item"><i class="fas fa-dedication"></i> Dedicated Data</div>
-                <div class="strip-item"><i class="fas fa-file-invoice"></i> Fixed Pricing</div>
-                <div class="strip-item"><i class="fas fa-infinity"></i> Uncapped & Unshaped</div>
-                <div class="strip-item"><i class="fas fa-tachometer-alt"></i> Guaranteed Speeds</div>
-                <div class="strip-item"><i class="fas fa-headset"></i> 24/7 Monitoring</div>
-            </div>
-
-            <div class="features-grid">
-                <div class="grid-item" style="--delay: 0.4s;">
-                    <div class="grid-accent"></div>
-                    <h3>Scalability & Flexibility</h3>
-                    <p>Expand bandwidth seamlessly as your business grows without infrastructure changes.</p>
-                </div>
-                <div class="grid-item" style="--delay: 0.5s;">
-                    <div class="grid-accent"></div>
-                    <h3>Cost Control</h3>
-                    <p>Predictable fixed pricing models eliminate budget surprises and hidden fees.</p>
-                </div>
-                <div class="grid-item" style="--delay: 0.6s;">
-                    <div class="grid-accent"></div>
-                    <h3>Real-Time Ready</h3>
-                    <p>Optimized for VoIP, cloud services, video conferencing, and enterprise storage.</p>
-                </div>
-                <div class="grid-item" style="--delay: 0.7s;">
-                    <div class="grid-accent"></div>
-                    <h3>SLA-Enforced</h3>
-                    <p>Guaranteed uptime backed by comprehensive carrier-grade service agreements.</p>
-                </div>
-            </div>
+      </div>
+      <div class="column is-6">
+        <div class="split-content" style="--delay:0.3s">
+          <span class="section-badge">Remote Monitoring</span>
+          <h2 class="section-title">Virtual Guards & Wireless Solutions</h2>
+          <p>Our trained operators remotely monitor live CCTV footage during alarm events to verify threats instantly. Paired with our cable-free RF wireless security systems for rapid, flexible deployment across any property.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Microwave / Metro Ethernet (Diagonal Clip Layout) -->
-    <section class="section diagonal-section metro-section">
-        <div class="container">
-            <div class="columns is-variable is-8">
-                <div class="column is-5" style="--delay: 0.1s;">
-                    <div class="info-panel">
-                        <span class="section-badge">Last Mile Connectivity</span>
-                        <h2>Microwave / Metro Ethernet</h2>
-                        <p>High-capacity, carrier-grade connectivity using licensed/unlicensed wireless spectrum. Transparent Layer 2 architecture with end-to-end management.</p>
-                        <ul class="feature-list">
-                            <li>Reliable carrier-grade performance</li>
-                            <li>Scalable capacity on demand</li>
-                            <li>Standard SLA included</li>
-                            <li>Dedicated 1:1 low latency service</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="column is-7" style="--delay: 0.3s;">
-                    <div class="visual-block metro-visual">
-                        <div class="pulse-ring"></div>
-                        <i class="fas fa-satellite-dish"></i>
-                    </div>
-                </div>
-            </div>
+<!-- ============ ENTERPRISE ICT ============ -->
+<section class="section split-section">
+  <div class="container">
+    <div class="has-text-centered mb-6">
+      <span class="section-badge">Enterprise ICT Solutions</span>
+      <h2 class="section-title">Dedicated Internet Access</h2>
+      <p class="section-subtitle">Premium business internet solutions over various access mediums for all business applications.</p>
+    </div>
+
+    <div class="icon-strip" style="--delay:0.2s">
+      <div class="strip-item"><i class="fas fa-database"></i> Dedicated Data</div>
+      <div class="strip-item"><i class="fas fa-tag"></i> Fixed Pricing</div>
+      <div class="strip-item"><i class="fas fa-infinity"></i> Uncapped & Unshaped</div>
+      <div class="strip-item"><i class="fas fa-tachometer-alt"></i> Guaranteed Speeds</div>
+      <div class="strip-item"><i class="fas fa-eye"></i> 24/7 Monitoring</div>
+    </div>
+
+    <div class="features-grid">
+      <div class="grid-item" style="--delay:0.1s">
+        <div class="grid-accent"></div>
+        <h3>Scalability & Flexibility</h3>
+        <p>Expand bandwidth seamlessly as your business grows without infrastructure changes.</p>
+      </div>
+      <div class="grid-item" style="--delay:0.2s">
+        <div class="grid-accent"></div>
+        <h3>Cost Control</h3>
+        <p>Predictable fixed pricing models eliminate budget surprises and hidden fees.</p>
+      </div>
+      <div class="grid-item" style="--delay:0.3s">
+        <div class="grid-accent"></div>
+        <h3>Real-Time Ready</h3>
+        <p>Optimized for VoIP, cloud services, video conferencing, and enterprise storage.</p>
+      </div>
+      <div class="grid-item" style="--delay:0.4s">
+        <div class="grid-accent"></div>
+        <h3>SLA-Enforced</h3>
+        <p>Guaranteed uptime backed by comprehensive carrier-grade service agreements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LAST MILE CONNECTIVITY ============ -->
+<section class="section diagonal-section">
+  <div class="container">
+    <div class="columns is-vcentered is-variable is-8">
+      <div class="column is-6">
+        <div class="info-panel" style="--delay:0.1s">
+          <span class="section-badge">Last Mile Connectivity</span>
+          <h2 class="section-title">Microwave / Metro Ethernet</h2>
+          <p>High-capacity, carrier-grade connectivity using licensed/unlicensed wireless spectrum. Transparent Layer 2 architecture with end-to-end management.</p>
+          <ul class="feature-list">
+            <li>Reliable carrier-grade performance</li>
+            <li>Scalable capacity on demand</li>
+            <li>Standard SLA included</li>
+            <li>Dedicated 1:1 low latency service</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- NMS Monitoring (Hover-Reveal Panels) -->
-    <section class="section monitoring-section">
-        <div class="container">
-            <h2 class="section-title has-text-centered" style="--delay: 0.1s;">NMS Monitoring Solutions</h2>
-            <p class="section-subtitle has-text-centered" style="--delay: 0.2s;">World-class open source systems trusted by global enterprises</p>
-            
-            <div class="monitoring-grid">
-                <div class="monitor-panel" style="--delay: 0.3s;">
-                    <div class="panel-icon"><i class="fas fa-server"></i></div>
-                    <h3>Server Monitoring</h3>
-                    <p class="panel-preview">Agent & agentless tracking for 100% uptime visibility</p>
-                    <div class="panel-detail">
-                        <p>Continuous health checks, resource utilization tracking, and automated alerting for Windows, Linux, and UNIX environments.</p>
-                    </div>
-                </div>
-                <div class="monitor-panel" style="--delay: 0.4s;">
-                    <div class="panel-icon"><i class="fas fa-code-branch"></i></div>
-                    <h3>Application Monitoring</h3>
-                    <p class="panel-preview">Instant detection of service & process bottlenecks</p>
-                    <div class="panel-detail">
-                        <p>Deep-dive analytics into Web, API, and database performance. Rapid troubleshooting tools for complex application stacks.</p>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="column is-6">
+        <div class="visual-block">
+          <i class="fas fa-broadcast-tower"></i>
+          <div class="pulse-ring"></div>
+          <div class="pulse-ring" style="animation-delay: 1s;"></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Telco, LAN & Fibre (Asymmetric 3-Column Layout) -->
-    <section class="section telco-lan-fibre">
-        <div class="container">
-            <div class="columns is-variable is-8">
-                <div class="column is-4 telco-col" style="--delay: 0.1s;">
-                    <div class="col-card">
-                        <div class="col-header"><i class="fas fa-broadcast-tower"></i></div>
-                        <h3>Telco & ISP Highsite</h3>
-                        <p>Specialized division for planning, build & commissioning fixed line, GSM carriers & ISP markets. Fibre longhaul, FTTH, DC power & microwave installs.</p>
-                    </div>
-                </div>
-                <div class="column is-4 lan-col" style="--delay: 0.3s;">
-                    <div class="col-card tall">
-                        <div class="col-header"><i class="fas fa-network-wired"></i></div>
-                        <h3>LAN Cabling</h3>
-                        <p>Certified Cat5e/6/7, Fibre to Desk (10G ready), server room design, environmental monitoring, and professional CAD documentation.</p>
-                        <ul class="col-list">
-                            <li>Network audits & design</li>
-                            <li>IP & analog voice installs</li>
-                            <li>Wireless AP solutions</li>
-                            <li>SLA maintenance contracts</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="column is-4 fibre-col" style="--delay: 0.5s;">
-                    <div class="col-card">
-                        <div class="col-header"><i class="fas fa-project-diagram"></i></div>
-                        <h3>Fibre Solutions</h3>
-                        <p>Enterprise-grade dedicated access on the same infrastructure as our wireless network. 5Mbps to 10Gbps speeds, <5ms latency, 4-hour SLA repairs.</p>
-                    </div>
-                </div>
-            </div>
+<!-- ============ NMS MONITORING ============ -->
+<section class="section monitoring-section">
+  <div class="container">
+    <div class="has-text-centered mb-6">
+      <span class="section-badge">NMS Monitoring Solutions</span>
+      <h2 class="section-title">World-Class Open Source Systems</h2>
+      <p class="section-subtitle">Trusted by global enterprises for comprehensive network visibility.</p>
+    </div>
+
+    <div class="monitoring-grid">
+      <div class="monitor-panel" style="--delay:0.1s">
+        <div class="panel-icon"><i class="fas fa-server"></i></div>
+        <h3>Server Monitoring</h3>
+        <p class="panel-preview">Agent & agentless tracking for 100% uptime visibility</p>
+        <p class="panel-detail">Continuous health checks, resource utilization tracking, and automated alerting for Windows, Linux, and UNIX environments.</p>
+      </div>
+      <div class="monitor-panel" style="--delay:0.2s">
+        <div class="panel-icon"><i class="fas fa-code"></i></div>
+        <h3>Application Monitoring</h3>
+        <p class="panel-preview">Instant detection of service & process bottlenecks</p>
+        <p class="panel-detail">Deep-dive analytics into Web, API, and database performance. Rapid troubleshooting tools for complex application stacks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TELCO / LAN / FIBRE ============ -->
+<section class="section telco-lan-fibre">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-4">
+        <div class="col-card" style="--delay:0.1s">
+          <div class="col-header"><i class="fas fa-broadcast-tower"></i></div>
+          <h3>Telco & ISP Highsite</h3>
+          <p>Specialized division for planning, build & commissioning fixed line, GSM carriers & ISP markets. Fibre longhaul, FTTH, DC power & microwave installs.</p>
         </div>
-    </section>
-
-    <!-- Wireless, VPN & IT Support (Staggered Horizontal Strip) -->
-    <section class="section wireless-it-section">
-        <div class="container">
-            <div class="columns is-multiline is-centered">
-                <div class="column is-8 wireless-panel" style="--delay: 0.1s;">
-                    <div class="panel-border"></div>
-                    <h2><i class="fas fa-wifi"></i> Wireless & VPN Services</h2>
-                    <p>Fixed wireless access network delivering up to 1Gbps real speeds. Carrier-class VPN customization for secure multi-site connectivity at a fraction of traditional costs.</p>
-                </div>
-                <div class="column is-4 it-panel" style="--delay: 0.2s;">
-                    <div class="panel-border"></div>
-                    <h3><i class="fas fa-tools"></i> IT Support & Recovery</h3>
-                    <p>Home, office & school support. WiFi, hardware, virus removal, and 95% success rate data recovery (clean room environment).</p>
-                </div>
-                <div class="column is-12 school-panel" style="--delay: 0.3s;">
-                    <div class="panel-border"></div>
-                    <div class="school-content">
-                        <h3><i class="fas fa-graduation-cap"></i> School IT Solutions</h3>
-                        <div class="school-grid">
-                            <span>Integrated IT systems</span>
-                            <span>Robust firewalls</span>
-                            <span>EdTech enhancement</span>
-                            <span>Reliable support</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="column is-4">
+        <div class="col-card tall" style="--delay:0.2s">
+          <div class="col-header"><i class="fas fa-network-wired"></i></div>
+          <h3>LAN Cabling</h3>
+          <p>Certified Cat5e/6/7, Fibre to Desk (10G ready), server room design, environmental monitoring, and professional CAD documentation.</p>
+          <ul class="col-list">
+            <li>Network audits & design</li>
+            <li>IP & analog voice installs</li>
+            <li>Wireless AP solutions</li>
+            <li>SLA maintenance contracts</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- NEW: Image Comparison (Before/After) showing company impact -->
-    <section class="section comparison-section">
-        <div class="container">
-            <div class="has-text-centered mb-5">
-                <span class="section-badge">Our Impact</span>
-                <h2 class="title is-2" style="color:#BD3745;">Before & After: Network Transformation</h2>
-                <p class="subtitle is-5" style="color:#7F8C8D;">See how we upgrade legacy infrastructure to modern, high-performance enterprise ICT</p>
-            </div>
-            <div class="columns is-centered">
-                <div class="column is-10">
-                    <div id="imageComparison" class="comparison-card">
-                        <!-- the js will render the slider here -->
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="column is-4">
+        <div class="col-card" style="--delay:0.3s">
+          <div class="col-header"><i class="fas fa-ethernet"></i></div>
+          <h3>Fibre Solutions</h3>
+          <p>Enterprise-grade dedicated access on the same infrastructure as our wireless network. 5Mbps to 10Gbps speeds.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer (Identical to Index) -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Mdukazi Projects</h3>
-                    <p>Enterprise ITC Solutions for the modern business</p>
-                </div>
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Quick Links</h3>
-                    <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="services.html">Services</a>
-                        <a href="ict.html">Solutions</a>
-                        <a href="about.html">About Us</a>
-                        <a href="faq.html">FAQ</a>
-                        <a href="contact.html">Contact</a>
-                    </div>
-                </div>
-                <div class="column is-one-third">
-                    <h3 class="footer-title">Contact</h3>
-                    <p><i class="fas fa-envelope mr-2"></i> info@mdukaziprojects.co.za</p>
-                    <p><i class="fas fa-phone mr-2"></i> +27 11 123 4567</p>
-                    <p><i class="fas fa-headset mr-2"></i> 24/7 Network Operations</p>
-                    <p><i class="fas fa-map-marker-alt mr-2"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
-                </div>
-            </div>
-            <div class="has-text-centered mt-6">
-                <p>© 2026 Mdukazi Projects. All rights reserved.</p>
-            </div>
+<!-- ============ WIRELESS / IT / SCHOOLS ============ -->
+<section class="section wireless-it-section has-background-light">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-4">
+        <div class="wireless-panel" style="--delay:0.1s">
+          <div class="panel-border"></div>
+          <h3><i class="fas fa-wifi"></i> Wireless & VPN Services</h3>
+          <p>Fixed wireless access network delivering up to 1Gbps real speeds. Carrier-class VPN customization for secure multi-site connectivity at a fraction of traditional costs.</p>
         </div>
-    </footer>
+      </div>
+      <div class="column is-4">
+        <div class="it-panel" style="--delay:0.2s">
+          <div class="panel-border"></div>
+          <h3><i class="fas fa-tools"></i> IT Support & Recovery</h3>
+          <p>Home, office & school support. WiFi, hardware, virus removal, and 95% success rate data recovery (clean room environment).</p>
+        </div>
+      </div>
+      <div class="column is-4">
+        <div class="school-panel" style="--delay:0.3s">
+          <div class="panel-border"></div>
+          <h3><i class="fas fa-graduation-cap"></i> School IT Solutions</h3>
+          <div class="school-grid">
+            <span>Integrated IT systems</span>
+            <span>Robust firewalls</span>
+            <span>EdTech enhancement</span>
+            <span>Reliable support</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script src="assets/js/services.js">
-    </script>
+<!-- ============ IMPACT / COMPARISON ============ -->
+<section class="section comparison-section">
+  <div class="container">
+    <div class="has-text-centered mb-6">
+      <span class="section-badge">Our Impact</span>
+      <h2 class="section-title">Before & After: Network Transformation</h2>
+      <p class="section-subtitle">See how we upgrade legacy infrastructure to modern, high-performance enterprise ICT</p>
+    </div>
+    <div id="imageComparison"></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="main-footer">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-4">
+        <h3 class="footer-title">Mdukazi Projects</h3>
+        <p>Enterprise ITC Solutions for the modern business</p>
+      </div>
+      <div class="column is-4">
+        <h3 class="footer-title">Quick Links</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a><br>
+          <a href="services.html">Services</a><br>
+          <a href="ict.html">Solutions</a><br>
+          <a href="about.html">About Us</a><br>
+          <a href="faq.html">FAQ</a><br>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="column is-4">
+        <h3 class="footer-title">Contact</h3>
+        <p><i class="fas fa-envelope"></i> info@mdukaziprojects.co.za</p>
+        <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
+        <p><i class="fas fa-clock"></i> 24/7 Network Operations</p>
+        <p><i class="fas fa-map-marker-alt"></i> 5940 Zone 5 Diepkloof, Soweto, 1864</p>
+      </div>
+    </div>
+    <hr style="border-color:rgba(255,255,255,0.15); margin:2rem 0 1rem;">
+    <p class="has-text-centered" style="font-size:0.85rem;">© 2026 Mdukazi Projects. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="assets/js/services.js"></script>
 </body>
 </html>

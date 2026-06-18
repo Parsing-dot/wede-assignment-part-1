@@ -288,12 +288,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Staggered link entrance */
-.sidenav.open .sidenav-link:nth-child(1) { transition-delay: 0.20s; }
-.sidenav.open .sidenav-link:nth-child(2) { transition-delay: 0.26s; }
-.sidenav.open .sidenav-link:nth-child(3) { transition-delay: 0.32s; }
-.sidenav.open .sidenav-link:nth-child(4) { transition-delay: 0.38s; }
-.sidenav.open .sidenav-link:nth-child(5) { transition-delay: 0.44s; }
-.sidenav.open .sidenav-link:nth-child(6) { transition-delay: 0.50s; }
+.sidenav.open .sidenav-link:nth-child(1) { 
+    transition-delay: 0.20s;
+}
+.sidenav.open .sidenav-link:nth-child(2) { 
+    transition-delay: 0.26s; 
+}
+.sidenav.open .sidenav-link:nth-child(3) { 
+    transition-delay: 0.32s; 
+}
+.sidenav.open .sidenav-link:nth-child(4) { 
+    transition-delay: 0.38s; 
+}
+.sidenav.open .sidenav-link:nth-child(5) { 
+    transition-delay: 0.44s; 
+}
+.sidenav.open .sidenav-link:nth-child(6) { 
+    transition-delay: 0.50s; 
+}
 
 .sidenav-link i {
   width: 22px;
@@ -528,11 +540,45 @@ h1, h2, h3, h4, h5, h6 {
   animation: float 20s infinite linear;
 }
 
-.particle:nth-child(1) { width: 80px; height: 80px; left: 10%; bottom: -80px; animation-duration: 15s; }
-.particle:nth-child(2) { width: 40px; height: 40px; left: 30%; bottom: -40px; animation-duration: 12s; animation-delay: 2s; }
-.particle:nth-child(3) { width: 60px; height: 60px; left: 50%; bottom: -60px; animation-duration: 18s; animation-delay: 4s; }
-.particle:nth-child(4) { width: 100px; height: 100px; left: 70%; bottom: -100px; animation-duration: 22s; animation-delay: 1s; }
-.particle:nth-child(5) { width: 50px; height: 50px; left: 90%; bottom: -50px; animation-duration: 14s; animation-delay: 3s; }
+.particle:nth-child(1) { 
+    width: 80px; 
+    height: 80px; 
+    left: 10%; 
+    bottom: -80px; 
+    animation-duration: 15s; 
+}
+.particle:nth-child(2) { 
+    width: 40px; 
+    height: 40px; 
+    left: 30%; 
+    bottom: -40px; 
+    animation-duration: 12s; 
+    animation-delay: 2s; 
+}
+.particle:nth-child(3) { 
+    width: 60px; 
+    height: 60px; 
+    left: 50%; 
+    bottom: -60px; 
+    animation-duration: 18s; 
+    animation-delay: 4s; 
+}
+.particle:nth-child(4) { 
+    width: 100px; 
+    height: 100px; 
+    left: 70%; 
+    bottom: -100px; 
+    animation-duration: 22s; 
+    animation-delay: 1s;
+ }
+.particle:nth-child(5) { 
+    width: 50px; 
+    height: 50px; 
+    left: 90%; 
+    bottom: -50px; 
+    animation-duration: 14s; 
+    animation-delay: 3s; 
+}
 
 @keyframes float {
   0% { transform: translateY(0) rotate(0deg); opacity: 0; }
@@ -902,16 +948,28 @@ h1, h2, h3, h4, h5, h6 {
     height: 2.5px;
   }
 
-  .hamburger.change .bar1 { transform: translateY(7.5px) rotate(-45deg); }
-  .hamburger.change .bar3 { transform: translateY(-7.5px) rotate(45deg); }
+  .hamburger.change .bar1 { 
+    transform: translateY(7.5px) rotate(-45deg); 
+}
+  .hamburger.change .bar3 { 
+    transform: translateY(-7.5px) rotate(45deg);
+}
 
   /* Sidenav takes more of screen on mobile but still not full */
   .sidenav.open { width: 85vw; max-width: 340px; }
 
-  .hero-body .title { font-size: 2.2rem; }
-  .hero-body .subtitle { font-size: 1rem; }
-  .section-title { font-size: 2rem; }
-  .stat-number { font-size: 2rem; }
+  .hero-body .title { 
+    font-size: 2.2rem; 
+}
+  .hero-body .subtitle { 
+    font-size: 1rem;
+ }
+  .section-title { 
+    font-size: 2rem; 
+}
+  .stat-number { 
+    font-size: 2rem; 
+}
 
   .benefit-item {
     flex-direction: column;
@@ -924,9 +982,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
   }
 
-  .hero.is-primary { min-height: 50vh; }
+  .hero.is-primary { 
+    min-height: 50vh; 
+}
 }
 
 @media screen and (min-width: 769px) {
-  .sidenav.open { width: 360px; }
+  .sidenav.open { 
+    width: 360px; 
+}
 }
